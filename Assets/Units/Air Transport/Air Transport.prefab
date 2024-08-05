@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1974153333601261373}
   - component: {fileID: 6373942607041070935}
   - component: {fileID: 4998999097916986450}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Air Transport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
