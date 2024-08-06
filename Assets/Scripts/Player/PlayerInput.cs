@@ -1,3 +1,4 @@
+using GameDevTV.RTS.Units;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,6 +9,7 @@ namespace GameDevTV.RTS.Player
     {
         [SerializeField] private Rigidbody cameraTarget;
         [SerializeField] private CinemachineCamera cinemachineCamera;
+        [SerializeField] private new Camera camera;
         [SerializeField] private CameraConfig cameraConfig;
 
         private CinemachineFollow cinemachineFollow;
@@ -15,6 +17,7 @@ namespace GameDevTV.RTS.Player
         private float rotationStartTime;
         private Vector3 startingFollowOffset;
         private float maxRotationAmount;
+        private ISelectable selectedUnit;
 
         private void Awake()
         {
@@ -32,6 +35,30 @@ namespace GameDevTV.RTS.Player
             HandlePanning();
             HandleZooming();
             HandleRotation();
+            HandleLeftClick();
+        }
+
+        private void HandleLeftClick()
+        {
+            if (camera == null) { return ; }
+
+            Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                if (selectedUnit != null)
+                {
+                    selectedUnit.Deselect();
+                    selectedUnit = null;
+                }
+
+                if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, LayerMask.GetMask("Default"))
+                    && hit.collider.TryGetComponent(out ISelectable selectable))
+                {
+                    selectable.Select();
+                    selectedUnit = selectable;
+                }
+            }
         }
 
         private void HandleRotation()
