@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
 using GameDevTV.RTS.Units;
@@ -24,7 +25,9 @@ namespace GameDevTV.RTS.Player
         private float rotationStartTime;
         private Vector3 startingFollowOffset;
         private float maxRotationAmount;
-        private ISelectable selectedUnit;
+        private HashSet<AbstractUnit> aliveUnits = new(100);
+        private HashSet<AbstractUnit> addedUnits = new(24);
+        private List<ISelectable> selectedUnits = new(12);
 
         private void Awake()
         {
@@ -38,22 +41,19 @@ namespace GameDevTV.RTS.Player
 
             Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
             Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
+            Bus<UnitSpawnEvent>.OnEvent += HandleUnitSpawn;
         }
 
         private void OnDestroy()
         {
             Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
+            Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
+            Bus<UnitSpawnEvent>.OnEvent -= HandleUnitSpawn;
         }
 
-        private void HandleUnitSelected(UnitSelectedEvent evt)
-        {
-            selectedUnit = evt.Unit;
-        }
-
-        private void HandleUnitDeselected(UnitDeselectedEvent evt)
-        {
-            selectedUnit = null;
-        }
+        private void HandleUnitSelected(UnitSelectedEvent evt) => selectedUnits.Add(evt.Unit);
+        private void HandleUnitDeselected(UnitDeselectedEvent evt) => selectedUnits.Remove(evt.Unit);
+        private void HandleUnitSpawn(UnitSpawnEvent evt) => aliveUnits.Add(evt.Unit);
 
         private void Update()
         {
@@ -71,22 +71,45 @@ namespace GameDevTV.RTS.Player
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
+                selectionBox.sizeDelta = Vector2.zero;
                 selectionBox.gameObject.SetActive(true);
                 startingMousePosition = Mouse.current.position.ReadValue();
+                addedUnits.Clear();
             }
             else if (Mouse.current.leftButton.isPressed && !Mouse.current.leftButton.wasPressedThisFrame)
             {
-                ResizeSelectionBox();
+                Bounds selectionBoxBounds = ResizeSelectionBox();
+                foreach(AbstractUnit unit in aliveUnits)
+                {
+                    Vector2 unitPosition = camera.WorldToScreenPoint(unit.transform.position);
+
+                    if (selectionBoxBounds.Contains(unitPosition))
+                    {
+                        addedUnits.Add(unit);
+                    }
+                }
             }
             else if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
-                // select new units
-                // deselect non-included units
+                DeselectAllUnits();
+                foreach(AbstractUnit unit in addedUnits)
+                {
+                    unit.Select();
+                }
                 selectionBox.gameObject.SetActive(false);
             }
         }
 
-        private void ResizeSelectionBox()
+        private void DeselectAllUnits()
+        {
+            ISelectable[] currentlySelectedUnits = selectedUnits.ToArray();
+            foreach(ISelectable selectable in currentlySelectedUnits)
+            {
+                selectable.Deselect();
+            }
+        }
+
+        private Bounds ResizeSelectionBox()
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
 
@@ -95,40 +118,48 @@ namespace GameDevTV.RTS.Player
 
             selectionBox.anchoredPosition = startingMousePosition + new Vector2(width / 2, height / 2);
             selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
+
+            return new Bounds(selectionBox.anchoredPosition, selectionBox.sizeDelta);
         }
 
         private void HandleRightClick()
         {
-            if (selectedUnit == null || selectedUnit is not IMoveable moveable) { return; }
+            if (selectedUnits.Count == 0) { return; }
 
             Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             if (Mouse.current.rightButton.wasReleasedThisFrame
                 && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorLayers))
             {
-                moveable.MoveTo(hit.point);
+                foreach(ISelectable selectable in selectedUnits)
+                {
+                    if (selectable is IMoveable moveable)
+                    {
+                        moveable.MoveTo(hit.point);
+                    }
+                }
             }
         }
 
         private void HandleLeftClick()
         {
-            if (camera == null) { return ; }
+            // if (camera == null) { return ; }
 
-            Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            // Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (Mouse.current.leftButton.wasReleasedThisFrame)
-            {
-                if (selectedUnit != null)
-                {
-                    selectedUnit.Deselect();
-                }
+            // if (Mouse.current.leftButton.wasReleasedThisFrame)
+            // {
+            //     if (selectedUnit != null)
+            //     {
+            //         selectedUnit.Deselect();
+            //     }
 
-                if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayers)
-                    && hit.collider.TryGetComponent(out ISelectable selectable))
-                {
-                    selectable.Select();
-                }
-            }
+            //     if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayers)
+            //         && hit.collider.TryGetComponent(out ISelectable selectable))
+            //     {
+            //         selectable.Select();
+            //     }
+            // }
         }
 
         private void HandleRotation()
