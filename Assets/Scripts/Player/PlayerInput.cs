@@ -37,6 +37,7 @@ namespace GameDevTV.RTS.Player
             maxRotationAmount = Mathf.Abs(cinemachineFollow.FollowOffset.z);
 
             Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
+            Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
         }
 
         private void OnDestroy()
@@ -46,12 +47,12 @@ namespace GameDevTV.RTS.Player
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
         {
-            if (selectedUnit != null)
-            {
-                selectedUnit.Deselect();
-            }
-
             selectedUnit = evt.Unit;
+        }
+
+        private void HandleUnitDeselected(UnitDeselectedEvent evt)
+        {
+            selectedUnit = null;
         }
 
         private void Update()
@@ -120,7 +121,6 @@ namespace GameDevTV.RTS.Player
                 if (selectedUnit != null)
                 {
                     selectedUnit.Deselect();
-                    selectedUnit = null;
                 }
 
                 if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayers)
