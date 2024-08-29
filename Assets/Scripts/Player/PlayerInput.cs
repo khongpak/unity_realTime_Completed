@@ -159,7 +159,6 @@ namespace GameDevTV.RTS.Player
                     }
                 }
 
-                int layer = 0;
                 int unitsOnLayer = 0;
                 int maxUnitsOnLayer = 1;
                 float circleRadius = 0;
@@ -178,7 +177,6 @@ namespace GameDevTV.RTS.Player
 
                     if (unitsOnLayer >= maxUnitsOnLayer)
                     {
-                        layer++;
                         unitsOnLayer = 0;
                         circleRadius += unit.AgentRadius * 3.5f;
                         maxUnitsOnLayer = Mathf.FloorToInt(2 * Mathf.PI * circleRadius / (unit.AgentRadius * 2));
