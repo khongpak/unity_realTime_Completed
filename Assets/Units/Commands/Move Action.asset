@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1e5f7468793484aa86acd3b5d0f389, type: 3}
   m_Name: Move Action
   m_EditorClassIdentifier: 
+  RadiusMultiplier: 3.5
