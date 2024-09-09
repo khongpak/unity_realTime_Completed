@@ -1,22 +1,46 @@
+using GameDevTV.RTS.Commands;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace GameDevTV.RTS.UI
 {
+    [RequireComponent(typeof(Button))]
     public class UIActionButton : MonoBehaviour
     {
-        [SerializeField] private Image Icon;
+        [SerializeField] private Image icon;
 
-        public void SetIcon(Sprite icon)
+        private Button button;
+
+        private void Awake()
+        {
+            button = GetComponent<Button>();
+        }
+
+        public void EnableFor(ActionBase action, UnityAction onClick)
+        {
+            SetIcon(action.Icon);
+            button.interactable = true;
+            button.onClick.AddListener(onClick);
+        }
+
+        public void Disable()
+        {
+            SetIcon(null);
+            button.interactable = false;
+            button.onClick.RemoveAllListeners();
+        }
+
+        private void SetIcon(Sprite icon)
         {
             if (icon == null)
             {
-                Icon.enabled = false;
+                this.icon.enabled = false;
             }
             else
             {
-                Icon.sprite = icon;
-                Icon.enabled = true;
+                this.icon.sprite = icon;
+                this.icon.enabled = true;
             }
         }
     }
