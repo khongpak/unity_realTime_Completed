@@ -23,7 +23,8 @@ namespace GameDevTV.RTS.Behavior
                 return Status.Failure;
             }
 
-            Vector3 targetPosition = TargetGameObject.Value.transform.position;
+            Vector3 targetPosition = GetTargetPosition();
+
             if (Vector3.Distance(agent.transform.position, targetPosition) <= agent.stoppingDistance)
             {
                 return Status.Success;
@@ -41,6 +42,21 @@ namespace GameDevTV.RTS.Behavior
             }
 
             return Status.Running;
+        }
+
+        private Vector3 GetTargetPosition()
+        {
+            Vector3 targetPosition;
+            if (TargetGameObject.Value.TryGetComponent(out Collider collider))
+            {
+                targetPosition = collider.ClosestPoint(agent.transform.position);
+            }
+            else
+            {
+                targetPosition = TargetGameObject.Value.transform.position;
+            }
+
+            return targetPosition;
         }
     }
 }
