@@ -19,6 +19,10 @@ namespace GameDevTV.RTS.Behavior
 
         protected override Status OnStart()
         {
+            if (GatherableSupplies.Value == null) 
+            {
+                return Status.Failure;
+            }
             enterTime = Time.time;
 
             GatherableSupplies.Value.BeginGather();
@@ -29,11 +33,24 @@ namespace GameDevTV.RTS.Behavior
         {
             if (GatherableSupplies.Value.Supply.BaseGatherTime + enterTime <= Time.time)
             {
-                Amount.Value = GatherableSupplies.Value.EndGather();
                 return Status.Success;
             }
 
             return Status.Running;
+        }
+
+        protected override void OnEnd()
+        {
+            if (GatherableSupplies.Value == null) return;
+
+            if (CurrentStatus == Status.Success)
+            {
+                Amount.Value = GatherableSupplies.Value.EndGather();
+            }
+            else
+            {
+                GatherableSupplies.Value.AbortGather();
+            }
         }
     }
 }
