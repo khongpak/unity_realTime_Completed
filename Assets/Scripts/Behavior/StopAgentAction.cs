@@ -4,6 +4,7 @@ using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
 using UnityEngine.AI;
+using GameDevTV.RTS.Utilities;
 
 namespace GameDevTV.RTS.Behavior
 {
@@ -17,6 +18,11 @@ namespace GameDevTV.RTS.Behavior
         {
             if (Agent.Value.TryGetComponent(out NavMeshAgent agent))
             {
+                if (agent.TryGetComponent(out Animator animator))
+                {
+                    animator.SetFloat(AnimationConstants.SPEED, 0);
+                }
+
                 agent.ResetPath();
                 return Status.Success;
             }

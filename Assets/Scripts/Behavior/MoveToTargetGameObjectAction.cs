@@ -4,6 +4,7 @@ using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
 using UnityEngine.AI;
+using GameDevTV.RTS.Utilities;
 
 namespace GameDevTV.RTS.Behavior
 {
@@ -15,6 +16,7 @@ namespace GameDevTV.RTS.Behavior
         [SerializeReference] public BlackboardVariable<GameObject> TargetGameObject;
 
         private NavMeshAgent agent;
+        private Animator animator;
 
         protected override Status OnStart()
         {
@@ -22,6 +24,8 @@ namespace GameDevTV.RTS.Behavior
             {
                 return Status.Failure;
             }
+
+            Agent.Value.TryGetComponent(out animator);
 
             Vector3 targetPosition = GetTargetPosition();
 
@@ -36,12 +40,25 @@ namespace GameDevTV.RTS.Behavior
 
         protected override Status OnUpdate()
         {
+            if (animator != null)
+            {
+                animator.SetFloat(AnimationConstants.SPEED, agent.velocity.magnitude);
+            }
+
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 return Status.Success;
             }
 
             return Status.Running;
+        }
+
+        protected override void OnEnd()
+        {
+            if (animator != null)
+            {
+                animator.SetFloat(AnimationConstants.SPEED, 0);
+            }
         }
 
         private Vector3 GetTargetPosition()

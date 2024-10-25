@@ -4,6 +4,7 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using GameDevTV.RTS.Utilities;
 
 namespace GameDevTV.RTS.Behavior
 {
@@ -15,6 +16,7 @@ namespace GameDevTV.RTS.Behavior
         [SerializeReference] public BlackboardVariable<int> Amount;
         [SerializeReference] public BlackboardVariable<GatherableSupply> GatherableSupplies;
 
+        private Animator animator;
         private float enterTime;
 
         protected override Status OnStart()
@@ -25,6 +27,10 @@ namespace GameDevTV.RTS.Behavior
             }
             enterTime = Time.time;
 
+            if (Unit.Value.TryGetComponent(out animator))
+            {
+                animator.SetBool(AnimationConstants.IS_GATHERING, true);
+            }
             GatherableSupplies.Value.BeginGather();
             return Status.Running;
         }
@@ -41,6 +47,11 @@ namespace GameDevTV.RTS.Behavior
 
         protected override void OnEnd()
         {
+            if (animator != null)
+            {
+                animator.SetBool(AnimationConstants.IS_GATHERING, false);
+            }
+
             if (GatherableSupplies.Value == null) return;
 
             if (CurrentStatus == Status.Success)
