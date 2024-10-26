@@ -15,6 +15,7 @@ namespace GameDevTV.RTS.Behavior
         [SerializeReference] public BlackboardVariable<GameObject> Unit;
         [SerializeReference] public BlackboardVariable<int> Amount;
         [SerializeReference] public BlackboardVariable<GatherableSupply> GatherableSupplies;
+        [SerializeReference] public BlackboardVariable<SupplySO> SupplySO;
 
         private Animator animator;
         private float enterTime;
@@ -32,6 +33,7 @@ namespace GameDevTV.RTS.Behavior
                 animator.SetBool(AnimationConstants.IS_GATHERING, true);
             }
             GatherableSupplies.Value.BeginGather();
+            SupplySO.Value = GatherableSupplies.Value.Supply;
             return Status.Running;
         }
 
