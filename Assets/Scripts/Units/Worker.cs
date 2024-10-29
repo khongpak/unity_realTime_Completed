@@ -9,6 +9,19 @@ namespace GameDevTV.RTS.Units
 {
     public class Worker : AbstractUnit
     {
+        public bool HasSupplies 
+        {
+            get 
+            {
+                if (graphAgent != null && graphAgent.GetVariable("SupplyAmountHeld", out BlackboardVariable<int> heldVariable))
+                {
+                    return heldVariable.Value > 0;
+                }
+
+                return false;
+            }
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -23,6 +36,12 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("Supply", supply);
             graphAgent.SetVariableValue("TargetGameObject", supply.gameObject);
             graphAgent.SetVariableValue("Command", UnitCommands.Gather);
+        }
+
+        public void ReturnSupplies(GameObject commandPost)
+        {
+            graphAgent.SetVariableValue("CommandPost", commandPost);
+            graphAgent.SetVariableValue("Command", UnitCommands.ReturnSupplies);
         }
 
         private void HandleGatherSupplies(GameObject self, int amount, SupplySO supply)
