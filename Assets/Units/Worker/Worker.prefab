@@ -196,11 +196,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Graph: {fileID: 4598362100129326914, guid: 10e583af0fed7ba439be975c79f1f0fc, type: 2}
   m_BlackboardVariableOverridesList:
-  - rid: 6534005386445062209
+  - rid: 9064456540193555416
   references:
     version: 2
     RefIds:
-    - rid: 6534005386445062209
+    - rid: 9064456540193555416
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:

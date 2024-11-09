@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace GameDevTV.RTS.UI.Components
 {
-    public class UIBuildQueueButton : MonoBehaviour, IUIElement<UnitSO, UnityAction>
+    public class UIBuildQueueButton : MonoBehaviour, IUIElement<AbstractUnitSO, UnityAction>
     {
         [SerializeField] private Image icon;
         private Button button;
@@ -16,7 +16,7 @@ namespace GameDevTV.RTS.UI.Components
             Disable();
         }
 
-        public void EnableFor(UnitSO item, UnityAction callback)
+        public void EnableFor(AbstractUnitSO item, UnityAction callback)
         {
             button.onClick.RemoveAllListeners();
             button.interactable = true;
