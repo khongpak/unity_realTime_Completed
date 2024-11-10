@@ -133,7 +133,8 @@ MonoBehaviour:
   <UnitSO>k__BackingField: {fileID: 11400000, guid: 2e813987328e67942957464bddd33480, type: 2}
   <CurrentQueueStartTime>k__BackingField: 0
   <BuildingUnit>k__BackingField: {fileID: 0}
-  mainRenderer: {fileID: 4728886198864161701}
+  <MainRenderer>k__BackingField: {fileID: 4728886198864161701}
+  navMeshObstacle: {fileID: 4408794320720015172}
 --- !u!208 &4408794320720015172
 NavMeshObstacle:
   m_ObjectHideFlags: 0
