@@ -14,10 +14,12 @@ namespace GameDevTV.RTS.Behavior
         [SerializeReference] public BlackboardVariable<GameObject> Self;
         [SerializeReference] public BlackboardVariable<BuildingSO> BuildingSO;
         [SerializeReference] public BlackboardVariable<Vector3> TargetLocation;
+        [SerializeReference] public BlackboardVariable<BaseBuilding> BuildingUnderConstruction;
 
         private float startBuildTime;
         private BaseBuilding completedBuilding;
         private Vector3 startPosition;
+        private Vector3 endPosition;
 
         protected override Status OnStart()
         {
@@ -25,10 +27,16 @@ namespace GameDevTV.RTS.Behavior
 
             startBuildTime = Time.time;
             GameObject building = GameObject.Instantiate(BuildingSO.Value.Prefab);
-            completedBuilding = building.GetComponent<BaseBuilding>();
+
+            if (!building.TryGetComponent(out completedBuilding) 
+                || completedBuilding.MainRenderer == null) return Status.Failure;
+
             Renderer buildingRenderer = completedBuilding.MainRenderer;
 
+            BuildingUnderConstruction.Value = completedBuilding;
+
             startPosition = TargetLocation.Value - Vector3.up * buildingRenderer.bounds.size.y;
+            endPosition = TargetLocation.Value;
             completedBuilding.transform.position = startPosition;
             return Status.Running;
         }
@@ -37,7 +45,7 @@ namespace GameDevTV.RTS.Behavior
         {
             float normalizedTime = (Time.time - startBuildTime) / BuildingSO.Value.BuildTime;
 
-            completedBuilding.transform.position = Vector3.Lerp(startPosition, TargetLocation.Value, normalizedTime);
+            completedBuilding.transform.position = Vector3.Lerp(startPosition, endPosition, normalizedTime);
 
             return normalizedTime >= 1 ? Status.Success : Status.Running;
         }
