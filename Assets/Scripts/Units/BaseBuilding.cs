@@ -12,6 +12,7 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public float CurrentQueueStartTime { get; private set; }
         [field: SerializeField] public AbstractUnitSO BuildingUnit { get; private set; }
         [field: SerializeField] public MeshRenderer MainRenderer { get; private set; }
+        [SerializeField] private Material primaryMaterial;
         [SerializeField] private NavMeshObstacle navMeshObstacle;
 
         public delegate void QueueUpdatedEvent(AbstractUnitSO[] unitsInQueue);
@@ -29,10 +30,9 @@ namespace GameDevTV.RTS.Units
         protected override void Start()
         {
             base.Start();
-
-            if (navMeshObstacle != null)
+            if (MainRenderer != null)
             {
-                navMeshObstacle.enabled = true;
+                MainRenderer.material = primaryMaterial;
             }
         }
 

@@ -18,6 +18,7 @@ namespace GameDevTV.RTS.Behavior
 
         private float startBuildTime;
         private BaseBuilding completedBuilding;
+        private Renderer buildingRenderer;
         private Vector3 startPosition;
         private Vector3 endPosition;
 
@@ -26,18 +27,18 @@ namespace GameDevTV.RTS.Behavior
             if (!HasValidInputs()) return Status.Failure;
 
             startBuildTime = Time.time;
-            GameObject building = GameObject.Instantiate(BuildingSO.Value.Prefab);
+            GameObject building = GameObject.Instantiate(BuildingSO.Value.Prefab, TargetLocation, Quaternion.identity);
 
             if (!building.TryGetComponent(out completedBuilding) 
                 || completedBuilding.MainRenderer == null) return Status.Failure;
 
-            Renderer buildingRenderer = completedBuilding.MainRenderer;
+            buildingRenderer = completedBuilding.MainRenderer;
 
             BuildingUnderConstruction.Value = completedBuilding;
 
             startPosition = TargetLocation.Value - Vector3.up * buildingRenderer.bounds.size.y;
             endPosition = TargetLocation.Value;
-            completedBuilding.transform.position = startPosition;
+            buildingRenderer.transform.position = startPosition;
             return Status.Running;
         }
 
@@ -45,7 +46,7 @@ namespace GameDevTV.RTS.Behavior
         {
             float normalizedTime = (Time.time - startBuildTime) / BuildingSO.Value.BuildTime;
 
-            completedBuilding.transform.position = Vector3.Lerp(startPosition, endPosition, normalizedTime);
+            buildingRenderer.transform.position = Vector3.Lerp(startPosition, endPosition, normalizedTime);
 
             return normalizedTime >= 1 ? Status.Success : Status.Running;
         }

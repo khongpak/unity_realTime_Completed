@@ -27,10 +27,6 @@ namespace GameDevTV.RTS.Behavior
             if (Self.Value == null) return Status.Failure;
 
             animator = Self.Value.GetComponent<Animator>();
-            if (Self.Value.TryGetComponent(out agent))
-            {
-                agent.enabled = false;
-            }
 
             selfTransform = Self.Value.transform;
             float distance = Vector3.Distance(selfTransform.position, TargetLocation.Value);
@@ -60,10 +56,6 @@ namespace GameDevTV.RTS.Behavior
             if (animator != null)
             {
                 animator.SetFloat(AnimationConstants.SPEED, 0);
-            }
-            if (agent != null)
-            {
-                agent.enabled = true;
             }
         }
     }
