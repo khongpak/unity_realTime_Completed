@@ -1,4 +1,6 @@
+using System;
 using GameDevTV.RTS.Behavior;
+using GameDevTV.RTS.Commands;
 using GameDevTV.RTS.Environment;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
@@ -9,9 +11,9 @@ namespace GameDevTV.RTS.Units
 {
     public class Worker : AbstractUnit, IBuildingBuilder
     {
-        public bool HasSupplies 
+        public bool HasSupplies
         {
-            get 
+            get
             {
                 if (graphAgent != null && graphAgent.GetVariable("SupplyAmountHeld", out BlackboardVariable<int> heldVariable))
                 {
@@ -21,6 +23,7 @@ namespace GameDevTV.RTS.Units
                 return false;
             }
         }
+        [SerializeField] private ActionBase CancelBuildingCommand;
 
         protected override void Start()
         {
@@ -62,7 +65,27 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("Ghost", instance);
             graphAgent.SetVariableValue("Command", UnitCommands.BuildBuilding);
 
+            SetCommandOverrides(new ActionBase[] { CancelBuildingCommand });
+            Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
+
             return instance;
+        }
+
+        public void CancelBuilding()
+        {
+            if (graphAgent.GetVariable("Ghost", out BlackboardVariable<GameObject> ghostVariable)
+                && ghostVariable.Value != null)
+            {
+                Destroy(ghostVariable.Value);
+            }
+            if (graphAgent.GetVariable("BuildingUnderConstruction", out BlackboardVariable<BaseBuilding> buildingVariable)
+                && buildingVariable.Value != null)
+            {
+                Destroy(buildingVariable.Value.gameObject);
+            }
+
+            SetCommandOverrides(Array.Empty<ActionBase>());
+            Stop();
         }
 
         private void HandleGatherSupplies(GameObject self, int amount, SupplySO supply)

@@ -15,6 +15,8 @@ namespace GameDevTV.RTS.Units
         [SerializeField] private Material primaryMaterial;
         [SerializeField] private NavMeshObstacle navMeshObstacle;
 
+        public IBuildingBuilder unitBuildingThis;
+
         public delegate void QueueUpdatedEvent(AbstractUnitSO[] unitsInQueue);
         public event QueueUpdatedEvent OnQueueUpdated;
 

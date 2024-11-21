@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32194d70ac3bc0647b55685549f2c196, type: 3}
-  m_Name: Build CommandPost
-  m_EditorClassIdentifier: 
+  m_Name: Build CommandPost Action
+  m_EditorClassIdentifier:
   <Icon>k__BackingField: {fileID: 21300000, guid: dfebbdf93f58d764ab9aa4d54edd629e, type: 3}
   <Slot>k__BackingField: 0
   <RequiresClickToActivate>k__BackingField: 1
