@@ -36,5 +36,10 @@ namespace GameDevTV.RTS.Units
         {
             graphAgent.SetVariableValue("Command", UnitCommands.Stop);
         }
+
+        private void OnDestroy()
+        {
+            Bus<UnitDeathEvent>.Raise(new UnitDeathEvent(this));
+        }
     }
 }
