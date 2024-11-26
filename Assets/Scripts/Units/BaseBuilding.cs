@@ -17,6 +17,7 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public BuildingProgress Progress { get; private set; } = new (
             BuildingProgress.BuildingState.Destroyed, 0, 0
         );
+        [field: SerializeField] public BuildingSO BuildingSO { get; private set; }
         [SerializeField] private Material primaryMaterial;
         [SerializeField] private NavMeshObstacle navMeshObstacle;
 
@@ -24,13 +25,12 @@ namespace GameDevTV.RTS.Units
         public event QueueUpdatedEvent OnQueueUpdated;
 
         private IBuildingBuilder unitBuildingThis;
-        private BuildingSO buildingSO;
         private List<AbstractUnitSO> buildingQueue = new (MAX_QUEUE_SIZE);
         private const int MAX_QUEUE_SIZE = 5;
 
         private void Awake()
         {
-            buildingSO = UnitSO as BuildingSO;
+            BuildingSO = UnitSO as BuildingSO;
         }
 
         protected override void Start()
@@ -95,11 +95,11 @@ namespace GameDevTV.RTS.Units
         public void StartBuilding(IBuildingBuilder buildingBuilder)
         {
             unitBuildingThis = buildingBuilder;
-            MainRenderer.material = buildingSO.PlacementMaterial;
+            MainRenderer.material = BuildingSO.PlacementMaterial;
 
             Progress = new BuildingProgress(
                 BuildingProgress.BuildingState.Building,
-                Time.time - buildingSO.BuildTime * Progress.Progress,
+                Time.time - BuildingSO.BuildTime * Progress.Progress,
                 Progress.Progress
             );
 
@@ -114,7 +114,7 @@ namespace GameDevTV.RTS.Units
                 Progress = new BuildingProgress(
                     BuildingProgress.BuildingState.Paused,
                     Progress.StartTime,
-                    (Time.time - Progress.StartTime) / buildingSO.BuildTime
+                    (Time.time - Progress.StartTime) / BuildingSO.BuildTime
                 );
 
                 Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
@@ -130,7 +130,7 @@ namespace GameDevTV.RTS.Units
                 OnQueueUpdated?.Invoke(buildingQueue.ToArray());
 
                 yield return new WaitForSeconds(BuildingUnit.BuildTime);
-                
+
                 Instantiate(BuildingUnit.Prefab, transform.position, Quaternion.identity);
                 buildingQueue.RemoveAt(0);
             }

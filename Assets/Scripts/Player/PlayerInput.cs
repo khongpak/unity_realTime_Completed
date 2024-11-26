@@ -220,7 +220,7 @@ namespace GameDevTV.RTS.Player
                 {
                     CommandContext context = new(abstractUnits[i], hit, i);
 
-                    foreach(ICommand command in abstractUnits[i].AvailableCommands)
+                    foreach(ICommand command in GetAvailableCommands(abstractUnits[i]))
                     {
                         if (command.CanHandle(context))
                         {
@@ -232,13 +232,35 @@ namespace GameDevTV.RTS.Player
             }
         }
 
+        private List<ActionBase> GetAvailableCommands(AbstractUnit unit)
+        {
+            OverrideCommandsCommand[] overrideCommandsCommands = unit.AvailableCommands
+                .Where(command => command is OverrideCommandsCommand)
+                .Cast<OverrideCommandsCommand>()
+                .ToArray();
+
+            List<ActionBase> allAvailableCommands = new();
+            foreach(OverrideCommandsCommand overrideCommand in overrideCommandsCommands)
+            {
+                allAvailableCommands.AddRange(overrideCommand.Commands
+                    .Where(command => command is not OverrideCommandsCommand)
+                );
+            }
+
+            allAvailableCommands.AddRange(unit.AvailableCommands
+                .Where(command => command is not OverrideCommandsCommand)
+            );
+
+            return allAvailableCommands;
+        }
+
         private void HandleLeftClick()
         {
             if (camera == null) { return ; }
 
             Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (activeAction == null 
+            if (activeAction == null
                 && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayers)
                 && hit.collider.TryGetComponent(out ISelectable selectable))
             {
@@ -268,10 +290,7 @@ namespace GameDevTV.RTS.Player
             for (int i = 0; i < abstractCommandables.Count; i++)
             {
                 CommandContext context = new(abstractCommandables[i], hit, i);
-                if (activeAction.CanHandle(context))
-                {
-                    activeAction.Handle(context);
-                }
+                activeAction.Handle(context);
             }
 
             activeAction = null;
