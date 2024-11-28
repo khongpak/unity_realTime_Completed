@@ -1,4 +1,3 @@
-using System.Linq;
 using GameDevTV.RTS.Units;
 using UnityEngine;
 
@@ -8,7 +7,6 @@ namespace GameDevTV.RTS.Commands
     public class BuildBuildingCommand : ActionBase
     {
         [field: SerializeField] public BuildingSO Building { get; private set; }
-        [field: SerializeField] public BuildingRestrictionSO[] Restrictions { get; private set; }
 
         public override bool CanHandle(CommandContext context)
         {
@@ -39,8 +37,5 @@ namespace GameDevTV.RTS.Commands
                 builder.Build(Building, context.Hit.point);
             }
         }
-
-        private bool AllRestrictionsPass(Vector3 point) => 
-            Restrictions.Length == 0 || Restrictions.All(restriction => restriction.CanPlace(point));
     }
 }

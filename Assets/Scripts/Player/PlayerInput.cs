@@ -21,11 +21,20 @@ namespace GameDevTV.RTS.Player
         [SerializeField] private LayerMask interactableLayers;
         [SerializeField] private LayerMask floorLayers;
         [SerializeField] private RectTransform selectionBox;
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        private Color errorTintColor = Color.red;
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        private Color errorFresnelColor = new (4, 1.7f, 0, 2);
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        private Color availableToPlaceTintColor = new (0.2f, 0.65f, 1, 2);
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        private Color availableToPlaceFresnelColor = new(4, 1.7f, 0, 2);
 
         private Vector2 startingMousePosition;
 
         private ActionBase activeAction;
         private GameObject ghostInstance;
+        private MeshRenderer ghostRenderer;
         private bool wasMouseDownOnUI;
         private CinemachineFollow cinemachineFollow;
         private float zoomStartTime;
@@ -35,6 +44,9 @@ namespace GameDevTV.RTS.Player
         private HashSet<AbstractUnit> aliveUnits = new(100);
         private HashSet<AbstractUnit> addedUnits = new(24);
         private List<ISelectable> selectedUnits = new(12);
+
+        private static readonly int TINT = Shader.PropertyToID("_Tint");
+        private static readonly int FRESNEL = Shader.PropertyToID("_FresnelColor");
 
         private void Awake()
         {
@@ -76,6 +88,7 @@ namespace GameDevTV.RTS.Player
             aliveUnits.Remove(evt.Unit);
             selectedUnits.Remove(evt.Unit);
         }
+
         private void HandleActionSelected(ActionSelectedEvent evt)
         {
             activeAction = evt.Action;
@@ -86,6 +99,7 @@ namespace GameDevTV.RTS.Player
             else if (activeAction.GhostPrefab != null)
             {
                 ghostInstance = Instantiate(activeAction.GhostPrefab);
+                ghostRenderer = ghostInstance.GetComponentInChildren<MeshRenderer>();
             }
         }
 
@@ -115,6 +129,13 @@ namespace GameDevTV.RTS.Player
             if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorLayers))
             {
                 ghostInstance.transform.position = hit.point;
+                
+                bool allRestrictionsPass = activeAction.AllRestrictionsPass(hit.point);
+                
+                ghostRenderer.material.SetColor(TINT, allRestrictionsPass ? availableToPlaceTintColor : errorTintColor);
+                ghostRenderer.material.SetColor(FRESNEL, 
+                    allRestrictionsPass ? availableToPlaceFresnelColor : errorFresnelColor
+                );
             }
         }
 
