@@ -11,9 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32194d70ac3bc0647b55685549f2c196, type: 3}
   m_Name: Build CommandPost Action
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   <Icon>k__BackingField: {fileID: 21300000, guid: dfebbdf93f58d764ab9aa4d54edd629e, type: 3}
   <Slot>k__BackingField: 0
   <RequiresClickToActivate>k__BackingField: 1
   <GhostPrefab>k__BackingField: {fileID: 7870278743457853935, guid: 991b5c9b538e791429cd57081b0a9b1a, type: 3}
   <Building>k__BackingField: {fileID: 11400000, guid: 2e813987328e67942957464bddd33480, type: 2}
+  <Restrictions>k__BackingField:
+  - {fileID: 11400000, guid: 56b38c40a3360594cb05105a71758f47, type: 2}
