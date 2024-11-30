@@ -1,3 +1,4 @@
+using GameDevTV.RTS.Player;
 using GameDevTV.RTS.Units;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace GameDevTV.RTS.Commands
                     );
             }
 
-            return AllRestrictionsPass(context.Hit.point);
+            return HasEnoughSupplies() && AllRestrictionsPass(context.Hit.point);
         }
 
         public override void Handle(CommandContext context)
@@ -32,10 +33,12 @@ namespace GameDevTV.RTS.Commands
             {
                 builder.ResumeBuilding(building);
             }
-            else if (AllRestrictionsPass(context.Hit.point))
+            else if (HasEnoughSupplies() && AllRestrictionsPass(context.Hit.point))
             {
                 builder.Build(Building, context.Hit.point);
             }
         }
+
+        private bool HasEnoughSupplies() => Building.Cost.Minerals <= Supplies.Minerals && Building.Cost.Gas <= Supplies.Gas;
     }
 }

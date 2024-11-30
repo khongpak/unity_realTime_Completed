@@ -63,6 +63,8 @@ namespace GameDevTV.RTS.Units
 
             SetCommandOverrides(new ActionBase[] { CancelBuildingCommand });
             Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
+            Bus<SupplyEvent>.Raise(new SupplyEvent(-building.Cost.Minerals, building.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(new SupplyEvent(-building.Cost.Gas, building.Cost.GasSO));
 
             return instance;
         }
