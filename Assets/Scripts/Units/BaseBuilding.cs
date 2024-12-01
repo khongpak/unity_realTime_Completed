@@ -75,6 +75,9 @@ namespace GameDevTV.RTS.Units
                 return;
             }
 
+            AbstractUnitSO unitSO = buildingQueue[index];
+            Bus<SupplyEvent>.Raise(new SupplyEvent(unitSO.Cost.Minerals, unitSO.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(new SupplyEvent(unitSO.Cost.Gas, unitSO.Cost.GasSO));
             buildingQueue.RemoveAt(index);
             if (index == 0)
             {

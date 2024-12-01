@@ -92,6 +92,16 @@ namespace GameDevTV.RTS.Units
                 && buildingVariable.Value != null)
             {
                 Destroy(buildingVariable.Value.gameObject);
+
+                BuildingSO buildingSO = buildingVariable.Value.BuildingSO;
+                Bus<SupplyEvent>.Raise(new SupplyEvent(
+                    Mathf.FloorToInt(0.75f * buildingSO.Cost.Minerals), 
+                    buildingSO.Cost.MineralsSO
+                ));
+                Bus<SupplyEvent>.Raise(new SupplyEvent(
+                    Mathf.FloorToInt(0.75f * buildingSO.Cost.Gas), 
+                    buildingSO.Cost.GasSO
+                ));
             }
 
             SetCommandOverrides(Array.Empty<ActionBase>());
