@@ -32,7 +32,7 @@ namespace GameDevTV.RTS.Player
 
         private Vector2 startingMousePosition;
 
-        private ActionBase activeAction;
+        private BaseCommand activeCommand;
         private GameObject ghostInstance;
         private MeshRenderer ghostRenderer;
         private bool wasMouseDownOnUI;
@@ -61,7 +61,7 @@ namespace GameDevTV.RTS.Player
             Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
             Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
             Bus<UnitSpawnEvent>.OnEvent += HandleUnitSpawn;
-            Bus<ActionSelectedEvent>.OnEvent += HandleActionSelected;
+            Bus<CommandSelectedEvent>.OnEvent += HandleActionSelected;
             Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
         }
 
@@ -70,7 +70,7 @@ namespace GameDevTV.RTS.Player
             Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
             Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
             Bus<UnitSpawnEvent>.OnEvent -= HandleUnitSpawn;
-            Bus<ActionSelectedEvent>.OnEvent -= HandleActionSelected;
+            Bus<CommandSelectedEvent>.OnEvent -= HandleActionSelected;
             Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
         }
 
@@ -89,16 +89,16 @@ namespace GameDevTV.RTS.Player
             selectedUnits.Remove(evt.Unit);
         }
 
-        private void HandleActionSelected(ActionSelectedEvent evt)
+        private void HandleActionSelected(CommandSelectedEvent evt)
         {
-            activeAction = evt.Action;
-            if (!activeAction.RequiresClickToActivate)
+            activeCommand = evt.Command;
+            if (!activeCommand.RequiresClickToActivate)
             {
                 ActivateAction(new RaycastHit());
             }
-            else if (activeAction.GhostPrefab != null)
+            else if (activeCommand.GhostPrefab != null)
             {
-                ghostInstance = Instantiate(activeAction.GhostPrefab);
+                ghostInstance = Instantiate(activeCommand.GhostPrefab);
                 ghostRenderer = ghostInstance.GetComponentInChildren<MeshRenderer>();
             }
         }
@@ -121,7 +121,7 @@ namespace GameDevTV.RTS.Player
             {
                 Destroy(ghostInstance);
                 ghostInstance = null;
-                activeAction = null;
+                activeCommand = null;
                 return;
             }
 
@@ -130,7 +130,7 @@ namespace GameDevTV.RTS.Player
             {
                 ghostInstance.transform.position = hit.point;
                 
-                bool allRestrictionsPass = activeAction.AllRestrictionsPass(hit.point);
+                bool allRestrictionsPass = activeCommand.AllRestrictionsPass(hit.point);
                 
                 ghostRenderer.material.SetColor(TINT, allRestrictionsPass ? availableToPlaceTintColor : errorTintColor);
                 ghostRenderer.material.SetColor(FRESNEL, 
@@ -159,7 +159,7 @@ namespace GameDevTV.RTS.Player
 
         private void HandleMouseUp()
         {
-            if (!wasMouseDownOnUI && activeAction == null && !Keyboard.current.shiftKey.isPressed)
+            if (!wasMouseDownOnUI && activeCommand == null && !Keyboard.current.shiftKey.isPressed)
             {
                 DeselectAllUnits();
             }
@@ -174,7 +174,7 @@ namespace GameDevTV.RTS.Player
 
         private void HandleMouseDrag()
         {
-            if (activeAction != null || wasMouseDownOnUI) return;
+            if (activeCommand != null || wasMouseDownOnUI) return;
 
             Bounds selectionBoxBounds = ResizeSelectionBox();
             foreach (AbstractUnit unit in aliveUnits)
@@ -253,14 +253,14 @@ namespace GameDevTV.RTS.Player
             }
         }
 
-        private List<ActionBase> GetAvailableCommands(AbstractUnit unit)
+        private List<BaseCommand> GetAvailableCommands(AbstractUnit unit)
         {
             OverrideCommandsCommand[] overrideCommandsCommands = unit.AvailableCommands
                 .Where(command => command is OverrideCommandsCommand)
                 .Cast<OverrideCommandsCommand>()
                 .ToArray();
 
-            List<ActionBase> allAvailableCommands = new();
+            List<BaseCommand> allAvailableCommands = new();
             foreach(OverrideCommandsCommand overrideCommand in overrideCommandsCommands)
             {
                 allAvailableCommands.AddRange(overrideCommand.Commands
@@ -281,13 +281,13 @@ namespace GameDevTV.RTS.Player
 
             Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (activeAction == null
+            if (activeCommand == null
                 && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayers)
                 && hit.collider.TryGetComponent(out ISelectable selectable))
             {
                 selectable.Select();
             }
-            else if (activeAction != null
+            else if (activeCommand != null
                 && !EventSystem.current.IsPointerOverGameObject()
                 && Physics.Raycast(cameraRay, out hit, float.MaxValue, interactableLayers | floorLayers))
             {
@@ -311,10 +311,10 @@ namespace GameDevTV.RTS.Player
             for (int i = 0; i < abstractCommandables.Count; i++)
             {
                 CommandContext context = new(abstractCommandables[i], hit, i);
-                activeAction.Handle(context);
+                activeCommand.Handle(context);
             }
 
-            activeAction = null;
+            activeCommand = null;
         }
 
         private void HandleRotation()

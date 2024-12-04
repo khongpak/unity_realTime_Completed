@@ -30,7 +30,7 @@ namespace GameDevTV.RTS.UI.Containers
 
         private void RefreshButtons(HashSet<AbstractCommandable> selectedUnits)
         {
-            HashSet<ActionBase> availableCommands = new(9);
+            HashSet<BaseCommand> availableCommands = new(9);
 
             foreach (AbstractCommandable commandable in selectedUnits)
             {
@@ -39,7 +39,7 @@ namespace GameDevTV.RTS.UI.Containers
 
             for (int i = 0; i < actionButtons.Length; i++)
             {
-                ActionBase actionForSlot = availableCommands.Where(action => action.Slot == i).FirstOrDefault();
+                BaseCommand actionForSlot = availableCommands.Where(action => action.Slot == i).FirstOrDefault();
 
                 if (actionForSlot != null)
                 {
@@ -52,9 +52,9 @@ namespace GameDevTV.RTS.UI.Containers
             }
         }
 
-        private UnityAction HandleClick(ActionBase action)
+        private UnityAction HandleClick(BaseCommand action)
         {
-            return () => Bus<ActionSelectedEvent>.Raise(new ActionSelectedEvent(action));
+            return () => Bus<CommandSelectedEvent>.Raise(new CommandSelectedEvent(action));
         }
     }
 }

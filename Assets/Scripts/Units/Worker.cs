@@ -23,7 +23,7 @@ namespace GameDevTV.RTS.Units
                 return false;
             }
         }
-        [SerializeField] private ActionBase CancelBuildingCommand;
+        [SerializeField] private BaseCommand CancelBuildingCommand;
 
         protected override void Start()
         {
@@ -61,7 +61,7 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("Ghost", instance);
             graphAgent.SetVariableValue("Command", UnitCommands.BuildBuilding);
 
-            SetCommandOverrides(new ActionBase[] { CancelBuildingCommand });
+            SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
             Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
             Bus<SupplyEvent>.Raise(new SupplyEvent(-building.Cost.Minerals, building.Cost.MineralsSO));
             Bus<SupplyEvent>.Raise(new SupplyEvent(-building.Cost.Gas, building.Cost.GasSO));
@@ -77,7 +77,7 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue<GameObject>("Ghost", null);
             graphAgent.SetVariableValue("Command", UnitCommands.BuildBuilding);
 
-            SetCommandOverrides(new ActionBase[] { CancelBuildingCommand });
+            SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
             Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
         }
 
@@ -104,7 +104,7 @@ namespace GameDevTV.RTS.Units
                 ));
             }
 
-            SetCommandOverrides(Array.Empty<ActionBase>());
+            SetCommandOverrides(Array.Empty<BaseCommand>());
             Stop();
         }
 

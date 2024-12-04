@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameDevTV.RTS.Commands
 {
     [CreateAssetMenu(fileName = "Move Action", menuName = "Units/Commands/Move", order = 100)]
-    public class MoveCommand : ActionBase
+    public class MoveCommand : BaseCommand
     {
         [SerializeField] private float radiusMultiplier = 3.5f;
 
@@ -47,5 +47,7 @@ namespace GameDevTV.RTS.Commands
                 radialOffset = 2 * Mathf.PI / maxUnitsOnLayer;
             }
         }
+
+        public override bool IsLocked(CommandContext context) => false;
     }
 }

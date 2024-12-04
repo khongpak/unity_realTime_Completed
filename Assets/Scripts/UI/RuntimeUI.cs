@@ -20,6 +20,7 @@ namespace GameDevTV.RTS.UI
             Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
             Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
             Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
+            Bus<SupplyEvent>.OnEvent += HandleSupplyChange;
         }
 
         private void Start()
@@ -33,6 +34,7 @@ namespace GameDevTV.RTS.UI
             Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
             Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
             Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
+            Bus<SupplyEvent>.OnEvent -= HandleSupplyChange;
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
@@ -85,6 +87,11 @@ namespace GameDevTV.RTS.UI
                 actionsUI.Disable();
                 buildingBuildingUI.Disable();
             }
+        }
+
+        private void HandleSupplyChange(SupplyEvent evt)
+        {
+            actionsUI.EnableFor(selectedUnits);
         }
     }
 }

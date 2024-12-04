@@ -10,11 +10,11 @@ namespace GameDevTV.RTS.Units
     {
         [field: SerializeField] public int CurrentHealth { get; private set; }
         [field: SerializeField] public int MaxHealth { get; private set; }
-        [field: SerializeField] public ActionBase[] AvailableCommands { get; private set; }
+        [field: SerializeField] public BaseCommand[] AvailableCommands { get; private set; }
         [SerializeField] private DecalProjector decalProjector;
         [field: SerializeField] public AbstractUnitSO UnitSO { get; private set; }
 
-        private ActionBase[] initialCommands;
+        private BaseCommand[] initialCommands;
 
         protected virtual void Start()
         {
@@ -46,7 +46,7 @@ namespace GameDevTV.RTS.Units
             Bus<UnitDeselectedEvent>.Raise(new UnitDeselectedEvent(this));
         }
 
-        public void SetCommandOverrides(ActionBase[] commands)
+        public void SetCommandOverrides(BaseCommand[] commands)
         {
             if (commands == null || commands.Length == 0)
             {
