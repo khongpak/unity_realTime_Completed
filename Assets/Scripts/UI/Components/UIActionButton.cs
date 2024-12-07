@@ -1,14 +1,16 @@
 using GameDevTV.RTS.Commands;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace GameDevTV.RTS.UI.Components
 {
     [RequireComponent(typeof(Button))]
-    public class UIActionButton : MonoBehaviour, IUIElement<BaseCommand, UnityAction>
+    public class UIActionButton : MonoBehaviour, IUIElement<BaseCommand, UnityAction>, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Image icon;
+        [SerializeField] private Tooltip tooltip;
 
         private Button button;
 
@@ -24,6 +26,11 @@ namespace GameDevTV.RTS.UI.Components
             SetIcon(action.Icon);
             button.interactable = !action.IsLocked(new CommandContext());
             button.onClick.AddListener(onClick);
+
+            if (tooltip != null)
+            {
+                tooltip.SetText(action.name);
+            }
         }
 
         public void Disable()
@@ -31,6 +38,29 @@ namespace GameDevTV.RTS.UI.Components
             SetIcon(null);
             button.interactable = false;
             button.onClick.RemoveAllListeners();
+            CancelInvoke();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Invoke(nameof(ShowTooltip), tooltip.HoverDelay);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (tooltip != null)
+            {
+                tooltip.Hide();
+            }
+            CancelInvoke();
+        }
+
+        private void ShowTooltip()
+        {
+            if (tooltip != null)
+            {
+                tooltip.Show();
+            }
         }
 
         private void SetIcon(Sprite icon)
