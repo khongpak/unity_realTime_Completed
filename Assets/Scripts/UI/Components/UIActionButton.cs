@@ -1,4 +1,5 @@
 using GameDevTV.RTS.Commands;
+using GameDevTV.RTS.Units;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -12,24 +13,28 @@ namespace GameDevTV.RTS.UI.Components
         [SerializeField] private Image icon;
         [SerializeField] private Tooltip tooltip;
 
+        private bool isActive;
+        private RectTransform rectTransform;
         private Button button;
 
         private void Awake()
         {
             button = GetComponent<Button>();
+            rectTransform = GetComponent<RectTransform>();
             Disable();
         }
 
-        public void EnableFor(BaseCommand action, UnityAction onClick)
+        public void EnableFor(BaseCommand command, UnityAction onClick)
         {
             button.onClick.RemoveAllListeners();
-            SetIcon(action.Icon);
-            button.interactable = !action.IsLocked(new CommandContext());
+            SetIcon(command.Icon);
+            button.interactable = !command.IsLocked(new CommandContext());
             button.onClick.AddListener(onClick);
+            isActive = true;
 
             if (tooltip != null)
             {
-                tooltip.SetText(action.name);
+                tooltip.SetText(GetTooltipText(command));
             }
         }
 
@@ -38,12 +43,16 @@ namespace GameDevTV.RTS.UI.Components
             SetIcon(null);
             button.interactable = false;
             button.onClick.RemoveAllListeners();
+            isActive = false;
             CancelInvoke();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Invoke(nameof(ShowTooltip), tooltip.HoverDelay);
+            if (isActive)
+            {
+                Invoke(nameof(ShowTooltip), tooltip.HoverDelay);
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -60,6 +69,10 @@ namespace GameDevTV.RTS.UI.Components
             if (tooltip != null)
             {
                 tooltip.Show();
+                tooltip.RectTransform.position = new Vector2(
+                    rectTransform.position.x + rectTransform.rect.width / 2f,
+                    rectTransform.position.y + rectTransform.rect.height / 2f
+                );
             }
         }
 
@@ -74,6 +87,35 @@ namespace GameDevTV.RTS.UI.Components
                 this.icon.sprite = icon;
                 this.icon.enabled = true;
             }
+        }
+
+        private string GetTooltipText(BaseCommand command)
+        {
+            string tooltipText = command.Name + "\n";
+
+            SupplyCostSO supplyCost = null;
+            if (command is BuildUnitCommand unitCommand)
+            {
+                supplyCost = unitCommand.Unit.Cost;
+            }
+            else if (command is BuildBuildingCommand buildingCommand)
+            {
+                supplyCost = buildingCommand.Building.Cost;
+            }
+
+            if (supplyCost != null)
+            {
+                if (supplyCost.Minerals > 0)
+                {
+                    tooltipText += $"{supplyCost.Minerals} Minerals.";
+                }
+                if (supplyCost.Gas > 0)
+                {
+                    tooltipText += $"{supplyCost.Gas} Gas.";
+                }
+            }
+
+            return tooltipText;
         }
     }
 }
