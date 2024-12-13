@@ -34,7 +34,10 @@ namespace GameDevTV.RTS.UI.Containers
 
             foreach (AbstractCommandable commandable in selectedUnits)
             {
-                availableCommands.AddRange(commandable.AvailableCommands);
+                if (commandable.AvailableCommands != null)
+                {
+                    availableCommands.AddRange(commandable.AvailableCommands);
+                }
             }
 
             for (int i = 0; i < actionButtons.Length; i++)

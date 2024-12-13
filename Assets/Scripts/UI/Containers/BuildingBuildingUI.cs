@@ -56,7 +56,10 @@ namespace GameDevTV.RTS.UI.Containers
                 buildCoroutine = StartCoroutine(UpdateUnitProgress());
             }
 
-            SetupUnitButtons();
+            if (building != null)
+            {
+                SetupUnitButtons();
+            }
         }
 
         private IEnumerator UpdateUnitProgress()
