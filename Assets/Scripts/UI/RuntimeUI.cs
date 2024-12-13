@@ -12,6 +12,8 @@ namespace GameDevTV.RTS.UI
     {
         [SerializeField] private ActionsUI actionsUI;
         [SerializeField] private BuildingBuildingUI buildingBuildingUI;
+        [SerializeField] private UnitIconUI unitIconUI;
+        [SerializeField] private SingleUnitSelectedUI singleUnitSelectedUI;
 
         private HashSet<AbstractCommandable> selectedUnits = new(12);
 
@@ -27,6 +29,8 @@ namespace GameDevTV.RTS.UI
         {
             actionsUI.Disable();
             buildingBuildingUI.Disable();
+            unitIconUI.Disable();
+            singleUnitSelectedUI.Disable();
         }
 
         private void OnDestroy()
@@ -42,12 +46,7 @@ namespace GameDevTV.RTS.UI
             if (evt.Unit is AbstractCommandable commandable)
             {
                 selectedUnits.Add(commandable);
-                actionsUI.EnableFor(selectedUnits);
-            }
-
-            if (selectedUnits.Count == 1 && evt.Unit is BaseBuilding building)
-            {
-                buildingBuildingUI.EnableFor(building);
+                RefreshUI();
             }
         }
 
@@ -73,12 +72,25 @@ namespace GameDevTV.RTS.UI
             {
                 actionsUI.EnableFor(selectedUnits);
 
-                if (selectedUnits.Count == 1 && selectedUnits.First() is BaseBuilding building)
+                if (selectedUnits.Count == 1)
                 {
-                    buildingBuildingUI.EnableFor(building);
+                    AbstractCommandable commandable = selectedUnits.First();
+                    unitIconUI.EnableFor(commandable);
+                    singleUnitSelectedUI.EnableFor(commandable);
+
+                    if (commandable is BaseBuilding building)
+                    {
+                        buildingBuildingUI.EnableFor(building);
+                    }
+                    else
+                    {
+                        buildingBuildingUI.Disable();
+                    }
                 }
                 else
                 {
+                    unitIconUI.Disable();
+                    singleUnitSelectedUI.Disable();
                     buildingBuildingUI.Disable();
                 }
             }
@@ -86,6 +98,8 @@ namespace GameDevTV.RTS.UI
             {
                 actionsUI.Disable();
                 buildingBuildingUI.Disable();
+                unitIconUI.Disable();
+                singleUnitSelectedUI.Disable();
             }
         }
 
