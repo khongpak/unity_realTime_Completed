@@ -1,3 +1,5 @@
+using GameDevTV.RTS.EventBus;
+using GameDevTV.RTS.Events;
 using GameDevTV.RTS.Units;
 using UnityEngine;
 
@@ -27,6 +29,7 @@ namespace GameDevTV.RTS.UI.Containers
                 buildingUnderConstructionUI.EnableFor(building);
                 buildingBuildingUI.Disable();
                 singleUnitSelectedUI.Disable();
+                Bus<BuildingSpawnEvent>.OnEvent += HandleBuildingSpawn;
             }
         }
 
@@ -35,6 +38,7 @@ namespace GameDevTV.RTS.UI.Containers
             buildingBuildingUI.Disable();
             singleUnitSelectedUI.Disable();
             buildingUnderConstructionUI.Disable();
+            Bus<BuildingSpawnEvent>.OnEvent -= HandleBuildingSpawn;
             if (selectedBuilding != null)
             {
                 selectedBuilding.OnQueueUpdated -= OnBuildingQueueUpdated;
@@ -53,6 +57,16 @@ namespace GameDevTV.RTS.UI.Containers
             {
                 buildingBuildingUI.EnableFor(selectedBuilding);
                 singleUnitSelectedUI.Disable();
+            }
+        }
+
+        private void HandleBuildingSpawn(BuildingSpawnEvent evt)
+        {
+            if (evt.Building == selectedBuilding)
+            {
+                Bus<BuildingSpawnEvent>.OnEvent -= HandleBuildingSpawn;
+                OnBuildingQueueUpdated();
+                buildingUnderConstructionUI.Disable();
             }
         }
     }
