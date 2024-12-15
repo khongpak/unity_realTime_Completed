@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace GameDevTV.RTS.Player
 {
@@ -21,13 +22,13 @@ namespace GameDevTV.RTS.Player
         [SerializeField] private LayerMask interactableLayers;
         [SerializeField] private LayerMask floorLayers;
         [SerializeField] private RectTransform selectionBox;
-        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)]
         private Color errorTintColor = Color.red;
-        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)]
         private Color errorFresnelColor = new (4, 1.7f, 0, 2);
-        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)]
         private Color availableToPlaceTintColor = new (0.2f, 0.65f, 1, 2);
-        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)] 
+        [SerializeField] [ColorUsage(showAlpha: true, hdr: true)]
         private Color availableToPlaceFresnelColor = new(4, 1.7f, 0, 2);
 
         private Vector2 startingMousePosition;
@@ -129,11 +130,11 @@ namespace GameDevTV.RTS.Player
             if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorLayers))
             {
                 ghostInstance.transform.position = hit.point;
-                
+
                 bool allRestrictionsPass = activeCommand.AllRestrictionsPass(hit.point);
-                
+
                 ghostRenderer.material.SetColor(TINT, allRestrictionsPass ? availableToPlaceTintColor : errorTintColor);
-                ghostRenderer.material.SetColor(FRESNEL, 
+                ghostRenderer.material.SetColor(FRESNEL,
                     allRestrictionsPass ? availableToPlaceFresnelColor : errorFresnelColor
                 );
             }
@@ -239,13 +240,17 @@ namespace GameDevTV.RTS.Player
 
                 for(int i = 0; i < abstractUnits.Count; i++)
                 {
-                    CommandContext context = new(abstractUnits[i], hit, i);
+                    CommandContext context = new(abstractUnits[i], hit, i, MouseButton.Right);
 
                     foreach(ICommand command in GetAvailableCommands(abstractUnits[i]))
                     {
                         if (command.CanHandle(context))
                         {
                             command.Handle(context);
+                            if (command.IsSingleUnitCommand)
+                            {
+                                return;
+                            }
                             break;
                         }
                     }
@@ -311,7 +316,14 @@ namespace GameDevTV.RTS.Player
             for (int i = 0; i < abstractCommandables.Count; i++)
             {
                 CommandContext context = new(abstractCommandables[i], hit, i);
-                activeCommand.Handle(context);
+                if (activeCommand.CanHandle(context))
+                {
+                    activeCommand.Handle(context);
+                    if (activeCommand.IsSingleUnitCommand)
+                    {
+                        break;
+                    }
+                }
             }
 
             activeCommand = null;

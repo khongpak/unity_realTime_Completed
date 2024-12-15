@@ -1,6 +1,7 @@
 using GameDevTV.RTS.Player;
 using GameDevTV.RTS.Units;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace GameDevTV.RTS.Commands
 {
@@ -11,15 +12,15 @@ namespace GameDevTV.RTS.Commands
 
         public override bool CanHandle(CommandContext context)
         {
-            if (context.Commandable is not IBuildingBuilder) return false;
+            if (context.Commandable is not IBuildingBuilder buildingBuilder || buildingBuilder.IsBuilding) return false;
 
-            if (context.Hit.collider != null)
+            if (context.Hit.collider != null && context.Button == MouseButton.Right)
             {
                 return context.Hit.collider.TryGetComponent(out BaseBuilding building)
                     && Building == building.BuildingSO
-                    && (building.Progress.State == BuildingProgress.BuildingState.Paused
-                        || building.Progress.State == BuildingProgress.BuildingState.Destroyed
-                    );
+                       && (building.Progress.State == BuildingProgress.BuildingState.Paused
+                           || building.Progress.State == BuildingProgress.BuildingState.Destroyed
+                       );
             }
 
             return HasEnoughSupplies() && AllRestrictionsPass(context.Hit.point);
