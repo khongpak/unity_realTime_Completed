@@ -21,6 +21,7 @@ namespace GameDevTV.RTS.Behavior
         private Renderer buildingRenderer;
         private Vector3 startPosition;
         private Vector3 endPosition;
+        private float targetHealth;
 
         protected override Status OnStart()
         {
@@ -54,6 +55,14 @@ namespace GameDevTV.RTS.Behavior
         protected override Status OnUpdate()
         {
             float normalizedTime = (Time.time - startBuildTime) / BuildingSO.Value.BuildTime;
+            
+            targetHealth += Time.deltaTime * (BuildingSO.Value.Health / BuildingSO.Value.BuildTime);
+            if (targetHealth >= 1)
+            {
+                int healAmount = Mathf.FloorToInt(targetHealth);
+                completedBuilding.Heal(healAmount);
+                targetHealth -= healAmount;
+            }
 
             buildingRenderer.transform.position = Vector3.Lerp(startPosition, endPosition, normalizedTime);
 

@@ -31,6 +31,8 @@ namespace GameDevTV.RTS.Units
         private void Awake()
         {
             BuildingSO = UnitSO as BuildingSO;
+            MaxHealth = BuildingSO.Health;
+            // Current health is set as the building is being built via Heal()
         }
 
         protected override void Start()
@@ -101,6 +103,7 @@ namespace GameDevTV.RTS.Units
 
         public void StartBuilding(IBuildingBuilder buildingBuilder)
         {
+            Awake();
             unitBuildingThis = buildingBuilder;
             MainRenderer.material = BuildingSO.PlacementMaterial;
 
@@ -109,6 +112,11 @@ namespace GameDevTV.RTS.Units
                 Time.time - BuildingSO.BuildTime * Progress.Progress,
                 Progress.Progress
             );
+
+            if (Progress.Progress == 0)
+            {
+                Heal(1);
+            }
 
             Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
             Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
