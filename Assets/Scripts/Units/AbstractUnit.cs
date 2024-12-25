@@ -36,6 +36,7 @@ namespace GameDevTV.RTS.Units
 
         public void Stop()
         {
+            SetCommandOverrides(null);
             graphAgent.SetVariableValue("Command", UnitCommands.Stop);
         }
 

@@ -33,6 +33,10 @@ namespace GameDevTV.RTS.Units
             {
                 eventChannelVariable.Value.Event += HandleGatherSupplies;
             }
+            if (graphAgent.GetVariable("BuildingEventChannel", out BlackboardVariable<BuildingEventChannel> buildingEventChannelVariable))
+            {
+                buildingEventChannelVariable.Value.Event += HandleBuildingEvent;
+            }
         }
 
         public void Gather(GatherableSupply supply)
@@ -63,7 +67,6 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("Command", UnitCommands.BuildBuilding);
 
             SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
-            Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
             Bus<SupplyEvent>.Raise(new SupplyEvent(-building.Cost.Minerals, building.Cost.MineralsSO));
             Bus<SupplyEvent>.Raise(new SupplyEvent(-building.Cost.Gas, building.Cost.GasSO));
 
@@ -77,9 +80,6 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("BuildingSO", building.BuildingSO);
             graphAgent.SetVariableValue<GameObject>("Ghost", null);
             graphAgent.SetVariableValue("Command", UnitCommands.BuildBuilding);
-
-            SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
-            Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
         }
 
         public void CancelBuilding()
@@ -112,6 +112,31 @@ namespace GameDevTV.RTS.Units
         private void HandleGatherSupplies(GameObject self, int amount, SupplySO supply)
         {
             Bus<SupplyEvent>.Raise(new SupplyEvent(amount, supply));
+        }
+        
+        private void HandleBuildingEvent(GameObject self, BuildingEventType eventType, BaseBuilding building)
+        {
+            switch(eventType)
+            {
+                case BuildingEventType.ArrivedAt:
+                    if (building != null && building.Progress.State == BuildingProgress.BuildingState.Building)
+                    {
+                        Stop();
+                        break;
+                    }
+                    SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
+                    break;
+                case BuildingEventType.Begin:
+                    SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
+                    break;
+                case BuildingEventType.Cancel:
+                case BuildingEventType.Abort:
+                    SetCommandOverrides(null);
+                    break;
+                case BuildingEventType.Completed:
+                default: 
+                    break;
+            }
         }
     }
 }
