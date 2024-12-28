@@ -12,7 +12,7 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public int CurrentHealth { get; protected set; }
         [field: SerializeField] public int MaxHealth { get; protected set; }
         [field: SerializeField] public BaseCommand[] AvailableCommands { get; private set; }
-        [SerializeField] private DecalProjector decalProjector;
+        [SerializeField] protected DecalProjector decalProjector;
         [field: SerializeField] public AbstractUnitSO UnitSO { get; private set; }
 
         public delegate void HealthUpdatedEvent(AbstractCommandable commandable, int lastHealth, int newHealth);
@@ -25,7 +25,7 @@ namespace GameDevTV.RTS.Units
             initialCommands = AvailableCommands;
         }
 
-        public void Select()
+        public virtual void Select()
         {
             if (decalProjector != null)
             {
@@ -36,7 +36,7 @@ namespace GameDevTV.RTS.Units
             Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
         }
 
-        public void Deselect()
+        public virtual void Deselect()
         {
             if (decalProjector != null)
             {

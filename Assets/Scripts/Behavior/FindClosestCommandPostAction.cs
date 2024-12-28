@@ -5,6 +5,7 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 using System.Collections.Generic;
 using GameDevTV.RTS.Units;
+using GameDevTV.RTS.Utilities;
 
 namespace GameDevTV.RTS.Behavior
 {
@@ -29,7 +30,8 @@ namespace GameDevTV.RTS.Behavior
             foreach(Collider collider in colliders)
             {
                 if (collider.TryGetComponent(out BaseBuilding building) 
-                        && building.UnitSO.Equals(CommandPostBuilding.Value))
+                        && building.UnitSO.Equals(CommandPostBuilding.Value)
+                        && building.Progress.State == BuildingProgress.BuildingState.Completed)
                 {
                     nearbyCommandPosts.Add(building);
                 }
@@ -40,6 +42,7 @@ namespace GameDevTV.RTS.Behavior
                 return Status.Failure;
             }
 
+            nearbyCommandPosts.Sort(new ClosestCommandPostComparer(Unit.Value.transform.position));
             CommandPost.Value = nearbyCommandPosts[0].gameObject;
 
             return Status.Success;

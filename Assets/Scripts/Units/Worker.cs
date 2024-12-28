@@ -96,11 +96,11 @@ namespace GameDevTV.RTS.Units
 
                 BuildingSO buildingSO = buildingVariable.Value.BuildingSO;
                 Bus<SupplyEvent>.Raise(new SupplyEvent(
-                    Mathf.FloorToInt(0.75f * buildingSO.Cost.Minerals), 
+                    Mathf.FloorToInt(0.75f * buildingSO.Cost.Minerals),
                     buildingSO.Cost.MineralsSO
                 ));
                 Bus<SupplyEvent>.Raise(new SupplyEvent(
-                    Mathf.FloorToInt(0.75f * buildingSO.Cost.Gas), 
+                    Mathf.FloorToInt(0.75f * buildingSO.Cost.Gas),
                     buildingSO.Cost.GasSO
                 ));
             }
@@ -109,11 +109,27 @@ namespace GameDevTV.RTS.Units
             Stop();
         }
 
+        public override void Deselect()
+        {
+            if (decalProjector != null)
+            {
+                decalProjector.gameObject.SetActive(false);
+            }
+
+            IsSelected = false;
+            if (!IsBuilding)
+            {
+                SetCommandOverrides(null);
+            }
+
+            Bus<UnitDeselectedEvent>.Raise(new UnitDeselectedEvent(this));
+        }
+
         private void HandleGatherSupplies(GameObject self, int amount, SupplySO supply)
         {
             Bus<SupplyEvent>.Raise(new SupplyEvent(amount, supply));
         }
-        
+
         private void HandleBuildingEvent(GameObject self, BuildingEventType eventType, BaseBuilding building)
         {
             switch(eventType)
@@ -131,10 +147,10 @@ namespace GameDevTV.RTS.Units
                     break;
                 case BuildingEventType.Cancel:
                 case BuildingEventType.Abort:
+                case BuildingEventType.Completed:
                     SetCommandOverrides(null);
                     break;
-                case BuildingEventType.Completed:
-                default: 
+                default:
                     break;
             }
         }
