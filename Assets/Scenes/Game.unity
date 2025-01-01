@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-356305593447271230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b27bb6d9a2c8d540a10dff10acc543e, type: 3}
-  m_Name: Worker BT Debug Info
-  m_EditorClassIdentifier: 
-  m_CodeBreakPointsList: []
 --- !u!29 &1
 OcclusionCullingSettings:
   m_ObjectHideFlags: 0
@@ -6949,143 +6936,6 @@ Transform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4960964140495102217, guid: 599856f3bd9a1614f9c0db64f2ddcacd, type: 3}
   m_PrefabInstance: {fileID: 684018148024924124}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &601104602
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1076983579694789324, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_Name
-      value: Air Transport
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_Graph
-      value: 
-      objectReference: {fileID: 4598362100129326914}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: 'managedReferences[6534005384409776301]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.GameObject,
-        UnityEngine.CoreModule]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: 'managedReferences[6534005386445062167]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.GameObject,
-        UnityEngine.CoreModule]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: 'managedReferences[6534005429014102118]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.GameObject,
-        UnityEngine.CoreModule]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005384409776301].Name
-      value: Self
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005386445062167].Name
-      value: Self
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005429014102118].Name
-      value: Self
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005384409776301].m_Value
-      value: 
-      objectReference: {fileID: 601104603}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005386445062167].m_Value
-      value: 
-      objectReference: {fileID: 601104603}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005429014102118].m_Value
-      value: 
-      objectReference: {fileID: 601104603}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[0]'
-      value: 6534005429014102118
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005384409776301].GUID.m_Value0
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005384409776301].GUID.m_Value1
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005386445062167].GUID.m_Value0
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005386445062167].GUID.m_Value1
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005429014102118].GUID.m_Value0
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2115234063178354583, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: managedReferences[6534005429014102118].GUID.m_Value1
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4999981
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -61.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
---- !u!1 &601104603 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1076983579694789324, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-  m_PrefabInstance: {fileID: 601104602}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &625525892
 PrefabInstance:
@@ -15898,6 +15748,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4583745518494351312, guid: 5920905e7a5364c47864b79706cb5eca, type: 3}
   m_PrefabInstance: {fileID: 1270598640}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1275220786
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1931094961596098796, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_Name
+      value: Rifleman
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.3678348
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -55.33233
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
 --- !u!1001 &1278391652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29162,397 +29069,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7acb4596e5267ea4e83644abedc24f88, type: 3}
---- !u!114 &4598362100129326914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db920e62f70f420bb33c771449926fa4, type: 3}
-  m_Name: Worker BT
-  m_EditorClassIdentifier: 
-  Graphs:
-  - rid: 6534005677079920640
-  RootGraph:
-    rid: 6534005677079920640
-  m_DebugInfo: {fileID: -356305593447271230}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 6534005676755387376
-      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 4
-    - rid: 6534005676755387379
-      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 0
-    - rid: 6534005676755387381
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 7
-    - rid: 6534005676755387383
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 10
-    - rid: 6534005677079920640
-      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        AuthoringAssetID:
-          m_Value0: 11852327495980541200
-          m_Value1: 18226333195515182649
-        m_DebugInfo: {fileID: -356305593447271230}
-        Root:
-          rid: 6534005677079920641
-        BlackboardReference:
-          rid: 6534005677079920642
-        BlackboardGroupReferences: []
-        m_VersionTimestamp: 638651876649728111
-    - rid: 6534005677079920641
-      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 3763453852605676754
-          m_Value1: 10176086116665472146
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: -2
-        m_Child:
-          rid: 6534005677079920643
-        Repeat: 1
-    - rid: 6534005677079920642
-      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        m_Blackboard:
-          rid: 6534005677079920644
-        m_Source: {fileID: -7874719913472112363, guid: 10e583af0fed7ba439be975c79f1f0fc, type: 2}
-    - rid: 6534005677079920643
-      type: {class: AbortModifier, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 3354845737909744878
-          m_Value1: 11198044715586253565
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920641
-        m_Child:
-          rid: 6534005677079920645
-        m_Conditions:
-        - rid: 6534005677079920646
-        m_RequiresAllConditions: 0
-    - rid: 6534005677079920644
-      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        m_Variables:
-        - rid: 6534005677079920647
-        - rid: 6534005677079920648
-        - rid: 6534005677079920649
-        - rid: 6534005677079920650
-        - rid: 6534005677079920651
-        - rid: 6534005677079920652
-        - rid: 6534005677079920653
-        - rid: 6534005677079920654
-    - rid: 6534005677079920645
-      type: {class: SwitchComposite, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 10408183436646978550
-          m_Value1: 509917084589205032
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920643
-        m_Children:
-        - rid: 6534005677079920655
-        - rid: 6534005677079920656
-        - rid: 6534005677079920657
-        EnumVariable:
-          rid: 6534005677079920650
-    - rid: 6534005677079920646
-      type: {class: VariableValueChangedCondition, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        Graph:
-          rid: 6534005677079920640
-        Variable:
-          rid: 6534005677079920650
-    - rid: 6534005677079920647
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 0}
-    - rid: 6534005677079920648
-      type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 15504965013581719353
-          m_Value1: 1730944643736169597
-        Name: TargetLocation
-        m_Value: {x: 0, y: 0, z: 0}
-    - rid: 6534005677079920649
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 9839067406154873950
-          m_Value1: 971551532672032483
-        Name: TargetGameObject
-        m_Value: {fileID: 0}
-    - rid: 6534005677079920650
-      type: {class: 'BlackboardVariable`1[[GameDevTV.RTS.Units.UnitCommands, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 9766435570170566133
-          m_Value1: 6015331306033516593
-        Name: Command
-        m_Value: 0
-    - rid: 6534005677079920651
-      type: {class: 'BlackboardVariable`1[[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 17354403183087742191
-          m_Value1: 10799009562584336673
-        Name: Supply
-        m_Value: {fileID: 0}
-    - rid: 6534005677079920652
-      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 11363701168115340772
-          m_Value1: 1914288827276478599
-        Name: SupplyAmountHeld
-        m_Value: 0
-    - rid: 6534005677079920653
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 4361667948591095350
-          m_Value1: 14185982170587754062
-        Name: CommandPost
-        m_Value: {fileID: 0}
-    - rid: 6534005677079920654
-      type: {class: 'BlackboardVariable`1[[GameDevTV.RTS.Units.UnitSO, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 859763845646169783
-          m_Value1: 1142334612693419073
-        Name: CommandPostSO
-        m_Value: {fileID: 11400000, guid: 8f44d39efdf8c204f8c5009b063b6db7, type: 2}
-    - rid: 6534005677079920655
-      type: {class: StopAgentAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 12641016198927112168
-          m_Value1: 11095118462186801646
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920645
-        Agent:
-          rid: 6534005677079920647
-    - rid: 6534005677079920656
-      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 379783828222244854
-          m_Value1: 13264149008529677302
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920645
-        m_Children:
-        - rid: 6534005677079920658
-        - rid: 6534005677079920659
-    - rid: 6534005677079920657
-      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 1769313919856586426
-          m_Value1: 12460273037910566900
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920645
-        m_Children:
-        - rid: 6534005677079920660
-        - rid: 6534005677079920661
-        - rid: 6534005677079920662
-        - rid: 6534005677079920663
-        - rid: 6534005677079920664
-    - rid: 6534005677079920658
-      type: {class: SetAgentAvoidanceAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 379783828222244854
-          m_Value1: 13264149008529677302
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920656
-        Agent:
-          rid: 6534005677079920647
-        AvoidanceQuality:
-          rid: 6534005676755387376
-    - rid: 6534005677079920659
-      type: {class: AbortModifier, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 13509670731976413646
-          m_Value1: 329849980919472967
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920656
-        m_Child:
-          rid: 6534005677079920665
-        m_Conditions:
-        - rid: 6534005677079920666
-        m_RequiresAllConditions: 0
-    - rid: 6534005677079920660
-      type: {class: SetAgentAvoidanceAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 11363491810398389513
-          m_Value1: 11638894425628656322
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920657
-        Agent:
-          rid: 6534005677079920647
-        AvoidanceQuality:
-          rid: 6534005676755387379
-    - rid: 6534005677079920661
-      type: {class: MoveToGatherableSupplyAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 12723345199775849209
-          m_Value1: 15362106265665253265
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920657
-        Agent:
-          rid: 6534005677079920647
-        Supply:
-          rid: 6534005677079920667
-        SearchRadius:
-          rid: 6534005676755387381
-    - rid: 6534005677079920662
-      type: {class: GatherSuppliesAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 1014808883105453704
-          m_Value1: 13597446404741655928
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920657
-        Unit:
-          rid: 6534005677079920647
-        Amount:
-          rid: 6534005677079920652
-        GatherableSupplies:
-          rid: 6534005677079920668
-        SupplySO:
-          rid: -2
-    - rid: 6534005677079920663
-      type: {class: FindClosestCommandPostAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 9400116597338535139
-          m_Value1: 16647885840128109503
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920657
-        Unit:
-          rid: 6534005677079920647
-        CommandPost:
-          rid: 6534005677079920653
-        SearchRadius:
-          rid: 6534005676755387383
-        CommandPostBuilding:
-          rid: 6534005677079920654
-    - rid: 6534005677079920664
-      type: {class: MoveToTargetGameObjectAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 17570677659851475554
-          m_Value1: 16115034272072492454
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920657
-        Agent:
-          rid: 6534005677079920647
-        TargetGameObject:
-          rid: 6534005677079920653
-    - rid: 6534005677079920665
-      type: {class: MoveToTargetLocationAction, ns: GameDevTV.RTS.Behavior, asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 15992163837271281927
-          m_Value1: 4595050435454055968
-        Graph:
-          rid: 6534005677079920640
-        m_Parent:
-          rid: 6534005677079920659
-        Agent:
-          rid: 6534005677079920647
-        TargetLocation:
-          rid: 6534005677079920648
-    - rid: 6534005677079920666
-      type: {class: VariableValueChangedCondition, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        Graph:
-          rid: 6534005677079920640
-        Variable:
-          rid: 6534005677079920648
-    - rid: 6534005677079920667
-      type: {class: 'ComponentToComponentBlackboardVariable`2[[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp],[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: {fileID: 0}
-        m_LinkedVariable:
-          rid: 6534005677079920651
-    - rid: 6534005677079920668
-      type: {class: 'ComponentToComponentBlackboardVariable`2[[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp],[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: {fileID: 0}
-        m_LinkedVariable:
-          rid: 6534005677079920651
 --- !u!1001 &6266538523910872510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29939,5 +29455,5 @@ SceneRoots:
   - {fileID: 2048382185}
   - {fileID: 506680887}
   - {fileID: 1776617987}
-  - {fileID: 601104602}
   - {fileID: 1595301437}
+  - {fileID: 1275220786}
