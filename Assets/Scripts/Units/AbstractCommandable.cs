@@ -6,11 +6,12 @@ using UnityEngine.Rendering.Universal;
 
 namespace GameDevTV.RTS.Units
 {
-    public abstract class AbstractCommandable : MonoBehaviour, ISelectable
+    public abstract class AbstractCommandable : MonoBehaviour, ISelectable, IDamageable
     {
         [field: SerializeField] public bool IsSelected { get; protected set; }
         [field: SerializeField] public int CurrentHealth { get; protected set; }
         [field: SerializeField] public int MaxHealth { get; protected set; }
+        public Transform Transform => transform;
         [field: SerializeField] public BaseCommand[] AvailableCommands { get; private set; }
         [SerializeField] protected DecalProjector decalProjector;
         [field: SerializeField] public AbstractUnitSO UnitSO { get; private set; }
@@ -64,6 +65,23 @@ namespace GameDevTV.RTS.Units
             {
                 Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
             }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            int lastHealth = CurrentHealth;
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, CurrentHealth);
+
+            OnHealthUpdated?.Invoke(this, lastHealth, CurrentHealth);
+            if (CurrentHealth == 0)
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            Destroy(gameObject);
         }
 
         public void Heal(int amount)
