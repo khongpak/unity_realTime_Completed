@@ -15,12 +15,17 @@ namespace GameDevTV.RTS.Units
         [SerializeField] private DamageableSensor DamageableSensor;
         private NavMeshAgent agent;
         protected BehaviorGraphAgent graphAgent;
+        protected UnitSO unitSO;
 
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             graphAgent = GetComponent<BehaviorGraphAgent>();
+
+            unitSO = UnitSO as UnitSO;
+
             graphAgent.SetVariableValue("Command", UnitCommands.Stop);
+            graphAgent.SetVariableValue("AttackConfig", unitSO.AttackConfig);
         }
 
         protected override void Start()
@@ -34,6 +39,7 @@ namespace GameDevTV.RTS.Units
             {
                 DamageableSensor.OnUnitEnter += HandleUnitEnterOrExit;
                 DamageableSensor.OnUnitExit += HandleUnitEnterOrExit;
+                DamageableSensor.SetupFrom(unitSO.AttackConfig);
             }
         }
 
