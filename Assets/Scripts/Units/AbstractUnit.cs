@@ -10,6 +10,7 @@ namespace GameDevTV.RTS.Units
     public abstract class AbstractUnit : AbstractCommandable, IMoveable
     {
         public float AgentRadius => agent.radius;
+        [SerializeField] private DamageableSensor DamageableSensor;
         private NavMeshAgent agent;
         protected BehaviorGraphAgent graphAgent;
 
@@ -26,6 +27,12 @@ namespace GameDevTV.RTS.Units
             CurrentHealth = UnitSO.Health;
             MaxHealth = UnitSO.Health;
             Bus<UnitSpawnEvent>.Raise(new UnitSpawnEvent(this));
+
+            if (DamageableSensor != null)
+            {
+                DamageableSensor.OnUnitEnter += HandleUnitEnter;
+                DamageableSensor.OnUnitExit += HandleUnitExit;
+            }
         }
 
         public void MoveTo(Vector3 position)
@@ -38,6 +45,16 @@ namespace GameDevTV.RTS.Units
         {
             SetCommandOverrides(null);
             graphAgent.SetVariableValue("Command", UnitCommands.Stop);
+        }
+
+        private void HandleUnitEnter(IDamageable damageable)
+        {
+            Debug.Log($"Detected unit enter! {DamageableSensor.Damageables.Count} nearby damageables!");
+        }
+
+        private void HandleUnitExit(IDamageable damageable)
+        {
+            Debug.Log($"Detected unit exit! {DamageableSensor.Damageables.Count} nearby damageables!");
         }
 
         private void OnDestroy()
