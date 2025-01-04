@@ -1,4 +1,3 @@
-using Unity.Properties;
 using UnityEngine;
 
 namespace GameDevTV.RTS.Units

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using GameDevTV.RTS.Utilities;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
@@ -30,8 +32,8 @@ namespace GameDevTV.RTS.Units
 
             if (DamageableSensor != null)
             {
-                DamageableSensor.OnUnitEnter += HandleUnitEnter;
-                DamageableSensor.OnUnitExit += HandleUnitExit;
+                DamageableSensor.OnUnitEnter += HandleUnitEnterOrExit;
+                DamageableSensor.OnUnitExit += HandleUnitEnterOrExit;
             }
         }
 
@@ -47,14 +49,13 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("Command", UnitCommands.Stop);
         }
 
-        private void HandleUnitEnter(IDamageable damageable)
+        private void HandleUnitEnterOrExit(IDamageable damageable)
         {
-            Debug.Log($"Detected unit enter! {DamageableSensor.Damageables.Count} nearby damageables!");
-        }
+            List<GameObject> nearbyEnemies = DamageableSensor.Damageables
+                .ConvertAll(damageable => damageable.Transform.gameObject);
+            nearbyEnemies.Sort(new ClosestGameObjectComparer(transform.position));
 
-        private void HandleUnitExit(IDamageable damageable)
-        {
-            Debug.Log($"Detected unit exit! {DamageableSensor.Damageables.Count} nearby damageables!");
+            graphAgent.SetVariableValue("NearbyEnemies", nearbyEnemies);
         }
 
         private void OnDestroy()
