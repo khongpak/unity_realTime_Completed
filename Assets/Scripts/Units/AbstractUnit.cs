@@ -9,7 +9,7 @@ using UnityEngine.AI;
 namespace GameDevTV.RTS.Units
 {
     [RequireComponent(typeof(NavMeshAgent), typeof(BehaviorGraphAgent))]
-    public abstract class AbstractUnit : AbstractCommandable, IMoveable
+    public abstract class AbstractUnit : AbstractCommandable, IMoveable, IAttacker
     {
         public float AgentRadius => agent.radius;
         [SerializeField] private DamageableSensor DamageableSensor;
@@ -53,6 +53,12 @@ namespace GameDevTV.RTS.Units
         {
             SetCommandOverrides(null);
             graphAgent.SetVariableValue("Command", UnitCommands.Stop);
+        }
+
+        public void Attack(IDamageable damageable)
+        {
+            // set some graph variables here!
+            Debug.Log($"{name} should attack {damageable.Transform.name}");
         }
 
         private void HandleUnitEnterOrExit(IDamageable damageable)
