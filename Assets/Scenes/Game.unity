@@ -15760,14 +15760,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifleman
       objectReference: {fileID: 0}
-    - target: {fileID: 5312076862503654571, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
-      propertyPath: <AvailableCommands>k__BackingField.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5312076862503654571, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
-      propertyPath: '<AvailableCommands>k__BackingField.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 9d6e954ce0a9a934492a858213ad680e, type: 2}
     - target: {fileID: 5550838747094831301, guid: 89fa1dbd1317d914a9727e0841043e2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8

@@ -12,6 +12,7 @@ namespace GameDevTV.RTS.Units
     public abstract class AbstractUnit : AbstractCommandable, IMoveable, IAttacker
     {
         public float AgentRadius => agent.radius;
+        [field: SerializeField] public ParticleSystem AttackingParticleSystem { get; private set; }
         [SerializeField] private DamageableSensor DamageableSensor;
         private NavMeshAgent agent;
         protected BehaviorGraphAgent graphAgent;

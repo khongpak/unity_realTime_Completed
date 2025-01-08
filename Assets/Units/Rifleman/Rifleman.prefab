@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 949870381fdaf4941aedc8857fe165e9, type: 2}
   m_DrawDistance: 1000
   m_FadeScale: 0.9
@@ -191,8 +191,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Graph: {fileID: -4141098662082047587, guid: e9a9360138de0f04da94789d4c1839c4, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 1136246353599922930
@@ -217,16 +217,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e5e7b2deed511440a662e463b9372bd, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   <IsSelected>k__BackingField: 0
   <CurrentHealth>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
   <AvailableCommands>k__BackingField:
   - {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
   - {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
+  - {fileID: 11400000, guid: 9d6e954ce0a9a934492a858213ad680e, type: 2}
   decalProjector: {fileID: 21840735638717537}
   <UnitSO>k__BackingField: {fileID: 11400000, guid: 3aac74df7495d4b40b3c6df03219294b, type: 2}
+  <AttackingParticleSystem>k__BackingField: {fileID: 7334213964210709637}
   DamageableSensor: {fileID: 3503758222440914250}
 --- !u!136 &2455126870533911747
 CapsuleCollider:
@@ -268,7 +270,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -283,8 +285,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f17050963e25094da8739a46e5d79ce, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   leftHandIKTarget: {fileID: 1627440132544312834}
   rightHandIKTarget: {fileID: 2401092275114471008}
   leftElbowIKTarget: {fileID: 9105185386273095323}
@@ -382,8 +384,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6f41716982c3304eb51f846ddaf1f3a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8221381515489779056
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 2a8a7123e3894b84994b0a335068bee9, type: 3}
       propertyPath: m_Controller
-      value:
+      value: 
       objectReference: {fileID: 9100000, guid: b2e578cb9270ee941994883712cf9623, type: 2}
     - target: {fileID: 5866666021909216657, guid: 2a8a7123e3894b84994b0a335068bee9, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -597,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6895486643888409912, guid: 2a8a7123e3894b84994b0a335068bee9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 0ed981d2c83bdb8488c6f158c95e00e4, type: 2}
     m_RemovedComponents:
     - {fileID: 3661183800282018576, guid: 2454936dd2ec492489a9b9a50476e629, type: 3}
@@ -672,6 +674,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -681,7 +687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: LightsModule.light
-      value:
+      value: 
       objectReference: {fileID: 108000013609061350, guid: 61a6b3a108030e54ba372fe7097916d0, type: 3}
     - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
       propertyPath: LightsModule.ratio
@@ -752,6 +758,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+--- !u!198 &7334213964210709637 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+  m_PrefabInstance: {fileID: 7424212209951488479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7424006846924559819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
