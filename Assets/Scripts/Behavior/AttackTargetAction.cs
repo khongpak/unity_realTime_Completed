@@ -6,6 +6,7 @@ using Unity.Properties;
 using GameDevTV.RTS.Units;
 using UnityEngine.AI;
 using GameDevTV.RTS.Utilities;
+using System.Collections.Generic;
 
 namespace GameDevTV.RTS.Behavior
 {
@@ -16,6 +17,7 @@ namespace GameDevTV.RTS.Behavior
         [SerializeReference] public BlackboardVariable<GameObject> Self;
         [SerializeReference] public BlackboardVariable<GameObject> Target;
         [SerializeReference] public BlackboardVariable<AttackConfigSO> AttackConfig;
+        [SerializeReference] public BlackboardVariable<List<GameObject>> NearbyEnemies;
 
         private NavMeshAgent navMeshAgent;
         private AbstractUnit unit;
@@ -39,6 +41,20 @@ namespace GameDevTV.RTS.Behavior
             targetTransform = Target.Value.transform;
             targetDamageable = Target.Value.GetComponent<IDamageable>();
 
+            if (!NearbyEnemies.Value.Contains(Target.Value))
+            {
+                navMeshAgent.SetDestination(targetTransform.position);
+                navMeshAgent.isStopped = false;
+                if (animator != null)
+                {
+                    animator.SetBool(AnimationConstants.ATTACK, false);
+                }
+            }
+            else
+            {
+                navMeshAgent.isStopped = true;
+            }
+
             return Status.Running;
         }
 
@@ -51,18 +67,13 @@ namespace GameDevTV.RTS.Behavior
                 animator.SetFloat(AnimationConstants.SPEED, navMeshAgent.velocity.magnitude);
             }
 
-            if (Vector3.Distance(targetTransform.position, selfTransform.position) >= AttackConfig.Value.AttackRange)
+            if (!NearbyEnemies.Value.Contains(Target.Value))
             {
-                navMeshAgent.SetDestination(targetTransform.position);
-                navMeshAgent.isStopped = false;
-                if (animator != null)
-                {
-                    animator.SetBool(AnimationConstants.ATTACK, false);
-                }
                 return Status.Running;
             }
 
             navMeshAgent.isStopped = true;
+
             Quaternion lookRotation = Quaternion.LookRotation(
                 (targetTransform.position - selfTransform.position).normalized,
                 Vector3.up
@@ -97,12 +108,16 @@ namespace GameDevTV.RTS.Behavior
             {
                 animator.SetBool(AnimationConstants.ATTACK, false);
             }
+            if (navMeshAgent != null)
+            {
+                navMeshAgent.isStopped = false;
+            }
         }
 
         private bool HasValidInputs() => Self.Value != null && Self.Value.TryGetComponent(out NavMeshAgent _)
             && Self.Value.TryGetComponent(out AbstractUnit _)
             && Target.Value != null && Target.Value.TryGetComponent(out IDamageable _)
-            && AttackConfig.Value != null;
+            && AttackConfig.Value != null && NearbyEnemies.Value != null;
     }
 
 }

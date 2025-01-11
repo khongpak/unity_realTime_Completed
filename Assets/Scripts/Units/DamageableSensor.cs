@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameDevTV.RTS.EventBus;
+using GameDevTV.RTS.Events;
 using UnityEngine;
 
 namespace GameDevTV.RTS.Units
@@ -28,6 +30,11 @@ namespace GameDevTV.RTS.Units
                 damageables.Add(damageable);
                 OnUnitEnter?.Invoke(damageable);
             }
+
+            if (damageables.Count == 1)
+            {
+                Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
+            }
         }
 
         private void OnTriggerExit(Collider collider)
@@ -36,6 +43,24 @@ namespace GameDevTV.RTS.Units
             {
                 damageables.Remove(damageable);
                 OnUnitExit?.Invoke(damageable);
+            }
+
+            if (damageables.Count == 0)
+            {
+                Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
+        }
+
+        private void HandleUnitDeath(UnitDeathEvent evt)
+        {
+            if (damageables.Remove(evt.Unit))
+            {
+                OnTriggerExit(evt.Unit.GetComponent<Collider>());
             }
         }
 
