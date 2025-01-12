@@ -18,7 +18,7 @@ namespace GameDevTV.RTS.Units
         protected BehaviorGraphAgent graphAgent;
         protected UnitSO unitSO;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             graphAgent = GetComponent<BehaviorGraphAgent>();
@@ -109,7 +109,7 @@ namespace GameDevTV.RTS.Units
             return nearbyEnemies;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             Bus<UnitDeathEvent>.Raise(new UnitDeathEvent(this));
         }

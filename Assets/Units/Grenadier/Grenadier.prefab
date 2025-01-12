@@ -522,9 +522,9 @@ GameObject:
   - component: {fileID: 4936711382548348666}
   - component: {fileID: 1219890731912414643}
   - component: {fileID: 8370150224592957449}
-  - component: {fileID: 4213073733000773917}
   - component: {fileID: 3848726292112328247}
   - component: {fileID: 5998050175462537992}
+  - component: {fileID: 1038136032758847798}
   m_Layer: 6
   m_Name: Grenadier
   m_TagString: Untagged
@@ -631,29 +631,6 @@ MonoBehaviour:
           m_Value1: 8023363909657029165
         Name: AttackConfig
         m_Value: {fileID: 11400000, guid: 7bcff460ddcd631409daf749759b2110, type: 2}
---- !u!114 &4213073733000773917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813055781741166138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e5e7b2deed511440a662e463b9372bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsSelected>k__BackingField: 0
-  <CurrentHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 0
-  <AvailableCommands>k__BackingField:
-  - {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
-  - {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
-  - {fileID: 11400000, guid: 9d6e954ce0a9a934492a858213ad680e, type: 2}
-  decalProjector: {fileID: 2595847832629677377}
-  <UnitSO>k__BackingField: {fileID: 11400000, guid: d23aeaf68f2283446848bb2702e64d64, type: 2}
-  <AttackingParticleSystem>k__BackingField: {fileID: 0}
-  DamageableSensor: {fileID: 4480043146221706622}
 --- !u!136 &3848726292112328247
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -704,6 +681,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1038136032758847798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813055781741166138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee1cb547a3c7a941a8d68ad38fc28c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsSelected>k__BackingField: 0
+  <CurrentHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 0
+  <AvailableCommands>k__BackingField:
+  - {fileID: 11400000, guid: 9d6e954ce0a9a934492a858213ad680e, type: 2}
+  - {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
+  - {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
+  decalProjector: {fileID: 2595847832629677377}
+  <UnitSO>k__BackingField: {fileID: 11400000, guid: d23aeaf68f2283446848bb2702e64d64, type: 2}
+  <AttackingParticleSystem>k__BackingField: {fileID: 0}
+  DamageableSensor: {fileID: 4480043146221706622}
+  grenade: {fileID: 1261287624979116851}
+  explosionParticles: {fileID: 162524390503710701}
 --- !u!1 &1929278855779803906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,6 +2487,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86dc2f018c879e84e85016c3b6eb06e4, type: 3}
+--- !u!1 &1261287624979116851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1834838210213202, guid: 86dc2f018c879e84e85016c3b6eb06e4, type: 3}
+  m_PrefabInstance: {fileID: 1262831637591524961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1930688289250584969 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 814399922220380136, guid: 86dc2f018c879e84e85016c3b6eb06e4, type: 3}
@@ -2547,6 +2554,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a7d9401fea42804da048030b09e4232, type: 3}
+--- !u!198 &162524390503710701 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2424133839786347970, guid: 7a7d9401fea42804da048030b09e4232, type: 3}
+  m_PrefabInstance: {fileID: 2586517474001777199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &294408575047847386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2878034333400645621, guid: 7a7d9401fea42804da048030b09e4232, type: 3}
