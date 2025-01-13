@@ -96,7 +96,12 @@ namespace GameDevTV.RTS.Behavior
                 {
                     unit.AttackingParticleSystem.Play();
                 }
-                targetDamageable.TakeDamage(AttackConfig.Value.Damage);
+
+                if (!AttackConfig.Value.HasProjectileAttacks)
+                {
+                    targetDamageable.TakeDamage(AttackConfig.Value.Damage);
+                    // projectile attacks are handled by the specific subclass of AbstractUnit that shoot projectiles
+                }
             }
 
             return Status.Running;

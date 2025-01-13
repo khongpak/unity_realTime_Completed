@@ -32,30 +32,34 @@ namespace GameDevTV.RTS.Units
             grenade.transform.SetParent(null);
             Vector3 startPosition = grenade.transform.position;
             Vector3 endPosition = grenade.transform.position + grenade.transform.forward * 3;
+            IDamageable damageable = null;
 
             if (graphAgent.GetVariable("TargetGameObject", out BlackboardVariable<GameObject> targetVariable)
                 && targetVariable != null)
             {
                 endPosition = targetVariable.Value.transform.position + Vector3.up;
+                damageable = targetVariable.Value.GetComponent<IDamageable>();
             }
             else if (graphAgent.GetVariable("TargetLocation", out BlackboardVariable<Vector3> targetLocationVariable))
             {
                 endPosition = targetLocationVariable;
             }
 
-            StartCoroutine(AnimateGrenadeMovement(startPosition, endPosition));
+            StartCoroutine(AnimateGrenadeMovement(startPosition, endPosition, damageable));
         }
 
-        private IEnumerator AnimateGrenadeMovement(Vector3 startPosition, Vector3 endPosition)
+        private IEnumerator AnimateGrenadeMovement(Vector3 startPosition, Vector3 endPosition, IDamageable damageable)
         {
             float time = 0;
             const float speed = 2;
-            while(time < 1)
+            while (time < 1)
             {
                 grenade.transform.position = Vector3.Lerp(startPosition, endPosition, time);
                 time += Time.deltaTime * speed;
                 yield return null;
             }
+
+            damageable?.TakeDamage(unitSO.AttackConfig.Damage);
 
             explosionParticles.transform.SetParent(null);
             explosionParticles.transform.position = endPosition;
