@@ -11,6 +11,7 @@ namespace GameDevTV.RTS.Units
 
         private Transform grenadeParent;
         private Vector3 defaultGrenadePosition;
+        private Collider[] enemyColliders;
 
         protected override void Awake()
         {
@@ -24,6 +25,12 @@ namespace GameDevTV.RTS.Units
 
             defaultGrenadePosition = grenade.transform.localPosition;
             grenadeParent = grenade.transform.parent;
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            enemyColliders = new Collider[unitSO.AttackConfig.MaxEnemiesHitPerAttack];
         }
 
         // Animation Event
@@ -59,14 +66,40 @@ namespace GameDevTV.RTS.Units
                 yield return null;
             }
 
-            damageable?.TakeDamage(unitSO.AttackConfig.Damage);
-
             explosionParticles.transform.SetParent(null);
             explosionParticles.transform.position = endPosition;
             explosionParticles.Play();
 
             grenade.transform.SetParent(grenadeParent);
             grenade.transform.localPosition = defaultGrenadePosition;
+            
+            ApplyDamage(endPosition, damageable);
+        }
+
+        private void ApplyDamage(Vector3 endPosition, IDamageable damageable)
+        {
+            damageable?.TakeDamage(unitSO.AttackConfig.Damage);
+
+            if (unitSO.AttackConfig.IsAreaOfEffect)
+            {
+                int hits = Physics.OverlapSphereNonAlloc(
+                    endPosition,
+                    unitSO.AttackConfig.AreaOfEffectRadius,
+                    enemyColliders,
+                    unitSO.AttackConfig.DamageableLayers
+                );
+
+                for (int i = 0; i < hits; i++)
+                {
+                    if (enemyColliders[i].TryGetComponent(out IDamageable nearbyDamageable)
+                        && damageable != nearbyDamageable)
+                    {
+                        nearbyDamageable.TakeDamage(
+                            unitSO.AttackConfig.CalculateAreaOfEffectDamage(endPosition, nearbyDamageable.Transform.position)
+                        );
+                    }
+                }
+            }
         }
 
         protected override void OnDestroy()

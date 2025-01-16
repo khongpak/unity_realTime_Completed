@@ -26,6 +26,7 @@ namespace GameDevTV.RTS.Behavior
 
         private IDamageable targetDamageable;
         private Transform targetTransform;
+        private Collider[] enemyColliders;
 
         private float lastAttackTime;
 
@@ -40,6 +41,10 @@ namespace GameDevTV.RTS.Behavior
 
             targetTransform = Target.Value.transform;
             targetDamageable = Target.Value.GetComponent<IDamageable>();
+            if (AttackConfig.Value.IsAreaOfEffect)
+            {
+                enemyColliders = new Collider[AttackConfig.Value.MaxEnemiesHitPerAttack];
+            }
 
             if (!NearbyEnemies.Value.Contains(Target.Value))
             {
@@ -73,7 +78,23 @@ namespace GameDevTV.RTS.Behavior
             }
 
             navMeshAgent.isStopped = true;
+            LookAtTarget();
 
+            if (animator != null)
+            {
+                animator.SetBool(AnimationConstants.ATTACK, true);
+            }
+
+            if (Time.time >= lastAttackTime + AttackConfig.Value.AttackDelay)
+            {
+                ApplyDamage();
+            }
+
+            return Status.Running;
+        }
+
+        private void LookAtTarget()
+        {
             Quaternion lookRotation = Quaternion.LookRotation(
                 (targetTransform.position - selfTransform.position).normalized,
                 Vector3.up
@@ -83,28 +104,43 @@ namespace GameDevTV.RTS.Behavior
                 lookRotation.eulerAngles.y,
                 selfTransform.rotation.eulerAngles.z
             );
+        }
 
-            if (animator != null)
+        private void ApplyDamage()
+        {
+            lastAttackTime = Time.time;
+            if (unit.AttackingParticleSystem != null)
             {
-                animator.SetBool(AnimationConstants.ATTACK, true);
+                unit.AttackingParticleSystem.Play();
             }
 
-            if (Time.time >= lastAttackTime + AttackConfig.Value.AttackDelay)
-            {
-                lastAttackTime = Time.time;
-                if (unit.AttackingParticleSystem != null)
-                {
-                    unit.AttackingParticleSystem.Play();
-                }
+            // projectile attacks are handled by the specific subclass of AbstractUnit that shoot projectiles
+            if (AttackConfig.Value.HasProjectileAttacks) return;
 
-                if (!AttackConfig.Value.HasProjectileAttacks)
+            targetDamageable.TakeDamage(AttackConfig.Value.Damage);
+
+            if (!AttackConfig.Value.IsAreaOfEffect) return;
+
+            int hits = Physics.OverlapSphereNonAlloc(
+                targetTransform.position,
+                AttackConfig.Value.AreaOfEffectRadius,
+                enemyColliders,
+                AttackConfig.Value.DamageableLayers
+            );
+
+            for (int i = 0; i < hits; i++)
+            {
+                if (enemyColliders[i].TryGetComponent(out IDamageable nearbyDamageable)
+                    && targetDamageable != nearbyDamageable)
                 {
-                    targetDamageable.TakeDamage(AttackConfig.Value.Damage);
-                    // projectile attacks are handled by the specific subclass of AbstractUnit that shoot projectiles
+                    nearbyDamageable.TakeDamage(
+                        AttackConfig.Value.CalculateAreaOfEffectDamage(
+                            targetTransform.position, 
+                            nearbyDamageable.Transform.position
+                        )
+                    );
                 }
             }
-
-            return Status.Running;
         }
 
         protected override void OnEnd()
