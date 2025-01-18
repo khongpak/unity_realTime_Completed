@@ -1,7 +1,12 @@
 namespace GameDevTV.RTS.Units
 {
-    public class BaseMilitaryUnit : AbstractUnit
+    public class BaseMilitaryUnit : AbstractUnit, ITransportable
     {
-        
+        public int TransportCapacityUsage => unitSO.TransportConfig.GetTransportCapacityUsage();
+
+        public void LoadInto(ITransporter transporter)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

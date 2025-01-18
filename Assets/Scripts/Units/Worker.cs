@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace GameDevTV.RTS.Units
 {
-    public class Worker : AbstractUnit, IBuildingBuilder
+    public class Worker : AbstractUnit, IBuildingBuilder, ITransportable
     {
         public bool IsBuilding => graphAgent.GetVariable("Command", out BlackboardVariable<UnitCommands> command) && command.Value == UnitCommands.BuildBuilding;
         public bool HasSupplies
@@ -24,6 +24,7 @@ namespace GameDevTV.RTS.Units
                 return false;
             }
         }
+        public int TransportCapacityUsage => unitSO.TransportConfig.GetTransportCapacityUsage();
         [SerializeField] private BaseCommand CancelBuildingCommand;
 
         protected override void Start()
@@ -37,6 +38,11 @@ namespace GameDevTV.RTS.Units
             {
                 buildingEventChannelVariable.Value.Event += HandleBuildingEvent;
             }
+        }
+
+        public void LoadInto(ITransporter transporter)
+        {
+            throw new System.NotImplementedException();
         }
 
         public void Gather(GatherableSupply supply)

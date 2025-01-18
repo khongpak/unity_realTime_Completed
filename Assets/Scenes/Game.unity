@@ -38450,16 +38450,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1182439771315072052, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: <AvailableCommands>k__BackingField.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 1182439771315072052, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: '<AvailableCommands>k__BackingField.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
-    - target: {fileID: 1182439771315072052, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
-      propertyPath: '<AvailableCommands>k__BackingField.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
     - target: {fileID: 1182439771315072052, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: '<AvailableCommands>k__BackingField.Array.data[2]'
       value: 

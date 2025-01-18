@@ -1,12 +1,44 @@
 using System;
+using System.Collections.Generic;
 using GameDevTV.RTS.Behavior;
 using Unity.Behavior;
 using UnityEngine;
 
 namespace GameDevTV.RTS.Units
 {
-    public class AirTransport : AbstractUnit
+    public class AirTransport : AbstractUnit, ITransporter
     {
+        public int Capacity => unitSO.TransportConfig.Capacity;
+        [field: SerializeField] public int UsedCapacity { get; private set; }
+
+        public List<ITransportable> GetLoadedUnits()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Load(ITransportable unit)
+        {
+            if (UsedCapacity + unit.TransportCapacityUsage > Capacity) return;
+
+            graphAgent.SetVariableValue("TargetGameObject", unit.Transform.gameObject);
+            graphAgent.SetVariableValue("Command", UnitCommands.LoadUnits);
+        }
+
+        public void Load(ITransportable[] units)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Unload(ITransportable unit)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UnloadAll()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -19,7 +51,10 @@ namespace GameDevTV.RTS.Units
 
         private void HandleLoadUnit(GameObject self, GameObject targetGameObject)
         {
-            Debug.Log($"Load unit {targetGameObject.name}");
+            targetGameObject.SetActive(false);
+            targetGameObject.transform.SetParent(self.transform);
+            ITransportable transportable = targetGameObject.GetComponent<ITransportable>();
+            UsedCapacity += transportable.TransportCapacityUsage;
         }
     }
 }
