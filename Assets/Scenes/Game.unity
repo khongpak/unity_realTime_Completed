@@ -38460,6 +38460,10 @@ PrefabInstance:
       propertyPath: '<AvailableCommands>k__BackingField.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
+    - target: {fileID: 1182439771315072052, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
+      propertyPath: '<AvailableCommands>k__BackingField.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a5aca7351d615044b815012d8061969, type: 2}
     - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.014875
