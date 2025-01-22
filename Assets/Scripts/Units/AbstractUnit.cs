@@ -47,6 +47,13 @@ namespace GameDevTV.RTS.Units
         public void MoveTo(Vector3 position)
         {
             graphAgent.SetVariableValue("TargetLocation", position);
+            graphAgent.SetVariableValue<GameObject>("TargetGameObject", null);
+            graphAgent.SetVariableValue("Command", UnitCommands.Move);
+        }
+
+        public void MoveTo(Transform transform)
+        {
+            graphAgent.SetVariableValue("TargetGameObject", transform.gameObject);
             graphAgent.SetVariableValue("Command", UnitCommands.Move);
         }
 

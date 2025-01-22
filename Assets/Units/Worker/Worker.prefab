@@ -150,15 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ba652ed6c643d4aad123a742989803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsSelected>k__BackingField: 0
   <CurrentHealth>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
   <AvailableCommands>k__BackingField:
+  - {fileID: 11400000, guid: ed12d7bbbd8a32d46a3315cea9f38791, type: 2}
   - {fileID: 11400000, guid: 5711e626ee3260d4388aaac5e505ab47, type: 2}
   - {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
   - {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
   - {fileID: 11400000, guid: cc4c6cbe12074ef4381e6e573f4503b5, type: 2}
   decalProjector: {fileID: 502642769604517157}
   <UnitSO>k__BackingField: {fileID: 11400000, guid: f15d9d4a0e8b3d848a49aaba59177157, type: 2}
+  <AttackingParticleSystem>k__BackingField: {fileID: 0}
+  DamageableSensor: {fileID: 0}
   CancelBuildingCommand: {fileID: 11400000, guid: 166415456c8d4cd4282c9686f36a509b, type: 2}
 --- !u!136 &1320190712326493636
 CapsuleCollider:
