@@ -20,7 +20,12 @@ namespace GameDevTV.RTS.Units
         {
             if (UsedCapacity + unit.TransportCapacityUsage > Capacity) return;
 
-            graphAgent.SetVariableValue("TargetGameObject", unit.Transform.gameObject);
+            if (graphAgent.GetVariable("LoadUnitTargets", out BlackboardVariable<List<GameObject>> loadUnitVariable))
+            {
+                loadUnitVariable.Value.Add(unit.Transform.gameObject);
+                graphAgent.SetVariableValue("LoadUnitTargets", loadUnitVariable.Value);
+            }
+            
             graphAgent.SetVariableValue("Command", UnitCommands.LoadUnits);
         }
 
@@ -55,6 +60,18 @@ namespace GameDevTV.RTS.Units
             targetGameObject.transform.SetParent(self.transform);
             ITransportable transportable = targetGameObject.GetComponent<ITransportable>();
             UsedCapacity += transportable.TransportCapacityUsage;
+
+            if(graphAgent.GetVariable("LoadUnitTargets", out BlackboardVariable<List<GameObject>> loadUnitsVariable))
+            {
+                loadUnitsVariable.Value.Remove(targetGameObject);
+                graphAgent.SetVariableValue("LoadUnitTargets", loadUnitsVariable.Value);
+            }
+
+            if (UsedCapacity >= Capacity)
+            {
+                graphAgent.SetVariableValue("Command", UnitCommands.Stop);
+                graphAgent.SetVariableValue("LoadUnitTargets", new List<GameObject>(unitSO.TransportConfig.Capacity));
+            }
         }
     }
 }

@@ -73,7 +73,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 7545770732564735305
           m_Value1: 16206394405883565400
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -6122282589062855206}
         Root:
           rid: 1136246808967905451
         BlackboardReference:
@@ -262,18 +262,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionTimestamp: 638730768713801669
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 14126325762194356224
+    m_Value1: 12807293273424055275
   m_Blackboard:
     m_Variables:
-    - rid: 1136246808885854333
-    - rid: 1136246808885854334
-    - rid: 1136246808885854335
+    - rid: 1136246854089966532
+    - rid: 1136246854089966533
+    - rid: 1136246854089966534
   m_SharedBlackboardVariableGuids: []
   references:
     version: 2
     RefIds:
-    - rid: 1136246808885854333
+    - rid: 1136246854089966532
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -281,7 +281,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 0}
-    - rid: 1136246808885854334
+    - rid: 1136246854089966533
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -289,7 +289,7 @@ MonoBehaviour:
           m_Value1: 12065914707777202682
         Name: TargetGameObject
         m_Value: {fileID: 0}
-    - rid: 1136246808885854335
+    - rid: 1136246854089966534
       type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -323,8 +323,8 @@ MonoBehaviour:
   m_VersionTimestamp: 638730768761550392
   m_DebugInfo: {fileID: -6122282589062855206}
   AssetID:
-    m_Value0: 7545770732564735305
-    m_Value1: 16206394405883565400
+    m_Value0: 14126325762194356224
+    m_Value1: 12807293273424055275
   Story:
     Story: 
     StoryVariableNames: []
@@ -495,7 +495,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854262
         LinkedVariable:
-          rid: 1136246808885854264
+          rid: 1136246854089966535
     - rid: 1136246808885854261
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -523,16 +523,6 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: 4
-    - rid: 1136246808885854264
-      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 1136246808885854265
       type: {class: BranchingConditionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -786,7 +776,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854293
         LinkedVariable:
-          rid: 1136246808885854264
+          rid: 1136246854089966535
     - rid: 1136246808885854291
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -797,7 +787,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854294
         LinkedVariable:
-          rid: 1136246808885854283
+          rid: 1136246854089966536
     - rid: 1136246808885854292
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -882,7 +872,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854301
         LinkedVariable:
-          rid: 1136246808885854264
+          rid: 1136246854089966535
     - rid: 1136246808885854300
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -893,7 +883,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854302
         LinkedVariable:
-          rid: 1136246808885854303
+          rid: 1136246854089966537
     - rid: 1136246808885854301
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1030,6 +1020,36 @@ MonoBehaviour:
           m_Value0: 0
           m_Value1: 0
         Name: 
+    - rid: 1136246854089966535
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246854089966536
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 6034563931186811681
+          m_Value1: 12065914707777202682
+        Name: TargetGameObject
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246854089966537
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 9937812256928417906
+          m_Value1: 16494631426614825938
+        Name: TargetLocation
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0, y: 0, z: 0}
 --- !u!114 &793043622299880630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1043,8 +1063,8 @@ MonoBehaviour:
   m_Name: Move Graph Blackboard Editor
   m_EditorClassIdentifier: 
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 14126325762194356224
+    m_Value1: 12807293273424055275
   m_Variables:
   - rid: 1136246808459871099
   - rid: 1136246808885854255
