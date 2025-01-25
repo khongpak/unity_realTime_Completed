@@ -11,16 +11,16 @@ namespace GameDevTV.RTS.Units
     [RequireComponent(typeof(NavMeshAgent), typeof(BehaviorGraphAgent))]
     public abstract class AbstractUnit : AbstractCommandable, IMoveable, IAttacker
     {
-        public float AgentRadius => agent.radius;
+        public float AgentRadius => Agent.radius;
         [field: SerializeField] public ParticleSystem AttackingParticleSystem { get; private set; }
         [SerializeField] private DamageableSensor DamageableSensor;
-        private NavMeshAgent agent;
+        public NavMeshAgent Agent { get; private set; }
         protected BehaviorGraphAgent graphAgent;
         protected UnitSO unitSO;
 
         protected virtual void Awake()
         {
-            agent = GetComponent<NavMeshAgent>();
+            Agent = GetComponent<NavMeshAgent>();
             graphAgent = GetComponent<BehaviorGraphAgent>();
 
             unitSO = UnitSO as UnitSO;

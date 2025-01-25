@@ -177,10 +177,13 @@ MonoBehaviour:
   <AvailableCommands>k__BackingField:
   - {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
   - {fileID: 11400000, guid: 84c8d4cd8863b1244994c4ca7b8d09a6, type: 2}
+  - {fileID: 11400000, guid: 4a5aca7351d615044b815012d8061969, type: 2}
+  - {fileID: 11400000, guid: 82f1770d91387bb44bde85711c93d1da, type: 2}
   decalProjector: {fileID: 7228355941995546484}
   <UnitSO>k__BackingField: {fileID: 11400000, guid: f6b38bef630bb884195c6d3f702eefb9, type: 2}
   <AttackingParticleSystem>k__BackingField: {fileID: 0}
   DamageableSensor: {fileID: 0}
+  <UsedCapacity>k__BackingField: 0
 --- !u!1 &8767989424686635610
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace GameDevTV.RTS.Units
 {
@@ -6,6 +7,7 @@ namespace GameDevTV.RTS.Units
     {
         public Transform Transform { get; }
         public int TransportCapacityUsage { get; }
+        public NavMeshAgent Agent { get; }
 
         public void LoadInto(ITransporter transporter);
     }
