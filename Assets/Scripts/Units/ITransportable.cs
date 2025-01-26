@@ -8,6 +8,7 @@ namespace GameDevTV.RTS.Units
         public Transform Transform { get; }
         public int TransportCapacityUsage { get; }
         public NavMeshAgent Agent { get; }
+        public Sprite Icon { get; }
 
         public void LoadInto(ITransporter transporter);
     }
