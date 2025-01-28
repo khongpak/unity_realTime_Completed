@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameDevTV.RTS.Behavior;
+using GameDevTV.RTS.EventBus;
+using GameDevTV.RTS.Events;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
@@ -63,6 +65,7 @@ namespace GameDevTV.RTS.Units
                 }
 
                 loadedUnits.Remove(unit);
+                Bus<UnitUnloadEvent>.Raise(new UnitUnloadEvent(unit, this));
                 return true;
             }
 
@@ -97,6 +100,7 @@ namespace GameDevTV.RTS.Units
             UsedCapacity += transportable.TransportCapacityUsage;
 
             loadedUnits.Add(transportable);
+            Bus<UnitLoadEvent>.Raise(new UnitLoadEvent(transportable, this));
 
             if(graphAgent.GetVariable("LoadUnitTargets", out BlackboardVariable<List<GameObject>> loadUnitsVariable))
             {

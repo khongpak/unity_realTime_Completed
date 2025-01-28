@@ -24,6 +24,8 @@ namespace GameDevTV.RTS.UI
             Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
             Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
             Bus<SupplyEvent>.OnEvent += HandleSupplyChange;
+            Bus<UnitLoadEvent>.OnEvent += HandleLoadUnit;
+            Bus<UnitUnloadEvent>.OnEvent += HandleUnloadUnit;
         }
 
         private void Start()
@@ -41,6 +43,8 @@ namespace GameDevTV.RTS.UI
             Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
             Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
             Bus<SupplyEvent>.OnEvent -= HandleSupplyChange;
+            Bus<UnitLoadEvent>.OnEvent -= HandleLoadUnit;
+            Bus<UnitUnloadEvent>.OnEvent -= HandleUnloadUnit;
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
@@ -56,6 +60,26 @@ namespace GameDevTV.RTS.UI
         {
             selectedUnits.Remove(evt.Unit);
             RefreshUI();
+        }
+
+        private void HandleLoadUnit(UnitLoadEvent evt)
+        {
+            if (selectedUnits.Count == 1 && selectedUnits.First() is ITransporter)
+            {
+                RefreshUI();
+            }
+            else if (evt.Unit is AbstractCommandable commandable && selectedUnits.Contains(commandable))
+            {
+                commandable.Deselect(); // RefreshUI will be called because of the UnitDeselectedEvent raised from this.
+            }
+        }
+
+        private void HandleUnloadUnit(UnitUnloadEvent evt)
+        {
+            if (selectedUnits.Count == 1 && selectedUnits.First() is ITransporter)
+            {
+                RefreshUI();
+            }
         }
 
         private void HandleUnitDeselected(UnitDeselectedEvent evt)
