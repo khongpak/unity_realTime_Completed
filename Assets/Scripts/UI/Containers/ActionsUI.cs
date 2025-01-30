@@ -30,13 +30,14 @@ namespace GameDevTV.RTS.UI.Containers
 
         private void RefreshButtons(HashSet<AbstractCommandable> selectedUnits)
         {
-            HashSet<BaseCommand> availableCommands = new(9);
+            IEnumerable<BaseCommand> availableCommands = selectedUnits.ElementAt(0).AvailableCommands;
 
-            foreach (AbstractCommandable commandable in selectedUnits)
+            for(int i = 1; i<selectedUnits.Count; i++)
             {
+                AbstractCommandable commandable = selectedUnits.ElementAt(i);
                 if (commandable.AvailableCommands != null)
                 {
-                    availableCommands.AddRange(commandable.AvailableCommands);
+                    availableCommands = availableCommands.Intersect(commandable.AvailableCommands);
                 }
             }
 
@@ -46,7 +47,7 @@ namespace GameDevTV.RTS.UI.Containers
 
                 if (actionForSlot != null)
                 {
-                    actionButtons[i].EnableFor(actionForSlot, HandleClick(actionForSlot));
+                    actionButtons[i].EnableFor(actionForSlot, selectedUnits, HandleClick(actionForSlot));
                 }
                 else
                 {

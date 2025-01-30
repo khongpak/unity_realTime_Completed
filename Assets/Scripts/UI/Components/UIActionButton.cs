@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using GameDevTV.RTS.Commands;
 using GameDevTV.RTS.Units;
 using UnityEngine;
@@ -8,7 +10,7 @@ using UnityEngine.UI;
 namespace GameDevTV.RTS.UI.Components
 {
     [RequireComponent(typeof(Button))]
-    public class UIActionButton : MonoBehaviour, IUIElement<BaseCommand, UnityAction>, IPointerEnterHandler, IPointerExitHandler
+    public class UIActionButton : MonoBehaviour, IUIElement<BaseCommand, IEnumerable<AbstractCommandable>, UnityAction>, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Image icon;
         [SerializeField] private Tooltip tooltip;
@@ -24,11 +26,11 @@ namespace GameDevTV.RTS.UI.Components
             Disable();
         }
 
-        public void EnableFor(BaseCommand command, UnityAction onClick)
+        public void EnableFor(BaseCommand command, IEnumerable<AbstractCommandable> selectedUnits, UnityAction onClick)
         {
             button.onClick.RemoveAllListeners();
             SetIcon(command.Icon);
-            button.interactable = !command.IsLocked(new CommandContext());
+            button.interactable = selectedUnits.Any((unit) => !command.IsLocked(new CommandContext(unit, new RaycastHit())));
             button.onClick.AddListener(onClick);
             isActive = true;
 

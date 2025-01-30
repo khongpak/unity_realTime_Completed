@@ -23,7 +23,8 @@ namespace GameDevTV.RTS.Commands
 
         public override bool IsLocked(CommandContext context)
         {
-            return false;
+            ITransporter transporter = context.Commandable as ITransporter;
+            return transporter.UsedCapacity >= transporter.Capacity;
         }
     }
 }

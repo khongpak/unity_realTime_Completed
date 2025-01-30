@@ -686,7 +686,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609781
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 376035757051609774
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -697,7 +697,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609782
         LinkedVariable:
-          rid: 1136246808459870647
+          rid: 1136246913970734055
     - rid: 376035757051609775
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -708,7 +708,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609783
         LinkedVariable:
-          rid: 1136246808459870648
+          rid: 1136246913970734056
     - rid: 376035757051609776
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -719,7 +719,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609784
         LinkedVariable:
-          rid: 1136246808459870649
+          rid: 1136246913970734057
     - rid: 376035757051609777
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -730,7 +730,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609785
         LinkedVariable:
-          rid: 1136246808459870650
+          rid: 1136246913970734058
     - rid: 376035757051609778
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -741,7 +741,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609786
         LinkedVariable:
-          rid: 1136246808459870651
+          rid: 1136246913970734059
     - rid: 376035757051609779
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -752,7 +752,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609787
         LinkedVariable:
-          rid: 1136246808459870652
+          rid: 1136246913970734060
     - rid: 376035757051609780
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -763,7 +763,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035757051609788
         LinkedVariable:
-          rid: 1136246808459870646
+          rid: 1136246913970734053
     - rid: 376035757051609781
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -953,7 +953,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014438
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 376035822170014432
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -964,7 +964,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014439
         LinkedVariable:
-          rid: 1136246808459870645
+          rid: 1136246913970734061
     - rid: 376035822170014433
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -975,7 +975,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014440
         LinkedVariable:
-          rid: 1136246808459870653
+          rid: 1136246913970734062
     - rid: 376035822170014434
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -986,7 +986,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014441
         LinkedVariable:
-          rid: 1136246808459870654
+          rid: 1136246913970734063
     - rid: 376035822170014435
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -997,7 +997,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014442
         LinkedVariable:
-          rid: 1136246808459870655
+          rid: 1136246913970734064
     - rid: 376035822170014436
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1008,7 +1008,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014443
         LinkedVariable:
-          rid: 1136246808459870656
+          rid: 1136246913970734065
     - rid: 376035822170014437
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1019,7 +1019,7 @@ MonoBehaviour:
         LocalValue:
           rid: 376035822170014444
         LinkedVariable:
-          rid: 1136246808459870646
+          rid: 1136246913970734053
     - rid: 376035822170014438
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1463,7 +1463,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246483333677956
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 1136246483333677954
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1474,7 +1474,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246483333677957
         LinkedVariable:
-          rid: 1136246808459870657
+          rid: 1136246913970734066
     - rid: 1136246483333677955
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1485,7 +1485,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246483333677958
         LinkedVariable:
-          rid: 1136246808459870658
+          rid: 1136246913970734067
     - rid: 1136246483333677956
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1520,7 +1520,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246483560169830
         LinkedVariable:
-          rid: 1136246808459870658
+          rid: 1136246913970734067
     - rid: 1136246483560169830
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1539,7 +1539,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246527933285102
         LinkedVariable:
-          rid: 1136246808459870645
+          rid: 1136246913970734061
     - rid: 1136246527933285102
       type: {class: 'BlackboardVariable`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1597,7 +1597,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246528122552400
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 1136246528122552400
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1669,156 +1669,6 @@ MonoBehaviour:
         m_NodeModel:
           rid: 1136246808459870475
         m_Connections: []
-    - rid: 1136246808459870644
-      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870645
-      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 15504965013581719353
-          m_Value1: 1730944643736169597
-        Name: TargetLocation
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {x: 0, y: 0, z: 0}
-    - rid: 1136246808459870646
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.UnitCommands, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 9766435570170566133
-          m_Value1: 6015331306033516593
-        Name: Command
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: 0
-    - rid: 1136246808459870647
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 17354403183087742191
-          m_Value1: 10799009562584336673
-        Name: Supply
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870648
-      type: {class: 'TypedVariableModel`1[[System.Int32, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 11363701168115340772
-          m_Value1: 1914288827276478599
-        Name: SupplyAmountHeld
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: 0
-    - rid: 1136246808459870649
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Environment.SupplySO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 3279860763778770260
-          m_Value1: 3085683982014158593
-        Name: SupplySO
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870650
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.BuildingSO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 18043796197266423170
-          m_Value1: 17242000418660485340
-        Name: CommandPostSO
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 11400000, guid: 2e813987328e67942957464bddd33480, type: 2}
-    - rid: 1136246808459870651
-      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 4361667948591095350
-          m_Value1: 14185982170587754062
-        Name: CommandPost
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870652
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Behavior.GatherSuppliesEventChannel, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 15621038980980559462
-          m_Value1: 4975210152698007111
-        Name: GatherSuppliesEvent
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870653
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Behavior.BuildingEventChannel, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 8995661604976579560
-          m_Value1: 4151336400940075504
-        Name: BuildingEventChannel
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870654
-      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 13669176828251947717
-          m_Value1: 4646507926964218175
-        Name: Ghost
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870655
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.BaseBuilding, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 7868147341367810150
-          m_Value1: 2856398693818845008
-        Name: BuildingUnderConstruction
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870656
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.BuildingSO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 18003637158128071372
-          m_Value1: 18011157307319290627
-        Name: BuildingSO
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870657
-      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.AttackConfigSO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 11793705940140394859
-          m_Value1: 7274335238855137552
-        Name: AttackConfig
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
-    - rid: 1136246808459870658
-      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 9839067406154873950
-          m_Value1: 971551532672032483
-        Name: TargetGameObject
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 1136246808885854591
       type: {class: SubgraphNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1932,7 +1782,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854602
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 1136246808885854600
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1943,7 +1793,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854603
         LinkedVariable:
-          rid: 1136246808459870658
+          rid: 1136246913970734067
     - rid: 1136246808885854601
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1954,7 +1804,7 @@ MonoBehaviour:
         LocalValue:
           rid: 1136246808885854604
         LinkedVariable:
-          rid: 1136246808459870645
+          rid: 1136246913970734061
     - rid: 1136246808885854602
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1979,6 +1829,156 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: {x: 0, y: 0, z: 0}
+    - rid: 1136246913970734053
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.UnitCommands, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 9766435570170566133
+          m_Value1: 6015331306033516593
+        Name: Command
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 1136246913970734054
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734055
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Environment.GatherableSupply, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 17354403183087742191
+          m_Value1: 10799009562584336673
+        Name: Supply
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734056
+      type: {class: 'TypedVariableModel`1[[System.Int32, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11363701168115340772
+          m_Value1: 1914288827276478599
+        Name: SupplyAmountHeld
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 1136246913970734057
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Environment.SupplySO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 3279860763778770260
+          m_Value1: 3085683982014158593
+        Name: SupplySO
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734058
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.BuildingSO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 18043796197266423170
+          m_Value1: 17242000418660485340
+        Name: CommandPostSO
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 11400000, guid: 2e813987328e67942957464bddd33480, type: 2}
+    - rid: 1136246913970734059
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 4361667948591095350
+          m_Value1: 14185982170587754062
+        Name: CommandPost
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734060
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Behavior.GatherSuppliesEventChannel, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15621038980980559462
+          m_Value1: 4975210152698007111
+        Name: GatherSuppliesEvent
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734061
+      type: {class: 'TypedVariableModel`1[[UnityEngine.Vector3, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 15504965013581719353
+          m_Value1: 1730944643736169597
+        Name: TargetLocation
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {x: 0, y: 0, z: 0}
+    - rid: 1136246913970734062
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Behavior.BuildingEventChannel, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8995661604976579560
+          m_Value1: 4151336400940075504
+        Name: BuildingEventChannel
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734063
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 13669176828251947717
+          m_Value1: 4646507926964218175
+        Name: Ghost
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734064
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.BaseBuilding, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 7868147341367810150
+          m_Value1: 2856398693818845008
+        Name: BuildingUnderConstruction
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734065
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.BuildingSO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 18003637158128071372
+          m_Value1: 18011157307319290627
+        Name: BuildingSO
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734066
+      type: {class: 'TypedVariableModel`1[[GameDevTV.RTS.Units.AttackConfigSO, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11793705940140394859
+          m_Value1: 7274335238855137552
+        Name: AttackConfig
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 1136246913970734067
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 9839067406154873950
+          m_Value1: 971551532672032483
+        Name: TargetGameObject
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
     - rid: 6534005384409776442
       type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -2052,7 +2052,7 @@ MonoBehaviour:
         LocalValue:
           rid: 6534005452364579267
         LinkedVariable:
-          rid: 1136246808459870646
+          rid: 1136246913970734053
     - rid: 6534005452364579267
       type: {class: 'BlackboardVariable`1[[System.Enum, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -2194,7 +2194,7 @@ MonoBehaviour:
         LocalValue:
           rid: 6534005452364579544
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 6534005452364579544
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -2252,7 +2252,7 @@ MonoBehaviour:
         LocalValue:
           rid: 9064456811075338628
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 9064456811075338627
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -2329,7 +2329,7 @@ MonoBehaviour:
         LocalValue:
           rid: 9064456811075338634
         LinkedVariable:
-          rid: 1136246808459870644
+          rid: 1136246913970734054
     - rid: 9064456811075338634
       type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -2754,7 +2754,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 11852327495980541200
           m_Value1: 18226333195515182649
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -356305593447271230}
         Root:
           rid: 1136246808967905471
         BlackboardReference:
@@ -2767,7 +2767,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 7545770732564735305
           m_Value1: 16206394405883565400
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -356305593447271230}
         Root:
           rid: 1136246808967905473
         BlackboardReference:
@@ -2780,7 +2780,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 1461098883854183954
           m_Value1: 2975354271620428969
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -356305593447271230}
         Root:
           rid: 1136246808967905475
         BlackboardReference:
@@ -2793,7 +2793,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 10667897801851109447
           m_Value1: 9031412282931658202
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -356305593447271230}
         Root:
           rid: 1136246808967905477
         BlackboardReference:
@@ -2806,7 +2806,7 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 305015699057156406
           m_Value1: 13514589722342445544
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: -356305593447271230}
         Root:
           rid: 1136246808967905479
         BlackboardReference:

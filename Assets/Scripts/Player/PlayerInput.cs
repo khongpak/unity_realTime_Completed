@@ -178,7 +178,7 @@ namespace GameDevTV.RTS.Player
             if (activeCommand != null || wasMouseDownOnUI) return;
 
             Bounds selectionBoxBounds = ResizeSelectionBox();
-            foreach (AbstractUnit unit in aliveUnits)
+            foreach (AbstractUnit unit in aliveUnits.Where(aliveUnits => aliveUnits.gameObject.activeInHierarchy))
             {
                 Vector2 unitPosition = camera.WorldToScreenPoint(unit.transform.position);
 
