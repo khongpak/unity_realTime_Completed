@@ -55,7 +55,7 @@ namespace GameDevTV.RTS.Behavior
         protected override Status OnUpdate()
         {
             float normalizedTime = (Time.time - startBuildTime) / BuildingSO.Value.BuildTime;
-            
+
             targetHealth += Time.deltaTime * (BuildingSO.Value.Health / BuildingSO.Value.BuildTime);
             if (targetHealth >= 1)
             {

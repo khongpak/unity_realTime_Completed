@@ -10,6 +10,7 @@ namespace GameDevTV.RTS.Units
     public class DamageableSensor : MonoBehaviour
     {
         public List<IDamageable> Damageables => damageables.ToList();
+        [field: SerializeField] public Owner Owner { get; set; }
 
         public delegate void UnitDetectionEvent(IDamageable damageable);
         public event UnitDetectionEvent OnUnitEnter;
@@ -25,7 +26,7 @@ namespace GameDevTV.RTS.Units
 
         private void OnTriggerEnter(Collider collider)
         {
-            if (collider.TryGetComponent(out IDamageable damageable))
+            if (collider.TryGetComponent(out IDamageable damageable) && damageable.Owner != Owner)
             {
                 damageables.Add(damageable);
                 OnUnitEnter?.Invoke(damageable);
@@ -39,9 +40,8 @@ namespace GameDevTV.RTS.Units
 
         private void OnTriggerExit(Collider collider)
         {
-            if (collider.TryGetComponent(out IDamageable damageable))
+            if (collider.TryGetComponent(out IDamageable damageable) && damageables.Remove(damageable))
             {
-                damageables.Remove(damageable);
                 OnUnitExit?.Invoke(damageable);
             }
 
@@ -58,7 +58,7 @@ namespace GameDevTV.RTS.Units
 
         private void HandleUnitDeath(UnitDeathEvent evt)
         {
-            if (damageables.Remove(evt.Unit))
+            if (damageables.Contains(evt.Unit))
             {
                 OnTriggerExit(evt.Unit.GetComponent<Collider>());
             }

@@ -105,6 +105,7 @@ namespace GameDevTV.RTS.Units
         {
             Awake();
             unitBuildingThis = buildingBuilder;
+            Owner = unitBuildingThis.Owner;
             MainRenderer.material = BuildingSO.PlacementMaterial;
 
             Progress = new BuildingProgress(
@@ -146,7 +147,11 @@ namespace GameDevTV.RTS.Units
 
                 yield return new WaitForSeconds(BuildingUnit.BuildTime);
 
-                Instantiate(BuildingUnit.Prefab, transform.position, Quaternion.identity);
+                GameObject instance = Instantiate(BuildingUnit.Prefab, transform.position, Quaternion.identity);
+                if (instance.TryGetComponent(out AbstractCommandable commandable))
+                {
+                    commandable.Owner = Owner;
+                }
                 buildingQueue.RemoveAt(0);
             }
 

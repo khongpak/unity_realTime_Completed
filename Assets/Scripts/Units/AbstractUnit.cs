@@ -41,6 +41,7 @@ namespace GameDevTV.RTS.Units
             {
                 DamageableSensor.OnUnitEnter += HandleUnitEnter;
                 DamageableSensor.OnUnitExit += HandleUnitExit;
+                DamageableSensor.Owner = Owner;
                 DamageableSensor.SetupFrom(unitSO.AttackConfig);
             }
         }
@@ -91,10 +92,10 @@ namespace GameDevTV.RTS.Units
         private void HandleUnitExit(IDamageable damageable)
         {
             List<GameObject> nearbyEnemies = SetNearbyEnemiesOnBlackboard();
-            
+
             if (!graphAgent.GetVariable("TargetGameObject", out BlackboardVariable<GameObject> targetVariable)
                 || damageable.Transform.gameObject != targetVariable.Value) return;
-            
+
             if (nearbyEnemies.Count > 0)
             {
                 graphAgent.SetVariableValue("TargetGameObject", nearbyEnemies[0]);
