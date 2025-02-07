@@ -35,7 +35,7 @@ namespace GameDevTV.RTS.Units
             }
 
             IsSelected = true;
-            Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
+            Bus<UnitSelectedEvent>.Raise(Owner, new UnitSelectedEvent(this));
         }
 
         public virtual void Deselect()
@@ -48,7 +48,7 @@ namespace GameDevTV.RTS.Units
             IsSelected = false;
             SetCommandOverrides(null);
 
-            Bus<UnitDeselectedEvent>.Raise(new UnitDeselectedEvent(this));
+            Bus<UnitDeselectedEvent>.Raise(Owner, new UnitDeselectedEvent(this));
         }
 
         public void SetCommandOverrides(BaseCommand[] commands)
@@ -64,7 +64,7 @@ namespace GameDevTV.RTS.Units
 
             if (IsSelected)
             {
-                Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
+                Bus<UnitSelectedEvent>.Raise(Owner, new UnitSelectedEvent(this));
             }
         }
 

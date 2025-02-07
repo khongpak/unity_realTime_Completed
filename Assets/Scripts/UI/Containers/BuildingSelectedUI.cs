@@ -29,7 +29,7 @@ namespace GameDevTV.RTS.UI.Containers
                 buildingUnderConstructionUI.EnableFor(building);
                 buildingBuildingUI.Disable();
                 singleUnitSelectedUI.Disable();
-                Bus<BuildingSpawnEvent>.OnEvent += HandleBuildingSpawn;
+                // Bus<BuildingSpawnEvent>.OnEvent += HandleBuildingSpawn;
             }
         }
 
@@ -38,7 +38,7 @@ namespace GameDevTV.RTS.UI.Containers
             buildingBuildingUI.Disable();
             singleUnitSelectedUI.Disable();
             buildingUnderConstructionUI.Disable();
-            Bus<BuildingSpawnEvent>.OnEvent -= HandleBuildingSpawn;
+            // Bus<BuildingSpawnEvent>.OnEvent -= HandleBuildingSpawn;
             if (selectedBuilding != null)
             {
                 selectedBuilding.OnQueueUpdated -= OnBuildingQueueUpdated;
@@ -64,7 +64,7 @@ namespace GameDevTV.RTS.UI.Containers
         {
             if (evt.Building == selectedBuilding)
             {
-                Bus<BuildingSpawnEvent>.OnEvent -= HandleBuildingSpawn;
+                // Bus<BuildingSpawnEvent>.OnEvent -= HandleBuildingSpawn;
                 OnBuildingQueueUpdated();
                 buildingUnderConstructionUI.Disable();
             }

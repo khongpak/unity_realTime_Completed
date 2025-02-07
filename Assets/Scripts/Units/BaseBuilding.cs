@@ -44,8 +44,8 @@ namespace GameDevTV.RTS.Units
             }
             Progress = new BuildingProgress(BuildingProgress.BuildingState.Completed, Progress.StartTime, 1);
             unitBuildingThis = null;
-            Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
-            Bus<BuildingSpawnEvent>.Raise(new BuildingSpawnEvent(this));
+            Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
+            Bus<BuildingSpawnEvent>.Raise(Owner, new BuildingSpawnEvent(this));
         }
 
         public void BuildUnit(AbstractUnitSO unit)
@@ -56,8 +56,8 @@ namespace GameDevTV.RTS.Units
                 return;
             }
 
-            Bus<SupplyEvent>.Raise(new SupplyEvent(-unit.Cost.Minerals, unit.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(new SupplyEvent(-unit.Cost.Gas, unit.Cost.GasSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(-unit.Cost.Minerals, unit.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(-unit.Cost.Gas, unit.Cost.GasSO));
 
             buildingQueue.Add(unit);
             if (buildingQueue.Count == 1)
@@ -79,8 +79,8 @@ namespace GameDevTV.RTS.Units
             }
 
             AbstractUnitSO unitSO = buildingQueue[index];
-            Bus<SupplyEvent>.Raise(new SupplyEvent(unitSO.Cost.Minerals, unitSO.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(new SupplyEvent(unitSO.Cost.Gas, unitSO.Cost.GasSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(unitSO.Cost.Minerals, unitSO.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(unitSO.Cost.Gas, unitSO.Cost.GasSO));
             buildingQueue.RemoveAt(index);
             if (index == 0)
             {
@@ -119,8 +119,8 @@ namespace GameDevTV.RTS.Units
                 Heal(1);
             }
 
-            Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
-            Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
+            Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
+            Bus<UnitDeathEvent>.OnEvent[Owner] += HandleUnitDeath;
         }
 
         private void HandleUnitDeath(UnitDeathEvent evt)
@@ -133,7 +133,7 @@ namespace GameDevTV.RTS.Units
                     (Time.time - Progress.StartTime) / BuildingSO.BuildTime
                 );
 
-                Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
+                Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
             }
         }
 
@@ -160,7 +160,7 @@ namespace GameDevTV.RTS.Units
 
         private void OnDestroy()
         {
-            Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
+            Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
         }
     }
 }
