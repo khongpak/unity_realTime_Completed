@@ -74,8 +74,8 @@ namespace GameDevTV.RTS.Units
             graphAgent.SetVariableValue("Command", UnitCommands.BuildBuilding);
 
             SetCommandOverrides(new BaseCommand[] { CancelBuildingCommand });
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(-building.Cost.Minerals, building.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(-building.Cost.Gas, building.Cost.GasSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -building.Cost.Minerals, building.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -building.Cost.Gas, building.Cost.GasSO));
 
             return instance;
         }
@@ -103,10 +103,12 @@ namespace GameDevTV.RTS.Units
 
                 BuildingSO buildingSO = buildingVariable.Value.BuildingSO;
                 Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(
+                    Owner,
                     Mathf.FloorToInt(0.75f * buildingSO.Cost.Minerals),
                     buildingSO.Cost.MineralsSO
                 ));
                 Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(
+                    Owner,
                     Mathf.FloorToInt(0.75f * buildingSO.Cost.Gas),
                     buildingSO.Cost.GasSO
                 ));
@@ -134,7 +136,7 @@ namespace GameDevTV.RTS.Units
 
         private void HandleGatherSupplies(GameObject self, int amount, SupplySO supply)
         {
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(amount, supply));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, amount, supply));
         }
 
         private void HandleBuildingEvent(GameObject self, BuildingEventType eventType, BaseBuilding building)

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using System;
 
 namespace GameDevTV.RTS.UI.Containers
 {
@@ -29,7 +30,9 @@ namespace GameDevTV.RTS.UI.Containers
 
         private void RefreshButtons(HashSet<AbstractCommandable> selectedUnits)
         {
-            IEnumerable<BaseCommand> availableCommands = selectedUnits.ElementAt(0).AvailableCommands;
+            IEnumerable<BaseCommand> availableCommands = selectedUnits.Count > 0 
+                ? selectedUnits.ElementAt(0).AvailableCommands 
+                : Array.Empty<BaseCommand>();
 
             for(int i = 1; i<selectedUnits.Count; i++)
             {

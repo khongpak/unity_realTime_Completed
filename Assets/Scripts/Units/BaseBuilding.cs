@@ -56,8 +56,8 @@ namespace GameDevTV.RTS.Units
                 return;
             }
 
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(-unit.Cost.Minerals, unit.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(-unit.Cost.Gas, unit.Cost.GasSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -unit.Cost.Minerals, unit.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -unit.Cost.Gas, unit.Cost.GasSO));
 
             buildingQueue.Add(unit);
             if (buildingQueue.Count == 1)
@@ -79,8 +79,8 @@ namespace GameDevTV.RTS.Units
             }
 
             AbstractUnitSO unitSO = buildingQueue[index];
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(unitSO.Cost.Minerals, unitSO.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(unitSO.Cost.Gas, unitSO.Cost.GasSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unitSO.Cost.Minerals, unitSO.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unitSO.Cost.Gas, unitSO.Cost.GasSO));
             buildingQueue.RemoveAt(index);
             if (index == 0)
             {
