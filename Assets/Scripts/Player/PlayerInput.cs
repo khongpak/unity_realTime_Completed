@@ -59,20 +59,20 @@ namespace GameDevTV.RTS.Player
             startingFollowOffset = cinemachineFollow.FollowOffset;
             maxRotationAmount = Mathf.Abs(cinemachineFollow.FollowOffset.z);
 
-            // Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
-            // Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
-            // Bus<UnitSpawnEvent>.OnEvent += HandleUnitSpawn;
-            // Bus<CommandSelectedEvent>.OnEvent += HandleActionSelected;
-            // Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
+            Bus<UnitSelectedEvent>.OnEvent[Owner.Player1] += HandleUnitSelected;
+            Bus<UnitDeselectedEvent>.OnEvent[Owner.Player1] += HandleUnitDeselected;
+            Bus<UnitSpawnEvent>.OnEvent[Owner.Player1] += HandleUnitSpawn;
+            Bus<CommandSelectedEvent>.OnEvent[Owner.Player1] += HandleActionSelected;
+            Bus<UnitDeathEvent>.OnEvent[Owner.Player1] += HandleUnitDeath;
         }
 
         private void OnDestroy()
         {
-            // Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
-            // Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
-            // Bus<UnitSpawnEvent>.OnEvent -= HandleUnitSpawn;
-            // Bus<CommandSelectedEvent>.OnEvent -= HandleActionSelected;
-            // Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
+            Bus<UnitSelectedEvent>.OnEvent[Owner.Player1] -= HandleUnitSelected;
+            Bus<UnitDeselectedEvent>.OnEvent[Owner.Player1] -= HandleUnitDeselected;
+            Bus<UnitSpawnEvent>.OnEvent[Owner.Player1] -= HandleUnitSpawn;
+            Bus<CommandSelectedEvent>.OnEvent[Owner.Player1] -= HandleActionSelected;
+            Bus<UnitDeathEvent>.OnEvent[Owner.Player1] -= HandleUnitDeath;
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)

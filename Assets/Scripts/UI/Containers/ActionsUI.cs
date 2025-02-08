@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameDevTV.RTS.Commands;
-using GameDevTV.RTS.EventBus;
-using GameDevTV.RTS.Events;
 using GameDevTV.RTS.Units;
-using Unity.VisualScripting;
 using GameDevTV.RTS.UI.Components;
 using UnityEngine;
 using UnityEngine.Events;
+using GameDevTV.RTS.EventBus;
+using GameDevTV.RTS.Events;
 
 namespace GameDevTV.RTS.UI.Containers
 {
@@ -58,8 +57,7 @@ namespace GameDevTV.RTS.UI.Containers
 
         private UnityAction HandleClick(BaseCommand action)
         {
-            return null;
-            // return () => Bus<CommandSelectedEvent>.Raise(new CommandSelectedEvent(action));
+            return () => Bus<CommandSelectedEvent>.Raise(Owner.Player1, new CommandSelectedEvent(action));
         }
     }
 }

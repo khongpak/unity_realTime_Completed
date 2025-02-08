@@ -20,12 +20,12 @@ namespace GameDevTV.RTS.UI
 
         private void Awake()
         {
-            // Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
-            // Bus<UnitDeselectedEvent>.OnEvent += HandleUnitDeselected;
-            // Bus<UnitDeathEvent>.OnEvent += HandleUnitDeath;
-            // Bus<SupplyEvent>.OnEvent += HandleSupplyChange;
-            // Bus<UnitLoadEvent>.OnEvent += HandleLoadUnit;
-            // Bus<UnitUnloadEvent>.OnEvent += HandleUnloadUnit;
+            Bus<UnitSelectedEvent>.OnEvent[Owner.Player1] += HandleUnitSelected;
+            Bus<UnitDeselectedEvent>.OnEvent[Owner.Player1] += HandleUnitDeselected;
+            Bus<UnitDeathEvent>.OnEvent[Owner.Player1] += HandleUnitDeath;
+            Bus<SupplyEvent>.OnEvent[Owner.Player1] += HandleSupplyChange;
+            Bus<UnitLoadEvent>.OnEvent[Owner.Player1] += HandleLoadUnit;
+            Bus<UnitUnloadEvent>.OnEvent[Owner.Player1] += HandleUnloadUnit;
         }
 
         private void Start()
@@ -39,12 +39,12 @@ namespace GameDevTV.RTS.UI
 
         private void OnDestroy()
         {
-            // Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
-            // Bus<UnitDeselectedEvent>.OnEvent -= HandleUnitDeselected;
-            // Bus<UnitDeathEvent>.OnEvent -= HandleUnitDeath;
-            // Bus<SupplyEvent>.OnEvent -= HandleSupplyChange;
-            // Bus<UnitLoadEvent>.OnEvent -= HandleLoadUnit;
-            // Bus<UnitUnloadEvent>.OnEvent -= HandleUnloadUnit;
+            Bus<UnitSelectedEvent>.OnEvent[Owner.Player1] -= HandleUnitSelected;
+            Bus<UnitDeselectedEvent>.OnEvent[Owner.Player1] -= HandleUnitDeselected;
+            Bus<UnitDeathEvent>.OnEvent[Owner.Player1] -= HandleUnitDeath;
+            Bus<SupplyEvent>.OnEvent[Owner.Player1] -= HandleSupplyChange;
+            Bus<UnitLoadEvent>.OnEvent[Owner.Player1] -= HandleLoadUnit;
+            Bus<UnitUnloadEvent>.OnEvent[Owner.Player1] -= HandleUnloadUnit;
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
