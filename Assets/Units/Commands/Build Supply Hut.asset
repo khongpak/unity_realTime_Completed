@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32194d70ac3bc0647b55685549f2c196, type: 3}
   m_Name: Build Supply Hut
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   <Name>k__BackingField: Supply Hut
   <Icon>k__BackingField: {fileID: 21300000, guid: 5b1043abe99f2d943b94b631a2aa42d9, type: 3}
   <Slot>k__BackingField: 1
@@ -20,4 +20,5 @@ MonoBehaviour:
   <GhostPrefab>k__BackingField: {fileID: 6863950657232117088, guid: f9aa20de8083ebf4186e34e9d16a3bdd, type: 3}
   <Restrictions>k__BackingField:
   - {fileID: 11400000, guid: ce5f6d260e8d6d54fbb96a434adb7bc2, type: 2}
+  techTree: {fileID: 11400000, guid: 3a07828278e4cdb44ab0c2a943ccf22a, type: 2}
   <Building>k__BackingField: {fileID: 11400000, guid: 8dd662d3b241c224ab9deac17c33674b, type: 2}

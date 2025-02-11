@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32194d70ac3bc0647b55685549f2c196, type: 3}
   m_Name: Build Infantry School
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   <Name>k__BackingField: Infantry School
   <Icon>k__BackingField: {fileID: 21300000, guid: 9913c672e9ced57439a2369b346459fe, type: 3}
   <Slot>k__BackingField: 3
@@ -20,4 +20,5 @@ MonoBehaviour:
   <GhostPrefab>k__BackingField: {fileID: 9213762452172689976, guid: 861543673118a8b41b94a4ebe97a02f1, type: 3}
   <Restrictions>k__BackingField:
   - {fileID: 11400000, guid: baa7ddd76ecc33e4f940f66c5f17d95f, type: 2}
+  techTree: {fileID: 11400000, guid: 3a07828278e4cdb44ab0c2a943ccf22a, type: 2}
   <Building>k__BackingField: {fileID: 11400000, guid: 0997c20444ad8e64990f524ed591c91f, type: 2}
