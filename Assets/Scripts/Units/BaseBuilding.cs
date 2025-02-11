@@ -45,7 +45,7 @@ namespace GameDevTV.RTS.Units
             Progress = new BuildingProgress(BuildingProgress.BuildingState.Completed, Progress.StartTime, 1);
             unitBuildingThis = null;
             Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
-            Bus<BuildingSpawnEvent>.Raise(Owner, new BuildingSpawnEvent(this));
+            Bus<BuildingSpawnEvent>.Raise(Owner, new BuildingSpawnEvent(Owner, this));
         }
 
         public void BuildUnit(AbstractUnitSO unit)
