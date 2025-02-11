@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using GameDevTV.RTS.TechTree;
 using GameDevTV.RTS.Utilities;
 using Unity.Behavior;
 using UnityEngine;
@@ -43,6 +44,12 @@ namespace GameDevTV.RTS.Units
                 DamageableSensor.OnUnitExit += HandleUnitExit;
                 DamageableSensor.Owner = Owner;
                 DamageableSensor.SetupFrom(unitSO.AttackConfig);
+            }
+
+            foreach(UpgradeSO upgrade in unitSO.Upgrades)
+            {
+                // we still need to check that it's researched! Coming in a future lecture!
+                upgrade.Apply(unitSO);
             }
         }
 
