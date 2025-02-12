@@ -1,5 +1,6 @@
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using GameDevTV.RTS.TechTree;
 using GameDevTV.RTS.Units;
 using UnityEngine;
 
@@ -46,7 +47,7 @@ namespace GameDevTV.RTS.UI.Containers
             }
         }
 
-        private void OnBuildingQueueUpdated(AbstractUnitSO[] _ = null)
+        private void OnBuildingQueueUpdated(UnlockableSO[] _ = null)
         {
             if (selectedBuilding.QueueSize == 0)
             {

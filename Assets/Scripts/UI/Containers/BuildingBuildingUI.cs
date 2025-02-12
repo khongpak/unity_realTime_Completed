@@ -1,4 +1,5 @@
 using System.Collections;
+using GameDevTV.RTS.TechTree;
 using GameDevTV.RTS.UI.Components;
 using GameDevTV.RTS.Units;
 using UnityEngine;
@@ -49,7 +50,7 @@ namespace GameDevTV.RTS.UI.Containers
             buildCoroutine = null;
         }
 
-        private void HandleQueueUpdated(AbstractUnitSO[] unitsInQueue)
+        private void HandleQueueUpdated(UnlockableSO[] unitsInQueue)
         {
             if (unitsInQueue.Length == 1 && buildCoroutine == null)
             {
@@ -67,7 +68,7 @@ namespace GameDevTV.RTS.UI.Containers
             while(building != null && building.QueueSize > 0)
             {
                 float startTime = building.CurrentQueueStartTime;
-                float endTime = startTime + building.BuildingUnit.BuildTime;
+                float endTime = startTime + building.SOBeingBuilt.BuildTime;
 
                 float progress = Mathf.Clamp01((Time.time - startTime) / (endTime - startTime));
 

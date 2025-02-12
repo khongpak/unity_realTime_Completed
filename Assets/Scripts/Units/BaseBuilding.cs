@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using GameDevTV.RTS.TechTree;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,9 +11,9 @@ namespace GameDevTV.RTS.Units
     public class BaseBuilding : AbstractCommandable
     {
         public int QueueSize => buildingQueue.Count;
-        public AbstractUnitSO[] Queue => buildingQueue.ToArray();
+        public UnlockableSO[] Queue => buildingQueue.ToArray();
         [field: SerializeField] public float CurrentQueueStartTime { get; private set; }
-        [field: SerializeField] public AbstractUnitSO BuildingUnit { get; private set; }
+        [field: SerializeField] public UnlockableSO SOBeingBuilt { get; private set; }
         [field: SerializeField] public MeshRenderer MainRenderer { get; private set; }
         [field: SerializeField] public BuildingProgress Progress { get; private set; } = new (
             BuildingProgress.BuildingState.Destroyed, 0, 0
@@ -21,11 +22,11 @@ namespace GameDevTV.RTS.Units
         [SerializeField] private Material primaryMaterial;
         [SerializeField] private NavMeshObstacle navMeshObstacle;
 
-        public delegate void QueueUpdatedEvent(AbstractUnitSO[] unitsInQueue);
+        public delegate void QueueUpdatedEvent(UnlockableSO[] unitsInQueue);
         public event QueueUpdatedEvent OnQueueUpdated;
 
         private IBuildingBuilder unitBuildingThis;
-        private List<AbstractUnitSO> buildingQueue = new (MAX_QUEUE_SIZE);
+        private List<UnlockableSO> buildingQueue = new (MAX_QUEUE_SIZE);
         private const int MAX_QUEUE_SIZE = 5;
 
         private void Awake()
@@ -48,7 +49,7 @@ namespace GameDevTV.RTS.Units
             Bus<BuildingSpawnEvent>.Raise(Owner, new BuildingSpawnEvent(Owner, this));
         }
 
-        public void BuildUnit(AbstractUnitSO unit)
+        public void BuildUnlockable(UnlockableSO unlockable)
         {
             if (buildingQueue.Count == MAX_QUEUE_SIZE)
             {
@@ -56,10 +57,10 @@ namespace GameDevTV.RTS.Units
                 return;
             }
 
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -unit.Cost.Minerals, unit.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -unit.Cost.Gas, unit.Cost.GasSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -unlockable.Cost.Minerals, unlockable.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, -unlockable.Cost.Gas, unlockable.Cost.GasSO));
 
-            buildingQueue.Add(unit);
+            buildingQueue.Add(unlockable);
             if (buildingQueue.Count == 1)
             {
                 StartCoroutine(DoBuildUnits());
@@ -78,9 +79,9 @@ namespace GameDevTV.RTS.Units
                 return;
             }
 
-            AbstractUnitSO unitSO = buildingQueue[index];
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unitSO.Cost.Minerals, unitSO.Cost.MineralsSO));
-            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unitSO.Cost.Gas, unitSO.Cost.GasSO));
+            UnlockableSO unlockableSO = buildingQueue[index];
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unlockableSO.Cost.Minerals, unlockableSO.Cost.MineralsSO));
+            Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unlockableSO.Cost.Gas, unlockableSO.Cost.GasSO));
             buildingQueue.RemoveAt(index);
             if (index == 0)
             {
@@ -141,17 +142,25 @@ namespace GameDevTV.RTS.Units
         {
             while(buildingQueue.Count > 0)
             {
-                BuildingUnit = buildingQueue[0];
+                SOBeingBuilt = buildingQueue[0];
                 CurrentQueueStartTime = Time.time;
                 OnQueueUpdated?.Invoke(buildingQueue.ToArray());
 
-                yield return new WaitForSeconds(BuildingUnit.BuildTime);
+                yield return new WaitForSeconds(SOBeingBuilt.BuildTime);
 
-                GameObject instance = Instantiate(BuildingUnit.Prefab, transform.position, Quaternion.identity);
-                if (instance.TryGetComponent(out AbstractCommandable commandable))
+                if (SOBeingBuilt is AbstractUnitSO unitSO)
                 {
-                    commandable.Owner = Owner;
+                    GameObject instance = Instantiate(unitSO.Prefab, transform.position, Quaternion.identity);
+                    if (instance.TryGetComponent(out AbstractCommandable commandable))
+                    {
+                        commandable.Owner = Owner;
+                    }
                 }
+                else if (SOBeingBuilt is UpgradeSO upgrade)
+                {
+                    Bus<UpgradeResearchedEvent>.Raise(Owner, new UpgradeResearchedEvent(Owner, upgrade));
+                }
+                
                 buildingQueue.RemoveAt(0);
             }
 

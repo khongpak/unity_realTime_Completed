@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Infantry School
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Infantry School
-  <BuildTime>k__BackingField: 80
+  <BuildTime>k__BackingField: 8
   <Icon>k__BackingField: {fileID: 21300000, guid: 9913c672e9ced57439a2369b346459fe, type: 3}
   <Cost>k__BackingField: {fileID: 11400000, guid: 4e07d32982207ad4a95b9f99fc71a3ce, type: 2}
+  <TechTree>k__BackingField: {fileID: 11400000, guid: 3a07828278e4cdb44ab0c2a943ccf22a, type: 2}
   <unlockRequirements>k__BackingField:
   - {fileID: 11400000, guid: 88f39542ca9a1044296b78a2433d8468, type: 2}
   <Health>k__BackingField: 600
   <Prefab>k__BackingField: {fileID: 5175054564074698786, guid: c3932362a5b6dcf4ab5981f279eb5a71, type: 3}
-  <TechTree>k__BackingField: {fileID: 11400000, guid: 3a07828278e4cdb44ab0c2a943ccf22a, type: 2}
+  <Upgrades>k__BackingField: []
   <PlacementMaterial>k__BackingField: {fileID: 2100000, guid: b1ef2fa16faec654da7102aa095d466e, type: 2}

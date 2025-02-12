@@ -15,9 +15,12 @@ namespace GameDevTV.RTS.TechTree
         public IEnumerable<UnlockableSO> AllUnlockables => allUnlockables.ToList();
 
         private Dictionary<Owner, Dictionary<UnlockableSO, Dependency>> techTrees;
+        private Dictionary<Owner, HashSet<UnlockableSO>> unlockedDependencies;
 
         public bool IsUnlocked(Owner owner, UnlockableSO unlockable) =>
             techTrees[owner].TryGetValue(unlockable, out Dependency value) && value.IsUnlocked;
+        public bool IsResearched(Owner owner, UnlockableSO unlockable) =>
+            unlockedDependencies[owner].Contains(unlockable);
 
         private void OnEnable()
         {
@@ -27,12 +30,25 @@ namespace GameDevTV.RTS.TechTree
             }
 
             Bus<BuildingSpawnEvent>.RegisterForAll(HandleBuildingSpawn);
+            Bus<UpgradeResearchedEvent>.RegisterForAll(HandleUpgradeResearched);
+        }
+
+        private void HandleUpgradeResearched(UpgradeResearchedEvent evt)
+        {
+            Debug.Log($"Researched {evt.Upgrade.Name} for {evt.Owner}!");
+            unlockedDependencies[evt.Owner].Add(evt.Upgrade);
+
+            foreach(KeyValuePair<UnlockableSO, Dependency> keyValuePair in techTrees[evt.Owner])
+            {
+                keyValuePair.Value.UnlockDependency(evt.Upgrade);
+            }
         }
 
         private void OnDisable()
         {
             techTrees = null;
             Bus<BuildingSpawnEvent>.UnregisterForAll(HandleBuildingSpawn);
+            Bus<UpgradeResearchedEvent>.UnregisterForAll(HandleUpgradeResearched);
         }
 
         private void HandleBuildingSpawn(BuildingSpawnEvent evt)
@@ -46,10 +62,12 @@ namespace GameDevTV.RTS.TechTree
         private void BuildTechTrees()
         {
             techTrees = new Dictionary<Owner, Dictionary<UnlockableSO, Dependency>>();
+            unlockedDependencies = new Dictionary<Owner, HashSet<UnlockableSO>>();
 
             foreach(Owner owner in Enum.GetValues(typeof(Owner)))
             {
                 techTrees.Add(owner, new Dictionary<UnlockableSO, Dependency>());
+                unlockedDependencies.Add(owner, new HashSet<UnlockableSO>());
 
                 foreach(UnlockableSO unlockableSO in allUnlockables)
                 {
