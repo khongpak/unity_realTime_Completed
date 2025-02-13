@@ -1,3 +1,4 @@
+using System.Linq;
 using GameDevTV.RTS.Player;
 using GameDevTV.RTS.TechTree;
 using GameDevTV.RTS.Units;
@@ -27,6 +28,16 @@ namespace GameDevTV.RTS.Commands
 
         public override bool IsLocked(CommandContext context) =>
             !HasEnoughSupplies(context) || !Upgrade.TechTree.IsUnlocked(context.Owner, Upgrade);
+
+        public override bool IsAvailable(CommandContext context)
+        {
+            if (Upgrade.IsOneTimeUnlock && Upgrade.TechTree.IsResearched(context.Owner, Upgrade))
+            {
+                return false;
+            }
+
+            return Upgrade.TechTree.IsUnlocked(context.Owner, Upgrade);
+        }
 
         private bool HasEnoughSupplies(CommandContext context)
         {

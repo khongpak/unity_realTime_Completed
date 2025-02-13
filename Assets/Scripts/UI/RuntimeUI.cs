@@ -26,6 +26,8 @@ namespace GameDevTV.RTS.UI
             Bus<SupplyEvent>.OnEvent[Owner.Player1] += HandleSupplyChange;
             Bus<UnitLoadEvent>.OnEvent[Owner.Player1] += HandleLoadUnit;
             Bus<UnitUnloadEvent>.OnEvent[Owner.Player1] += HandleUnloadUnit;
+            Bus<BuildingSpawnEvent>.OnEvent[Owner.Player1] += HandleBuildingSpawn;
+            Bus<UpgradeResearchedEvent>.OnEvent[Owner.Player1] += HandleUpgradeResearched;
         }
 
         private void Start()
@@ -45,6 +47,8 @@ namespace GameDevTV.RTS.UI
             Bus<SupplyEvent>.OnEvent[Owner.Player1] -= HandleSupplyChange;
             Bus<UnitLoadEvent>.OnEvent[Owner.Player1] -= HandleLoadUnit;
             Bus<UnitUnloadEvent>.OnEvent[Owner.Player1] -= HandleUnloadUnit;
+            Bus<BuildingSpawnEvent>.OnEvent[Owner.Player1] -= HandleBuildingSpawn;
+            Bus<UpgradeResearchedEvent>.OnEvent[Owner.Player1] -= HandleUpgradeResearched;
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
@@ -60,6 +64,19 @@ namespace GameDevTV.RTS.UI
         {
             selectedUnits.Remove(evt.Unit);
             RefreshUI();
+        }
+
+        private void HandleUpgradeResearched(UpgradeResearchedEvent args)
+        {
+            RefreshUI();
+        }
+
+        private void HandleBuildingSpawn(BuildingSpawnEvent args)
+        {
+            if (selectedUnits.Count == 1 && selectedUnits.First() is Worker)
+            {
+                actionsUI.EnableFor(selectedUnits);
+            }
         }
 
         private void HandleLoadUnit(UnitLoadEvent evt)
