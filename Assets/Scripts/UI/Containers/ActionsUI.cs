@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
 using System;
+using GameDevTV.RTS.TechTree;
 
 namespace GameDevTV.RTS.UI.Containers
 {
@@ -15,9 +16,26 @@ namespace GameDevTV.RTS.UI.Containers
     {
         [SerializeField] private UIActionButton[] actionButtons;
 
+        private HashSet<BaseBuilding> selectedBuildings = new();
+
         public void EnableFor(HashSet<AbstractCommandable> selectedUnits)
         {
             RefreshButtons(selectedUnits);
+
+            foreach(BaseBuilding building in selectedBuildings)
+            {
+                building.OnQueueUpdated -= OnBuildingQueueUpdated;
+            }
+
+            selectedBuildings = selectedUnits
+                .Where(selectedUnit => selectedUnit is BaseBuilding)
+                .Cast<BaseBuilding>()
+                .ToHashSet();
+            
+            foreach(BaseBuilding building in selectedBuildings)
+            {
+                building.OnQueueUpdated += OnBuildingQueueUpdated;
+            }
         }
 
         public void Disable()
@@ -26,6 +44,17 @@ namespace GameDevTV.RTS.UI.Containers
             {
                 button.Disable();
             }
+
+            foreach (BaseBuilding building in selectedBuildings)
+            {
+                building.OnQueueUpdated -= OnBuildingQueueUpdated;
+            }
+            selectedBuildings.Clear();
+        }
+
+        private void OnBuildingQueueUpdated(UnlockableSO[] unitsInQueue)
+        {
+            RefreshButtons(selectedBuildings.Cast<AbstractCommandable>().ToHashSet());
         }
 
         private void RefreshButtons(HashSet<AbstractCommandable> selectedUnits)

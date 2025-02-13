@@ -26,8 +26,18 @@ namespace GameDevTV.RTS.Commands
             }
         }
 
-        public override bool IsLocked(CommandContext context) =>
-            !HasEnoughSupplies(context) || !Upgrade.TechTree.IsUnlocked(context.Owner, Upgrade);
+        public override bool IsLocked(CommandContext context)
+        {
+            bool isLocked = !HasEnoughSupplies(context) || !Upgrade.TechTree.IsUnlocked(context.Owner, Upgrade);
+
+            if (!isLocked && Upgrade.IsOneTimeUnlock && context.Commandable != null
+                && context.Commandable is BaseBuilding building)
+            {
+                isLocked = building.Queue.Contains(Upgrade);
+            }
+
+            return isLocked;
+        }
 
         public override bool IsAvailable(CommandContext context)
         {

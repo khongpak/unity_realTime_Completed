@@ -16,6 +16,10 @@ namespace GameDevTV.RTS.UI.Containers
 
         public void EnableFor(BaseBuilding item)
         {
+            if (building != null)
+            {
+                building.OnQueueUpdated -= HandleQueueUpdated;
+            }
             progressBar.SetProgress(0);
             gameObject.SetActive(true);
             building = item;
