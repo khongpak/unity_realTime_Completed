@@ -20,5 +20,5 @@ MonoBehaviour:
   <TechTree>k__BackingField: {fileID: 11400000, guid: 3a07828278e4cdb44ab0c2a943ccf22a, type: 2}
   <unlockRequirements>k__BackingField:
   - {fileID: 11400000, guid: 1a539722dcaa7bf4bbf2af09917a710d, type: 2}
-  <PropertyPath>k__BackingField: Damage
+  <PropertyPath>k__BackingField: AttackConfig/Damage
   <Amount>k__BackingField: 1

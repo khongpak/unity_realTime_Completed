@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using GameDevTV.RTS.Commands;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
@@ -25,6 +27,13 @@ namespace GameDevTV.RTS.Units
         protected virtual void Start()
         {
             initialCommands = AvailableCommands;
+
+            Bus<UpgradeResearchedEvent>.OnEvent[Owner] += HandleUpgradeResearched;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            Bus<UpgradeResearchedEvent>.OnEvent[Owner] -= HandleUpgradeResearched;
         }
 
         public virtual void Select()
@@ -90,6 +99,14 @@ namespace GameDevTV.RTS.Units
             int lastHealth = CurrentHealth;
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
             OnHealthUpdated?.Invoke(this, lastHealth, CurrentHealth);
+        }
+
+        private void HandleUpgradeResearched(UpgradeResearchedEvent evt)
+        {
+            if (evt.Owner == Owner && UnitSO.Upgrades.Contains(evt.Upgrade))
+            {
+                evt.Upgrade.Apply(UnitSO);
+            }
         }
     }
 }

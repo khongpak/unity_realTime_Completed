@@ -47,6 +47,14 @@ namespace GameDevTV.RTS.Units
             unitBuildingThis = null;
             Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
             Bus<BuildingSpawnEvent>.Raise(Owner, new BuildingSpawnEvent(Owner, this));
+
+            foreach (UpgradeSO upgrade in BuildingSO.Upgrades)
+            {
+                if (BuildingSO.TechTree.IsResearched(Owner, upgrade))
+                {
+                    upgrade.Apply(BuildingSO);
+                }
+            }
         }
 
         public void BuildUnlockable(UnlockableSO unlockable)
