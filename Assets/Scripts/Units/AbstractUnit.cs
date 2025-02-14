@@ -20,8 +20,10 @@ namespace GameDevTV.RTS.Units
         protected BehaviorGraphAgent graphAgent;
         protected UnitSO unitSO;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             Agent = GetComponent<NavMeshAgent>();
             graphAgent = GetComponent<BehaviorGraphAgent>();
 

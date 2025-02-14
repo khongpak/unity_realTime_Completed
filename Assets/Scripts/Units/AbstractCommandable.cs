@@ -24,6 +24,11 @@ namespace GameDevTV.RTS.Units
 
         private BaseCommand[] initialCommands;
 
+        protected virtual void Awake()
+        {
+            UnitSO = UnitSO.Clone() as AbstractUnitSO;
+        }
+
         protected virtual void Start()
         {
             initialCommands = AvailableCommands;

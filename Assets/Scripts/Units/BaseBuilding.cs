@@ -29,8 +29,10 @@ namespace GameDevTV.RTS.Units
         private List<UnlockableSO> buildingQueue = new (MAX_QUEUE_SIZE);
         private const int MAX_QUEUE_SIZE = 5;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             BuildingSO = UnitSO as BuildingSO;
             MaxHealth = BuildingSO.Health;
             // Current health is set as the building is being built via Heal()
