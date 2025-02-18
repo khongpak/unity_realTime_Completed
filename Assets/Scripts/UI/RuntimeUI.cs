@@ -28,6 +28,7 @@ namespace GameDevTV.RTS.UI
             Bus<UnitUnloadEvent>.OnEvent[Owner.Player1] += HandleUnloadUnit;
             Bus<BuildingSpawnEvent>.OnEvent[Owner.Player1] += HandleBuildingSpawn;
             Bus<UpgradeResearchedEvent>.OnEvent[Owner.Player1] += HandleUpgradeResearched;
+            Bus<BuildingDeathEvent>.OnEvent[Owner.Player1] += HandleBuildingDeath;
         }
 
         private void Start()
@@ -49,6 +50,7 @@ namespace GameDevTV.RTS.UI
             Bus<UnitUnloadEvent>.OnEvent[Owner.Player1] -= HandleUnloadUnit;
             Bus<BuildingSpawnEvent>.OnEvent[Owner.Player1] -= HandleBuildingSpawn;
             Bus<UpgradeResearchedEvent>.OnEvent[Owner.Player1] -= HandleUpgradeResearched;
+            Bus<BuildingDeathEvent>.OnEvent[Owner.Player1] -= HandleBuildingDeath;
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
@@ -63,6 +65,12 @@ namespace GameDevTV.RTS.UI
         private void HandleUnitDeath(UnitDeathEvent evt)
         {
             selectedUnits.Remove(evt.Unit);
+            RefreshUI();
+        }
+
+        private void HandleBuildingDeath(BuildingDeathEvent evt)
+        {
+            selectedUnits.Remove(evt.Building);
             RefreshUI();
         }
 

@@ -31,6 +31,7 @@ namespace GameDevTV.RTS.TechTree
 
             Bus<BuildingSpawnEvent>.RegisterForAll(HandleBuildingSpawn);
             Bus<UpgradeResearchedEvent>.RegisterForAll(HandleUpgradeResearched);
+            Bus<BuildingDeathEvent>.RegisterForAll(HandleBuildingDeath);
         }
 
         private void HandleUpgradeResearched(UpgradeResearchedEvent evt)
@@ -49,6 +50,7 @@ namespace GameDevTV.RTS.TechTree
             techTrees = null;
             Bus<BuildingSpawnEvent>.UnregisterForAll(HandleBuildingSpawn);
             Bus<UpgradeResearchedEvent>.UnregisterForAll(HandleUpgradeResearched);
+            Bus<BuildingDeathEvent>.UnregisterForAll(HandleBuildingDeath);
         }
 
         private void HandleBuildingSpawn(BuildingSpawnEvent evt)
@@ -56,6 +58,14 @@ namespace GameDevTV.RTS.TechTree
             foreach(KeyValuePair<UnlockableSO, Dependency> keyValuePair in techTrees[evt.Owner])
             {
                 keyValuePair.Value.UnlockDependency(evt.Building.BuildingSO);
+            }
+        }
+
+        private void HandleBuildingDeath(BuildingDeathEvent evt)
+        {
+            foreach (KeyValuePair<UnlockableSO, Dependency> keyValuePair in techTrees[evt.Owner])
+            {
+                keyValuePair.Value.LoseDependency(evt.Building.BuildingSO);
             }
         }
 
@@ -93,6 +103,22 @@ namespace GameDevTV.RTS.TechTree
                 if (Dependencies.Contains(dependency) && !metDependencies.TryAdd(dependency, 1))
                 {
                     metDependencies[dependency]++;
+                }
+            }
+
+            public void LoseDependency(UnlockableSO dependency)
+            {
+                if (dependency.IsOneTimeUnlock || !metDependencies.TryGetValue(dependency, out int count)) return;
+
+                count--;
+
+                if (count > 0)
+                {
+                    metDependencies[dependency] = count;
+                }
+                else
+                {
+                    metDependencies.Remove(dependency);
                 }
             }
         }

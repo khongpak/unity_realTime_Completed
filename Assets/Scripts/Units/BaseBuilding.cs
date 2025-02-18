@@ -177,9 +177,11 @@ namespace GameDevTV.RTS.Units
             OnQueueUpdated?.Invoke(buildingQueue.ToArray());
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
+            Bus<BuildingDeathEvent>.Raise(Owner, new BuildingDeathEvent(Owner, this));
         }
     }
 }
