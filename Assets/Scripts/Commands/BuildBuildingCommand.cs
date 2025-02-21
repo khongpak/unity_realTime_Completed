@@ -1,4 +1,5 @@
 using GameDevTV.RTS.Player;
+using GameDevTV.RTS.TechTree;
 using GameDevTV.RTS.Units;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem.LowLevel;
 namespace GameDevTV.RTS.Commands
 {
     [CreateAssetMenu(fileName = "Build Building", menuName = "Units/Commands/Build Building")]
-    public class BuildBuildingCommand : BaseCommand
+    public class BuildBuildingCommand : BaseCommand, IUnlockableCommand
     {
         [field: SerializeField] public BuildingSO Building { get; private set; }
 
@@ -42,6 +43,11 @@ namespace GameDevTV.RTS.Commands
 
         public override bool IsLocked(CommandContext context) =>
             !HasEnoughSupplies(context) || !Building.TechTree.IsUnlocked(context.Owner, Building);
+
+        public UnlockableSO[] GetUnmetDependencies(Owner owner)
+        {
+            return Building.TechTree.GetUnmetDependencies(owner, Building);
+        }
 
         private bool HasEnoughSupplies(CommandContext context)
         {
