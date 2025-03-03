@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using GameDevTV.RTS.Player;
 using GameDevTV.RTS.TechTree;
@@ -11,6 +12,8 @@ namespace GameDevTV.RTS.Commands
     {
         [field: SerializeField] public UpgradeSO Upgrade { get; private set; }
 
+        private Dictionary<Owner, BaseBuilding.QueueUpdatedEvent> updateQueue = new();
+
         public override bool CanHandle(CommandContext context)
         {
             return context.Commandable is BaseBuilding;
@@ -23,6 +26,26 @@ namespace GameDevTV.RTS.Commands
             if (HasEnoughSupplies(context))
             {
                 building.BuildUnlockable(Upgrade);
+
+                if (updateQueue.TryAdd(context.Owner, GetQueueUpdatedFunction(context.Owner, building)))
+                {
+                    building.OnQueueUpdated += updateQueue[context.Owner];
+                }
+            }
+        }
+
+        private BaseBuilding.QueueUpdatedEvent GetQueueUpdatedFunction(Owner owner, BaseBuilding building)
+        {
+            return (unlockables) => HandleQueueUpdated(owner, building, unlockables);
+        }
+
+        private void HandleQueueUpdated(Owner owner, BaseBuilding building, UnlockableSO[] unitsInQueue)
+        {
+            Debug.Log($"Handle Queue Updated in {Name}");
+            if (!unitsInQueue.Contains(Upgrade))
+            {
+                building.OnQueueUpdated -= updateQueue[owner];
+                updateQueue.Remove(owner);
             }
         }
 
@@ -31,9 +54,9 @@ namespace GameDevTV.RTS.Commands
             bool isLocked = !HasEnoughSupplies(context) || !Upgrade.TechTree.IsUnlocked(context.Owner, Upgrade);
 
             if (!isLocked && Upgrade.IsOneTimeUnlock && context.Commandable != null
-                && context.Commandable is BaseBuilding building)
+                && context.Commandable is BaseBuilding)
             {
-                isLocked = building.Queue.Contains(Upgrade);
+                isLocked = updateQueue.ContainsKey(context.Owner);
             }
 
             return isLocked;
