@@ -61,6 +61,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Explored_Fog_of_War_Render_Texture:
+        m_Texture: {fileID: 8400000, guid: 4a02c5810d9f4084c86767ced61de51a, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Fog_of_War_Render_Texture:
         m_Texture: {fileID: 8400000, guid: 52facb0f6e8b2564ba1e7adcc0e9d299, type: 2}
         m_Scale: {x: 1, y: 1}
@@ -114,6 +118,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 0
+    - _ExploredFogAlpha: 0.25
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
