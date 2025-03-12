@@ -22,4 +22,5 @@ MonoBehaviour:
   <Health>k__BackingField: 1000
   <Prefab>k__BackingField: {fileID: 5827066523746683823, guid: 0769b0d4430bf10488837724577a9cde, type: 3}
   <Upgrades>k__BackingField: []
+  <SightConfig>k__BackingField: {fileID: 11400000, guid: f72837298f54f6540bf60aa3b317c6f8, type: 2}
   <PlacementMaterial>k__BackingField: {fileID: 2100000, guid: b1ef2fa16faec654da7102aa095d466e, type: 2}

@@ -16,8 +16,9 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public Owner Owner { get; set; }
         public Transform Transform => transform;
         [field: SerializeField] public BaseCommand[] AvailableCommands { get; private set; }
-        [SerializeField] protected DecalProjector decalProjector;
         [field: SerializeField] public AbstractUnitSO UnitSO { get; private set; }
+        [SerializeField] protected DecalProjector decalProjector;
+        [SerializeField] protected Transform VisionTransform;
 
         public delegate void HealthUpdatedEvent(AbstractCommandable commandable, int lastHealth, int newHealth);
         public event HealthUpdatedEvent OnHealthUpdated;
@@ -31,6 +32,12 @@ namespace GameDevTV.RTS.Units
 
         protected virtual void Start()
         {
+            if (UnitSO.SightConfig != null && VisionTransform != null)
+            {
+                float size = UnitSO.SightConfig.SightRadius * 2;
+                VisionTransform.localScale = new Vector3(size, size, size);
+            }
+
             initialCommands = AvailableCommands;
 
             Bus<UpgradeResearchedEvent>.OnEvent[Owner] += HandleUpgradeResearched;

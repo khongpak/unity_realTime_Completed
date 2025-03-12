@@ -6,5 +6,14 @@ namespace GameDevTV.RTS.Units
     public class BuildingSO : AbstractUnitSO
     {
         [field: SerializeField] public Material PlacementMaterial { get; private set; }
+
+        public override object Clone()
+        {
+            BuildingSO copy = base.Clone() as BuildingSO;
+
+            copy.SightConfig = SightConfig == null ? null : Instantiate(SightConfig);
+
+            return copy;
+        }
     }
 }
