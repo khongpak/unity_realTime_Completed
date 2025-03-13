@@ -36,6 +36,7 @@ namespace GameDevTV.RTS.Units
             {
                 float size = UnitSO.SightConfig.SightRadius * 2;
                 VisionTransform.localScale = new Vector3(size, size, size);
+                VisionTransform.gameObject.SetActive(Owner == Owner.Player1);
             }
 
             initialCommands = AvailableCommands;
