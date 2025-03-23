@@ -18825,6 +18825,7 @@ GameObject:
   - component: {fileID: 1140988377}
   - component: {fileID: 1140988380}
   - component: {fileID: 1140988378}
+  - component: {fileID: 1140988381}
   m_Layer: 0
   m_Name: Fog of War Visibility Camera
   m_TagString: Untagged
@@ -18942,6 +18943,18 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1140988381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140988376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03959e4ecd9f43c1b3ae2b22c02b7b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1144222448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37801,11 +37814,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1182439771315072052, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: <Owner>k__BackingField
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.014875
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37813,7 +37826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -56.249123
+      value: -45.81
       objectReference: {fileID: 0}
     - target: {fileID: 2636797422651241148, guid: 4d0c2e8c3bd76b64097b86828a286bc6, type: 3}
       propertyPath: m_LocalRotation.w
