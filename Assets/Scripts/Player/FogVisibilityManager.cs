@@ -55,7 +55,7 @@ namespace GameDevTV.RTS.Player
         {
             Vector3 screenPoint = fogOfWarCamera.WorldToScreenPoint(commandable.transform.position);
             Color visibilityColor = visionTexture.GetPixel((int)screenPoint.x, (int)screenPoint.y);
-            Debug.Log($"Determined {commandable.name} is {(visibilityColor.r > 0.9f ? "Visible!" : "Not Visible!")}");
+            commandable.SetVisible(visibilityColor.r > 0.9f);
         }
 
         private void HandleUnitSpawn(UnitSpawnEvent evt)

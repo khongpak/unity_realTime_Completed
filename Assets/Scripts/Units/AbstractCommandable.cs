@@ -14,6 +14,7 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public int CurrentHealth { get; protected set; }
         [field: SerializeField] public int MaxHealth { get; protected set; }
         [field: SerializeField] public Owner Owner { get; set; }
+        [field: SerializeField] public bool IsVisible { get; private set; } = true;
         public Transform Transform => transform;
         [field: SerializeField] public BaseCommand[] AvailableCommands { get; private set; }
         [field: SerializeField] public AbstractUnitSO UnitSO { get; private set; }
@@ -24,10 +25,15 @@ namespace GameDevTV.RTS.Units
         public event HealthUpdatedEvent OnHealthUpdated;
 
         private BaseCommand[] initialCommands;
+        private Renderer[] renderers = Array.Empty<Renderer>();
+        private ParticleSystem[] particleSystems = Array.Empty<ParticleSystem>();
 
         protected virtual void Awake()
         {
             UnitSO = UnitSO.Clone() as AbstractUnitSO;
+
+            renderers = GetComponentsInChildren<Renderer>();
+            particleSystems = GetComponentsInChildren<ParticleSystem>();
         }
 
         protected virtual void Start()
@@ -112,6 +118,48 @@ namespace GameDevTV.RTS.Units
             int lastHealth = CurrentHealth;
             CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0, MaxHealth);
             OnHealthUpdated?.Invoke(this, lastHealth, CurrentHealth);
+        }
+
+        public void SetVisible(bool isVisible)
+        {
+            if (isVisible == IsVisible) return;
+
+            IsVisible = isVisible;
+
+            if (IsVisible)
+            {
+                OnGainVisibility();
+            }
+            else
+            {
+                OnLoseVisibility();
+            }
+        }
+
+        private void OnGainVisibility()
+        {
+            foreach(Renderer renderer in renderers)
+            {
+                renderer.enabled = true;
+            }
+
+            foreach(ParticleSystem particleSystem in particleSystems)
+            {
+                particleSystem.gameObject.SetActive(true);
+            }
+        }
+
+        private void OnLoseVisibility()
+        {
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
+
+            foreach (ParticleSystem particleSystem in particleSystems)
+            {
+                particleSystem.gameObject.SetActive(false);
+            }
         }
 
         private void HandleUpgradeResearched(UpgradeResearchedEvent evt)
