@@ -24,12 +24,18 @@ namespace GameDevTV.RTS.Player
 
             Bus<UnitSpawnEvent>.RegisterForAll(HandleUnitSpawn);
             Bus<UnitDeathEvent>.RegisterForAll(HandleUnitDeath);
+
+            Bus<BuildingSpawnEvent>.RegisterForAll(HandleBuildingSpawn);
+            Bus<BuildingDeathEvent>.RegisterForAll(HandleBuildingDeath);
         }
 
         private void OnDestroy()
         {
             Bus<UnitSpawnEvent>.UnregisterForAll(HandleUnitSpawn);
             Bus<UnitDeathEvent>.UnregisterForAll(HandleUnitDeath);
+
+            Bus<BuildingSpawnEvent>.UnregisterForAll(HandleBuildingSpawn);
+            Bus<BuildingDeathEvent>.UnregisterForAll(HandleBuildingDeath);
         }
 
         private void LateUpdate()
@@ -69,6 +75,19 @@ namespace GameDevTV.RTS.Player
         private void HandleUnitDeath(UnitDeathEvent evt)
         {
             aliveNotOwnedUnits.Remove(evt.Unit);
+        }
+
+        private void HandleBuildingSpawn(BuildingSpawnEvent evt)
+        {
+            if (evt.Building.Owner != Owner.Player1)
+            {
+                aliveNotOwnedUnits.Add(evt.Building);
+            }
+        }
+
+        private void HandleBuildingDeath(BuildingDeathEvent evt)
+        {
+            aliveNotOwnedUnits.Remove(evt.Building);
         }
     }
 }
