@@ -3,12 +3,13 @@ using System.Linq;
 using GameDevTV.RTS.Commands;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using GameDevTV.RTS.Player;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace GameDevTV.RTS.Units
 {
-    public abstract class AbstractCommandable : MonoBehaviour, ISelectable, IDamageable
+    public abstract class AbstractCommandable : MonoBehaviour, ISelectable, IDamageable, IHideable
     {
         [field: SerializeField] public bool IsSelected { get; protected set; }
         [field: SerializeField] public int CurrentHealth { get; protected set; }

@@ -14,7 +14,7 @@ namespace GameDevTV.RTS.Player
         private Texture2D visionTexture;
         private Rect textureRect;
 
-        private HashSet<AbstractCommandable> aliveNotOwnedUnits = new(1000);
+        private HashSet<IHideable> hideables = new(1000);
 
         private void Awake()
         {
@@ -27,6 +27,9 @@ namespace GameDevTV.RTS.Player
 
             Bus<BuildingSpawnEvent>.RegisterForAll(HandleBuildingSpawn);
             Bus<BuildingDeathEvent>.RegisterForAll(HandleBuildingDeath);
+
+            Bus<SupplySpawnEvent>.OnEvent[Owner.Unowned] += HandleSupplySpawn;
+            Bus<SupplyDepletedEvent>.OnEvent[Owner.Unowned] += HandleSupplyDepleted;
         }
 
         private void OnDestroy()
@@ -36,15 +39,18 @@ namespace GameDevTV.RTS.Player
 
             Bus<BuildingSpawnEvent>.UnregisterForAll(HandleBuildingSpawn);
             Bus<BuildingDeathEvent>.UnregisterForAll(HandleBuildingDeath);
+
+            Bus<SupplySpawnEvent>.OnEvent[Owner.Unowned] -= HandleSupplySpawn;
+            Bus<SupplyDepletedEvent>.OnEvent[Owner.Unowned] -= HandleSupplyDepleted;
         }
 
         private void LateUpdate()
         {
             ReadPixelsToVisionTexture();
 
-            foreach(AbstractCommandable commandable in aliveNotOwnedUnits)
+            foreach(IHideable hideable in hideables)
             {
-                SetUnitVisibilityStatus(commandable);
+                SetUnitVisibilityStatus(hideable);
             }
         }
 
@@ -57,37 +63,47 @@ namespace GameDevTV.RTS.Player
             RenderTexture.active = previousRenderTexture;
         }
 
-        private void SetUnitVisibilityStatus(AbstractCommandable commandable)
+        private void SetUnitVisibilityStatus(IHideable hideable)
         {
-            Vector3 screenPoint = fogOfWarCamera.WorldToScreenPoint(commandable.transform.position);
+            Vector3 screenPoint = fogOfWarCamera.WorldToScreenPoint(hideable.Transform.position);
             Color visibilityColor = visionTexture.GetPixel((int)screenPoint.x, (int)screenPoint.y);
-            commandable.SetVisible(visibilityColor.r > 0.9f);
+            hideable.SetVisible(visibilityColor.r > 0.9f);
         }
 
         private void HandleUnitSpawn(UnitSpawnEvent evt)
         {
             if (evt.Unit.Owner != Owner.Player1)
             {
-                aliveNotOwnedUnits.Add(evt.Unit);
+                hideables.Add(evt.Unit);
             }
         }
 
         private void HandleUnitDeath(UnitDeathEvent evt)
         {
-            aliveNotOwnedUnits.Remove(evt.Unit);
+            hideables.Remove(evt.Unit);
         }
 
         private void HandleBuildingSpawn(BuildingSpawnEvent evt)
         {
             if (evt.Building.Owner != Owner.Player1)
             {
-                aliveNotOwnedUnits.Add(evt.Building);
+                hideables.Add(evt.Building);
             }
         }
 
         private void HandleBuildingDeath(BuildingDeathEvent evt)
         {
-            aliveNotOwnedUnits.Remove(evt.Building);
+            hideables.Remove(evt.Building);
+        }
+
+        private void HandleSupplySpawn(SupplySpawnEvent evt)
+        {
+            hideables.Add(evt.Supply);
+        }
+
+        private void HandleSupplyDepleted(SupplyDepletedEvent evt)
+        {
+            hideables.Remove(evt.Supply);
         }
     }
 }
