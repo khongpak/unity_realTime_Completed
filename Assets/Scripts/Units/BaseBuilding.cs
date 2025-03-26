@@ -15,7 +15,8 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public float CurrentQueueStartTime { get; private set; }
         [field: SerializeField] public UnlockableSO SOBeingBuilt { get; private set; }
         [field: SerializeField] public MeshRenderer MainRenderer { get; private set; }
-        [field: SerializeField] public BuildingProgress Progress { get; private set; } = new (
+        [field: SerializeField]
+        public BuildingProgress Progress { get; private set; } = new(
             BuildingProgress.BuildingState.Destroyed, 0, 0
         );
         [field: SerializeField] public BuildingSO BuildingSO { get; private set; }
@@ -25,8 +26,9 @@ namespace GameDevTV.RTS.Units
         public delegate void QueueUpdatedEvent(UnlockableSO[] unitsInQueue);
         public event QueueUpdatedEvent OnQueueUpdated;
 
+        private GameObject culledVisuals;
         private IBuildingBuilder unitBuildingThis;
-        private List<UnlockableSO> buildingQueue = new (MAX_QUEUE_SIZE);
+        private List<UnlockableSO> buildingQueue = new(MAX_QUEUE_SIZE);
         private const int MAX_QUEUE_SIZE = 5;
 
         protected override void Awake()
@@ -150,7 +152,7 @@ namespace GameDevTV.RTS.Units
 
         private IEnumerator DoBuildUnits()
         {
-            while(buildingQueue.Count > 0)
+            while (buildingQueue.Count > 0)
             {
                 SOBeingBuilt = buildingQueue[0];
                 CurrentQueueStartTime = Time.time;
@@ -170,7 +172,7 @@ namespace GameDevTV.RTS.Units
                 {
                     Bus<UpgradeResearchedEvent>.Raise(Owner, new UpgradeResearchedEvent(Owner, upgrade));
                 }
-                
+
                 buildingQueue.RemoveAt(0);
             }
 
@@ -182,6 +184,43 @@ namespace GameDevTV.RTS.Units
             base.OnDestroy();
             Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
             Bus<BuildingDeathEvent>.Raise(Owner, new BuildingDeathEvent(Owner, this));
+        }
+
+        protected override void OnGainVisibility()
+        {
+            base.OnGainVisibility();
+            if (culledVisuals != null)
+            {
+                culledVisuals.SetActive(false);
+            }
+        }
+
+        protected override void OnLoseVisibility()
+        {
+            base.OnLoseVisibility();
+
+            if (culledVisuals == null)
+            {
+                Transform originalRendererTransform = MainRenderer.transform;
+                culledVisuals = new GameObject($"Culled {BuildingSO.Name} Visuals")
+                {
+                    layer = LayerMask.GetMask("TransparentFX"),
+                    transform =
+                    {
+                        position = originalRendererTransform.position,
+                        rotation = originalRendererTransform.rotation,
+                        localScale = originalRendererTransform.localScale
+                    }
+                };
+                MeshFilter meshFilter = culledVisuals.AddComponent<MeshFilter>();
+                meshFilter.mesh = MainRenderer.GetComponent<MeshFilter>().mesh;
+                MeshRenderer renderer = culledVisuals.AddComponent<MeshRenderer>();
+                renderer.materials = MainRenderer.materials;
+            }
+            else
+            {
+                culledVisuals.SetActive(true);
+            }
         }
     }
 }

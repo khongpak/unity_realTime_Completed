@@ -137,7 +137,7 @@ namespace GameDevTV.RTS.Units
             }
         }
 
-        private void OnGainVisibility()
+        protected virtual void OnGainVisibility()
         {
             foreach(Renderer renderer in renderers)
             {
@@ -150,7 +150,7 @@ namespace GameDevTV.RTS.Units
             }
         }
 
-        private void OnLoseVisibility()
+        protected virtual void OnLoseVisibility()
         {
             foreach (Renderer renderer in renderers)
             {

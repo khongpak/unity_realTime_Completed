@@ -15,6 +15,7 @@ namespace GameDevTV.RTS.Environment
         [field: SerializeField] public bool IsVisible { get; private set; }
         public Transform Transform => transform;
         
+        private GameObject culledVisuals;
         private Renderer[] renderers = Array.Empty<Renderer>();
         private ParticleSystem[] particleSystems = Array.Empty<ParticleSystem>();
 
@@ -92,6 +93,11 @@ namespace GameDevTV.RTS.Environment
             {
                 particleSystem.gameObject.SetActive(true);
             }
+
+            if (culledVisuals != null)
+            {
+                culledVisuals.SetActive(false);
+            }
         }
 
         private void OnLoseVisibility()
@@ -104,6 +110,30 @@ namespace GameDevTV.RTS.Environment
             foreach (ParticleSystem particleSystem in particleSystems)
             {
                 particleSystem.gameObject.SetActive(false);
+            }
+
+            if (culledVisuals == null)
+            {
+                MeshRenderer mainRenderer = GetComponentInChildren<MeshRenderer>();
+                Transform originalRendererTransform = mainRenderer.transform;
+                culledVisuals = new GameObject($"Culled {name} Visuals")
+                {
+                    layer = LayerMask.GetMask("TransparentFX"),
+                    transform =
+                    {
+                        position = originalRendererTransform.position,
+                        rotation = originalRendererTransform.rotation,
+                        localScale = originalRendererTransform.localScale
+                    }
+                };
+                MeshFilter meshFilter = culledVisuals.AddComponent<MeshFilter>();
+                meshFilter.mesh = mainRenderer.GetComponent<MeshFilter>().mesh;
+                MeshRenderer renderer = culledVisuals.AddComponent<MeshRenderer>();
+                renderer.materials = mainRenderer.materials;
+            }
+            else
+            {
+                culledVisuals.SetActive(true);
             }
         }
     }
