@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
+using GameDevTV.RTS.Player;
 using GameDevTV.RTS.TechTree;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,7 +27,7 @@ namespace GameDevTV.RTS.Units
         public delegate void QueueUpdatedEvent(UnlockableSO[] unitsInQueue);
         public event QueueUpdatedEvent OnQueueUpdated;
 
-        private GameObject culledVisuals;
+        private Placeholder culledVisuals;
         private IBuildingBuilder unitBuildingThis;
         private List<UnlockableSO> buildingQueue = new(MAX_QUEUE_SIZE);
         private const int MAX_QUEUE_SIZE = 5;
@@ -191,7 +192,7 @@ namespace GameDevTV.RTS.Units
             base.OnGainVisibility();
             if (culledVisuals != null)
             {
-                culledVisuals.SetActive(false);
+                culledVisuals.gameObject.SetActive(false);
             }
         }
 
@@ -202,7 +203,7 @@ namespace GameDevTV.RTS.Units
             if (culledVisuals == null)
             {
                 Transform originalRendererTransform = MainRenderer.transform;
-                culledVisuals = new GameObject($"Culled {BuildingSO.Name} Visuals")
+                GameObject culledGO = new ($"Culled {BuildingSO.Name} Visuals")
                 {
                     layer = LayerMask.GetMask("TransparentFX"),
                     transform =
@@ -212,14 +213,17 @@ namespace GameDevTV.RTS.Units
                         localScale = originalRendererTransform.localScale
                     }
                 };
-                MeshFilter meshFilter = culledVisuals.AddComponent<MeshFilter>();
+                culledVisuals = culledGO.AddComponent<Placeholder>();
+                culledVisuals.Owner = Owner;
+                culledVisuals.ParentObject = gameObject;
+                MeshFilter meshFilter = culledGO.AddComponent<MeshFilter>();
                 meshFilter.mesh = MainRenderer.GetComponent<MeshFilter>().mesh;
-                MeshRenderer renderer = culledVisuals.AddComponent<MeshRenderer>();
+                MeshRenderer renderer = culledGO.AddComponent<MeshRenderer>();
                 renderer.materials = MainRenderer.materials;
             }
             else
             {
-                culledVisuals.SetActive(true);
+                culledVisuals.gameObject.SetActive(true);
             }
         }
     }

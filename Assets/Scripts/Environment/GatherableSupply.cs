@@ -15,7 +15,7 @@ namespace GameDevTV.RTS.Environment
         [field: SerializeField] public bool IsVisible { get; private set; }
         public Transform Transform => transform;
         
-        private GameObject culledVisuals;
+        private Placeholder culledVisuals;
         private Renderer[] renderers = Array.Empty<Renderer>();
         private ParticleSystem[] particleSystems = Array.Empty<ParticleSystem>();
 
@@ -96,7 +96,7 @@ namespace GameDevTV.RTS.Environment
 
             if (culledVisuals != null)
             {
-                culledVisuals.SetActive(false);
+                culledVisuals.gameObject.SetActive(false);
             }
         }
 
@@ -116,7 +116,7 @@ namespace GameDevTV.RTS.Environment
             {
                 MeshRenderer mainRenderer = GetComponentInChildren<MeshRenderer>();
                 Transform originalRendererTransform = mainRenderer.transform;
-                culledVisuals = new GameObject($"Culled {name} Visuals")
+                GameObject culledGO = new ($"Culled {name} Visuals")
                 {
                     layer = LayerMask.GetMask("TransparentFX"),
                     transform =
@@ -126,14 +126,17 @@ namespace GameDevTV.RTS.Environment
                         localScale = originalRendererTransform.localScale
                     }
                 };
-                MeshFilter meshFilter = culledVisuals.AddComponent<MeshFilter>();
+                culledVisuals = culledGO.AddComponent<Placeholder>();
+                culledVisuals.ParentObject = gameObject;
+                culledVisuals.Owner = Owner.Unowned;
+                MeshFilter meshFilter = culledGO.AddComponent<MeshFilter>();
                 meshFilter.mesh = mainRenderer.GetComponent<MeshFilter>().mesh;
-                MeshRenderer renderer = culledVisuals.AddComponent<MeshRenderer>();
+                MeshRenderer renderer = culledGO.AddComponent<MeshRenderer>();
                 renderer.materials = mainRenderer.materials;
             }
             else
             {
-                culledVisuals.SetActive(true);
+                culledVisuals.gameObject.SetActive(true);
             }
         }
     }

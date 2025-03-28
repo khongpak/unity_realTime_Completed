@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
@@ -28,6 +29,9 @@ namespace GameDevTV.RTS.Player
             Bus<BuildingSpawnEvent>.RegisterForAll(HandleBuildingSpawn);
             Bus<BuildingDeathEvent>.RegisterForAll(HandleBuildingDeath);
 
+            Bus<PlaceholderSpawnEvent>.RegisterForAll(HandlePlaceholderSpawn);
+            Bus<PlaceholderDestroyEvent>.RegisterForAll(HandlePlaceholderDestroy);
+
             Bus<SupplySpawnEvent>.OnEvent[Owner.Unowned] += HandleSupplySpawn;
             Bus<SupplyDepletedEvent>.OnEvent[Owner.Unowned] += HandleSupplyDepleted;
         }
@@ -39,6 +43,9 @@ namespace GameDevTV.RTS.Player
 
             Bus<BuildingSpawnEvent>.UnregisterForAll(HandleBuildingSpawn);
             Bus<BuildingDeathEvent>.UnregisterForAll(HandleBuildingDeath);
+
+            Bus<PlaceholderSpawnEvent>.UnregisterForAll(HandlePlaceholderSpawn);
+            Bus<PlaceholderDestroyEvent>.UnregisterForAll(HandlePlaceholderDestroy);
 
             Bus<SupplySpawnEvent>.OnEvent[Owner.Unowned] -= HandleSupplySpawn;
             Bus<SupplyDepletedEvent>.OnEvent[Owner.Unowned] -= HandleSupplyDepleted;
@@ -104,6 +111,16 @@ namespace GameDevTV.RTS.Player
         private void HandleSupplyDepleted(SupplyDepletedEvent evt)
         {
             hideables.Remove(evt.Supply);
+        }
+
+        private void HandlePlaceholderDestroy(PlaceholderDestroyEvent evt)
+        {
+            hideables.Remove(evt.Placeholder);
+        }
+
+        private void HandlePlaceholderSpawn(PlaceholderSpawnEvent evt)
+        {
+            hideables.Add(evt.Placeholder);
         }
     }
 }
