@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using GameDevTV.RTS.Player;
 
 namespace GameDevTV.RTS.Commands
 {
@@ -33,5 +34,8 @@ namespace GameDevTV.RTS.Commands
 
         public bool AllRestrictionsPass(Vector3 point) =>
             Restrictions.Length == 0 || Restrictions.All(restriction => restriction.CanPlace(point));
+
+        public bool IsHitColliderVisible(CommandContext context) => context.Hit.collider != null
+            && context.Hit.collider.TryGetComponent(out IHideable hideable) && hideable.IsVisible;
     }
 }

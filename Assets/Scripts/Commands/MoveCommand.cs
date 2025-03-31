@@ -22,7 +22,8 @@ namespace GameDevTV.RTS.Commands
         {
             AbstractUnit unit = (AbstractUnit)context.Commandable;
 
-            if (context.Hit.collider != null && context.Hit.collider.TryGetComponent(out AbstractCommandable commandable))
+            if (context.Hit.collider != null && context.Hit.collider.TryGetComponent(out AbstractCommandable commandable)
+                && commandable.IsVisible)
             {
                 unit.MoveTo(commandable.transform);
                 return;

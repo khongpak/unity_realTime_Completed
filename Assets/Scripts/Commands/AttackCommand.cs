@@ -14,7 +14,7 @@ namespace GameDevTV.RTS.Commands
         public override void Handle(CommandContext context)
         {
             IAttacker attacker = context.Commandable as IAttacker;
-            if (context.Hit.collider.TryGetComponent(out IDamageable damageable))
+            if (context.Hit.collider.TryGetComponent(out IDamageable damageable) && IsHitColliderVisible(context))
             {
                 attacker.Attack(damageable);
             }

@@ -8,6 +8,7 @@ namespace GameDevTV.RTS.Units
         public Transform Transform { get; }
         public int Capacity { get; }
         public int UsedCapacity { get; }
+        public Owner Owner { get; }
 
         public List<ITransportable> GetLoadedUnits();
 

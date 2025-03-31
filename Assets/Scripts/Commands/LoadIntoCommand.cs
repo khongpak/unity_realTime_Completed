@@ -8,9 +8,10 @@ namespace GameDevTV.RTS.Commands
     {
         public override bool CanHandle(CommandContext context)
         {
-            return context.Commandable is ITransportable
+            return context.Commandable is ITransportable transportable
                 && context.Hit.collider != null
-                && context.Hit.collider.TryGetComponent(out ITransporter _);
+                && context.Hit.collider.TryGetComponent(out ITransporter transporter)
+                && transportable.Owner == transporter.Owner;
         }
 
         public override void Handle(CommandContext context)

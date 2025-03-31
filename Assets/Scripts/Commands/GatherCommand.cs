@@ -19,7 +19,11 @@ namespace GameDevTV.RTS.Commands
         public override void Handle(CommandContext context)
         {
             Worker worker = context.Commandable as Worker;
-            if (context.Hit.collider.TryGetComponent(out GatherableSupply supply))
+            if (!IsHitColliderVisible(context))
+            {
+                worker.MoveTo(context.Hit.collider.gameObject.transform.position);
+            }
+            else if (context.Hit.collider.TryGetComponent(out GatherableSupply supply))
             {
                 worker.Gather(supply);
             }
