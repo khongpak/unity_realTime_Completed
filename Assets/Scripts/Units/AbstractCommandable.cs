@@ -24,6 +24,8 @@ namespace GameDevTV.RTS.Units
 
         public delegate void HealthUpdatedEvent(AbstractCommandable commandable, int lastHealth, int newHealth);
         public event HealthUpdatedEvent OnHealthUpdated;
+        
+        public event IHideable.VisibilityChangeEvent OnVisibilityChanged;
 
         private BaseCommand[] initialCommands;
         private Renderer[] renderers = Array.Empty<Renderer>();
@@ -126,6 +128,7 @@ namespace GameDevTV.RTS.Units
             if (isVisible == IsVisible) return;
 
             IsVisible = isVisible;
+            OnVisibilityChanged?.Invoke(this, isVisible);
 
             if (IsVisible)
             {

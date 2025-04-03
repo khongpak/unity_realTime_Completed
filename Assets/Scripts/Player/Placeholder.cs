@@ -8,9 +8,11 @@ namespace GameDevTV.RTS.Player
     public class Placeholder : MonoBehaviour, IHideable
     {
         public Transform Transform => transform;
-        public bool IsVisible { get; }
+        public bool IsVisible { get; private set; }
         public Owner Owner { get; set; }
         public GameObject ParentObject { get; set; }
+
+        public event IHideable.VisibilityChangeEvent OnVisibilityChanged;
 
         private void Start()
         {
@@ -19,6 +21,13 @@ namespace GameDevTV.RTS.Player
 
         public void SetVisible(bool isVisible)
         {
+            if (IsVisible != isVisible)
+            {
+                OnVisibilityChanged?.Invoke(this, isVisible);
+            }
+
+            IsVisible = isVisible;
+
             if (isVisible && ParentObject == null)
             {
                 Destroy(gameObject);

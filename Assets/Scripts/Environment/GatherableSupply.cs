@@ -19,6 +19,8 @@ namespace GameDevTV.RTS.Environment
         private Renderer[] renderers = Array.Empty<Renderer>();
         private ParticleSystem[] particleSystems = Array.Empty<ParticleSystem>();
 
+        public event IHideable.VisibilityChangeEvent OnVisibilityChanged;
+
         private void Awake()
         {
             renderers = GetComponentsInChildren<Renderer>();
@@ -71,6 +73,7 @@ namespace GameDevTV.RTS.Environment
             if (isVisible == IsVisible) return;
 
             IsVisible = isVisible;
+            OnVisibilityChanged?.Invoke(this, isVisible);
 
             if (IsVisible)
             {
