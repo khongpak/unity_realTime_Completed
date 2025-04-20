@@ -149,7 +149,7 @@ namespace GameDevTV.RTS.Behavior
             {
                 animator.SetBool(AnimationConstants.ATTACK, false);
             }
-            if (navMeshAgent != null)
+            if (navMeshAgent != null && navMeshAgent.enabled && navMeshAgent.isOnNavMesh)
             {
                 navMeshAgent.isStopped = false;
             }

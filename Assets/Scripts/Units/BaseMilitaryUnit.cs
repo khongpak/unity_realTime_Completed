@@ -4,6 +4,13 @@ namespace GameDevTV.RTS.Units
     {
         public int TransportCapacityUsage => unitSO.TransportConfig.GetTransportCapacityUsage();
 
+        protected override void Start()
+        {
+            base.Start();
+
+            graphAgent.SetVariableValue("Command", UnitCommands.Attack);
+        }
+
         public void LoadInto(ITransporter transporter)
         {
             MoveTo(transporter.Transform);

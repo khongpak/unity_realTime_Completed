@@ -42,7 +42,7 @@ namespace GameDevTV.RTS.Units
             IDamageable damageable = null;
 
             if (graphAgent.GetVariable("TargetGameObject", out BlackboardVariable<GameObject> targetVariable)
-                && targetVariable != null)
+                && targetVariable != null && targetVariable.Value != null)
             {
                 endPosition = targetVariable.Value.transform.position + Vector3.up;
                 damageable = targetVariable.Value.GetComponent<IDamageable>();
@@ -78,7 +78,10 @@ namespace GameDevTV.RTS.Units
 
         private void ApplyDamage(Vector3 endPosition, IDamageable damageable)
         {
-            damageable?.TakeDamage(unitSO.AttackConfig.Damage);
+            if (damageable != null && damageable.Transform != null)
+            {
+                damageable?.TakeDamage(unitSO.AttackConfig.Damage);
+            }
 
             if (unitSO.AttackConfig.IsAreaOfEffect)
             {
@@ -105,8 +108,14 @@ namespace GameDevTV.RTS.Units
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            Destroy(grenade);
-            Destroy(explosionParticles.gameObject);
+            if (grenade != null)
+            {
+                Destroy(grenade);
+            }
+            if (explosionParticles != null)
+            {
+                Destroy(explosionParticles.gameObject);
+            }
         }
     }
 }
