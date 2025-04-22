@@ -205,7 +205,7 @@ namespace GameDevTV.RTS.Units
                 Transform originalRendererTransform = MainRenderer.transform;
                 GameObject culledGO = new ($"Culled {BuildingSO.Name} Visuals")
                 {
-                    layer = LayerMask.GetMask("TransparentFX"),
+                    layer = LayerMask.NameToLayer("Supplies"),
                     transform =
                     {
                         position = originalRendererTransform.position,
