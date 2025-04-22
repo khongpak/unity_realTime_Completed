@@ -17,7 +17,7 @@ TagManager:
   - Floor
   - Supplies
   - DamageableSensors
-  - 
+  - Minimap Only
   - World Bounds
   - Fog of War
   - Fog of War Vision

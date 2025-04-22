@@ -21,6 +21,7 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public AbstractUnitSO UnitSO { get; private set; }
         [SerializeField] protected DecalProjector decalProjector;
         [SerializeField] protected Transform VisionTransform;
+        [SerializeField] protected Renderer MinimapRenderer;
 
         public delegate void HealthUpdatedEvent(AbstractCommandable commandable, int lastHealth, int newHealth);
         public event HealthUpdatedEvent OnHealthUpdated;
@@ -30,6 +31,8 @@ namespace GameDevTV.RTS.Units
         private BaseCommand[] initialCommands;
         private Renderer[] renderers = Array.Empty<Renderer>();
         private ParticleSystem[] particleSystems = Array.Empty<ParticleSystem>();
+
+        private static int COLOR_ID = Shader.PropertyToID("_BaseColor");
 
         protected virtual void Awake()
         {
@@ -49,6 +52,11 @@ namespace GameDevTV.RTS.Units
             }
 
             initialCommands = AvailableCommands;
+
+            if (MinimapRenderer != null)
+            {
+                MinimapRenderer.material.SetColor(COLOR_ID, Owner == Owner.Player1 ? Color.green : Color.red);
+            }
 
             Bus<UpgradeResearchedEvent>.OnEvent[Owner] += HandleUpgradeResearched;
         }
