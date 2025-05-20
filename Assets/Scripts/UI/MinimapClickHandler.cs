@@ -1,5 +1,9 @@
+using GameDevTV.RTS.EventBus;
+using GameDevTV.RTS.Events;
+using GameDevTV.RTS.Units;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace GameDevTV.RTS.UI
 {
@@ -41,6 +45,10 @@ namespace GameDevTV.RTS.UI
             {
                 isMouseDownOnMinimap = false;
             }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                RaiseClickEvent(eventData.position, MouseButton.Right);
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData) => isMouseDownOnMinimap = false;
@@ -49,6 +57,14 @@ namespace GameDevTV.RTS.UI
         {
             if (!isMouseDownOnMinimap) return;
 
+            if (RaycastFromMousePosition(mousePosition, out RaycastHit hit))
+            {
+                cameraTarget.position = hit.point;
+            }
+        }
+
+        private bool RaycastFromMousePosition(Vector2 mousePosition, out RaycastHit hit)
+        {
             float widthMultiplier = minimapCamera.scaledPixelWidth / rectTransform.rect.width;
             float heightMultiplier = minimapCamera.scaledPixelHeight / rectTransform.rect.height;
 
@@ -58,9 +74,14 @@ namespace GameDevTV.RTS.UI
             );
 
             Ray cameraRay = minimapCamera.ScreenPointToRay(convertedMousePosition);
-            if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, floorMask))
+            return Physics.Raycast(cameraRay, out hit, float.MaxValue, floorMask);
+        }
+
+        private void RaiseClickEvent(Vector2 mousePosition, MouseButton button)
+        {
+            if (RaycastFromMousePosition(mousePosition, out RaycastHit hit))
             {
-                cameraTarget.position = hit.point;
+                Bus<MinimapClickEvent>.Raise(Owner.Player1, new MinimapClickEvent(button, hit));
             }
         }
     }

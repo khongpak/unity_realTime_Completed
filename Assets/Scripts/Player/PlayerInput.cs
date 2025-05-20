@@ -64,6 +64,7 @@ namespace GameDevTV.RTS.Player
             Bus<UnitSpawnEvent>.OnEvent[Owner.Player1] += HandleUnitSpawn;
             Bus<CommandSelectedEvent>.OnEvent[Owner.Player1] += HandleActionSelected;
             Bus<UnitDeathEvent>.OnEvent[Owner.Player1] += HandleUnitDeath;
+            Bus<MinimapClickEvent>.OnEvent[Owner.Player1] += HandleMinimapClick;
         }
 
         private void OnDestroy()
@@ -73,6 +74,15 @@ namespace GameDevTV.RTS.Player
             Bus<UnitSpawnEvent>.OnEvent[Owner.Player1] -= HandleUnitSpawn;
             Bus<CommandSelectedEvent>.OnEvent[Owner.Player1] -= HandleActionSelected;
             Bus<UnitDeathEvent>.OnEvent[Owner.Player1] -= HandleUnitDeath;
+            Bus<MinimapClickEvent>.OnEvent[Owner.Player1] -= HandleMinimapClick;
+        }
+
+        private void HandleMinimapClick(MinimapClickEvent evt)
+        {
+            if (evt.Button == MouseButton.Right)
+            {
+                IssueRightClickCommand(evt.Hit);
+            }
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
@@ -222,37 +232,42 @@ namespace GameDevTV.RTS.Player
 
         private void HandleRightClick()
         {
-            if (selectedUnits.Count == 0) { return; }
+            if (selectedUnits.Count == 0 || EventSystem.current.IsPointerOverGameObject()) { return; }
 
             Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             if (Mouse.current.rightButton.wasReleasedThisFrame
                 && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, interactableLayers | floorLayers))
             {
-                List<AbstractUnit> abstractUnits = new (selectedUnits.Count);
-                foreach(ISelectable selectable in selectedUnits)
+                IssueRightClickCommand(hit);
+            }
+        }
+
+        private void IssueRightClickCommand(RaycastHit hit)
+        {
+            List<AbstractUnit> abstractUnits = new(selectedUnits.Count);
+            foreach (ISelectable selectable in selectedUnits)
+            {
+                if (selectable is AbstractUnit unit)
                 {
-                    if (selectable is AbstractUnit unit)
-                    {
-                        abstractUnits.Add(unit);
-                    }
+                    abstractUnits.Add(unit);
                 }
+            }
 
-                for(int i = 0; i < abstractUnits.Count; i++)
+            for (int i = 0; i < abstractUnits.Count; i++)
+            {
+                CommandContext context = new(abstractUnits[i], hit, i, MouseButton.Right);
+
+                foreach (ICommand command in GetAvailableCommands(abstractUnits[i]))
                 {
-                    CommandContext context = new(abstractUnits[i], hit, i, MouseButton.Right);
-
-                    foreach(ICommand command in GetAvailableCommands(abstractUnits[i]))
+                    if (command.CanHandle(context))
                     {
-                        if (command.CanHandle(context))
+                        command.Handle(context);
+                        if (command.IsSingleUnitCommand)
                         {
-                            command.Handle(context);
-                            if (command.IsSingleUnitCommand)
-                            {
-                                return;
-                            }
-                            break;
+                            return;
                         }
+                        break;
                     }
                 }
             }
