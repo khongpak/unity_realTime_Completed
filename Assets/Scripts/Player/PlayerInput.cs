@@ -83,6 +83,10 @@ namespace GameDevTV.RTS.Player
             {
                 IssueRightClickCommand(evt.Hit);
             }
+            else if (evt.Button == MouseButton.Left)
+            {
+                ActivateAction(evt.Hit);
+            }
         }
 
         private void HandleUnitSelected(UnitSelectedEvent evt)
@@ -341,6 +345,7 @@ namespace GameDevTV.RTS.Player
                 }
             }
 
+            Bus<CommandIssuedEvent>.Raise(Owner.Player1, new CommandIssuedEvent(activeCommand));
             activeCommand = null;
         }
 

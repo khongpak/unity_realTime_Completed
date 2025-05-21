@@ -1,3 +1,4 @@
+using GameDevTV.RTS.Commands;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
 using GameDevTV.RTS.Units;
@@ -17,6 +18,7 @@ namespace GameDevTV.RTS.UI
 
         private bool isMouseDownOnMinimap;
         private RectTransform rectTransform;
+        private BaseCommand activeCommand;
 
         private void Awake()
         {
@@ -25,12 +27,25 @@ namespace GameDevTV.RTS.UI
             {
                 Debug.LogError("MinimapClickHandler is missing some references! Ensure minimapCamera and cameraTarget are assigned!");
                 enabled = false;
+                return;
             }
+
+            Bus<CommandSelectedEvent>.OnEvent[Owner.Player1] += HandleCommandSelected;
+            Bus<CommandIssuedEvent>.OnEvent[Owner.Player1] += HandleCommandIssued;
         }
+
+        private void OnDestroy()
+        {
+            Bus<CommandSelectedEvent>.OnEvent[Owner.Player1] -= HandleCommandSelected;
+            Bus<CommandIssuedEvent>.OnEvent[Owner.Player1] -= HandleCommandIssued;
+        }
+
+        private void HandleCommandSelected(CommandSelectedEvent evt) => activeCommand = evt.Command;
+        private void HandleCommandIssued(CommandIssuedEvent evt) => activeCommand = null;
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.button == PointerEventData.InputButton.Left && activeCommand == null)
             {
                 isMouseDownOnMinimap = true;
                 MoveVirtualCameraTarget(eventData.position);
@@ -44,6 +59,7 @@ namespace GameDevTV.RTS.UI
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 isMouseDownOnMinimap = false;
+                RaiseClickEvent(eventData.position, MouseButton.Left);
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
             {
