@@ -25,7 +25,7 @@ namespace GameDevTV.RTS.Units
 
         public delegate void HealthUpdatedEvent(AbstractCommandable commandable, int lastHealth, int newHealth);
         public event HealthUpdatedEvent OnHealthUpdated;
-        
+
         public event IHideable.VisibilityChangeEvent OnVisibilityChanged;
 
         private BaseCommand[] initialCommands;
@@ -51,7 +51,8 @@ namespace GameDevTV.RTS.Units
                 VisionTransform.gameObject.SetActive(Owner == Owner.Player1);
             }
 
-            initialCommands = AvailableCommands;
+            // initialCommands = AvailableCommands;
+            initialCommands = UnitSO.Prefab.GetComponent<AbstractCommandable>().AvailableCommands;
 
             if (MinimapRenderer != null)
             {

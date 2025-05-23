@@ -111,7 +111,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 1, z: 0}
@@ -149,6 +149,8 @@ MonoBehaviour:
   <BuildingSO>k__BackingField: {fileID: 0}
   primaryMaterial: {fileID: 2100000, guid: b35c532178876e94f917ff0196f65258, type: 2}
   navMeshObstacle: {fileID: 6234324901356792241}
+  collider: {fileID: 4212464277386913961}
+  cancelBuildingCommand: {fileID: 11400000, guid: 166415456c8d4cd4282c9686f36a509b, type: 2}
 --- !u!208 &6234324901356792241
 NavMeshObstacle:
   m_ObjectHideFlags: 0

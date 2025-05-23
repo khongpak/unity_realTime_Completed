@@ -31,7 +31,7 @@ namespace GameDevTV.RTS.UI.Containers
                 .Where(selectedUnit => selectedUnit is BaseBuilding)
                 .Cast<BaseBuilding>()
                 .ToHashSet();
-            
+
             foreach(BaseBuilding building in selectedBuildings)
             {
                 building.OnQueueUpdated += OnBuildingQueueUpdated;
@@ -59,17 +59,24 @@ namespace GameDevTV.RTS.UI.Containers
 
         private void RefreshButtons(HashSet<AbstractCommandable> selectedUnits)
         {
-            IEnumerable<BaseCommand> availableCommands = selectedUnits.Count > 0 
-                ? selectedUnits.ElementAt(0).AvailableCommands 
+            IEnumerable<BaseCommand> availableCommands = selectedUnits.Count > 0
+                ? selectedUnits.ElementAt(0).AvailableCommands
                 : Array.Empty<BaseCommand>();
 
-            availableCommands = availableCommands.Where(action => action.IsAvailable(
-                new CommandContext(
-                    Owner.Player1,
-                    selectedUnits.FirstOrDefault(),
-                    new RaycastHit()
-                )
-            ));
+            if (availableCommands != null)
+            {
+                availableCommands = availableCommands.Where(action => action.IsAvailable(
+                    new CommandContext(
+                        Owner.Player1,
+                        selectedUnits.FirstOrDefault(),
+                        new RaycastHit()
+                    )
+                ));
+            }
+            else
+            {
+                availableCommands = Array.Empty<BaseCommand>();
+            }
 
             for(int i = 1; i<selectedUnits.Count; i++)
             {
