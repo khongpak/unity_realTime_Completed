@@ -10,6 +10,8 @@ namespace GameDevTV.RTS.Player
     [RequireComponent(typeof(Camera))]
     public class FogVisibilityManager : MonoBehaviour
     {
+        public static FogVisibilityManager Instance { get; private set; }
+
         private Camera fogOfWarCamera;
 
         private Texture2D visionTexture;
@@ -19,6 +21,14 @@ namespace GameDevTV.RTS.Player
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Debug.LogError($"Multiple FogVisibilityManagers cannot exist! Disabling {name}!");
+                enabled = false;
+                return;
+            }
+            Instance = this;
+
             fogOfWarCamera = GetComponent<Camera>();
             visionTexture = new Texture2D(fogOfWarCamera.targetTexture.width, fogOfWarCamera.targetTexture.height);
             textureRect = new Rect(0, 0, visionTexture.width, visionTexture.height);
@@ -61,6 +71,13 @@ namespace GameDevTV.RTS.Player
             }
         }
 
+        public bool IsVisible(Vector3 position)
+        {
+            Vector3 screenPoint = fogOfWarCamera.WorldToScreenPoint(position);
+            Color visibilityColor = visionTexture.GetPixel((int)screenPoint.x, (int)screenPoint.y);
+            return visibilityColor.r > 0.9f;
+        }
+
         private void ReadPixelsToVisionTexture()
         {
             RenderTexture previousRenderTexture = RenderTexture.active;
@@ -72,9 +89,7 @@ namespace GameDevTV.RTS.Player
 
         private void SetUnitVisibilityStatus(IHideable hideable)
         {
-            Vector3 screenPoint = fogOfWarCamera.WorldToScreenPoint(hideable.Transform.position);
-            Color visibilityColor = visionTexture.GetPixel((int)screenPoint.x, (int)screenPoint.y);
-            hideable.SetVisible(visibilityColor.r > 0.9f);
+            hideable.SetVisible(IsVisible(hideable.Transform.position));
         }
 
         private void HandleUnitSpawn(UnitSpawnEvent evt)
