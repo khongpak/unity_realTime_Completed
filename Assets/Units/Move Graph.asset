@@ -47,6 +47,12 @@ MonoBehaviour:
         BlackboardReference:
           rid: 1136247005849583642
         BlackboardGroupReferences: []
+        m_ActiveNodes: []
+        m_NodesToTick: []
+        m_NodesToEnd:
+          rid: 2426434840495391073
+        m_EndedNodes:
+          rid: 2426434840495391074
         m_VersionTimestamp: 638730768761550392
     - rid: 1136247005849583641
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
@@ -61,6 +67,7 @@ MonoBehaviour:
         m_Child:
           rid: 1136247005849583643
         Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
     - rid: 1136247005849583642
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -248,6 +255,12 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
+    - rid: 2426434840495391073
+      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
+      data: 
+    - rid: 2426434840495391074
+      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
+      data: 
 --- !u!114 &-777959550840699345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +271,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Move Graph Blackboard Editor
+  m_Name: Move Graph Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638730768713801669
   AssetID:
@@ -322,6 +335,7 @@ MonoBehaviour:
   - rid: 1136246808885854304
   m_VersionTimestamp: 638730768761550392
   m_DebugInfo: {fileID: -6122282589062855206}
+  m_RuntimeGraph: {fileID: -5328308619305698752}
   AssetID:
     m_Value0: 14126325762194356224
     m_Value1: 12807293273424055275
@@ -410,8 +424,10 @@ MonoBehaviour:
     Variables: []
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: 793043622299880630}
   m_CommandBuffer:
     m_Commands: []
+  m_SubgraphsInfo: []
   references:
     version: 2
     RefIds:
@@ -435,6 +451,7 @@ MonoBehaviour:
           m_Value1: 11549843281177505721
         m_FieldValues: []
         Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
     - rid: 1136246808459871098
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -1060,7 +1077,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Move Graph Blackboard Editor
+  m_Name: Move Graph Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 14126325762194356224

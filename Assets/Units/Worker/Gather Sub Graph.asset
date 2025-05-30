@@ -23,7 +23,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Gather Sub Graph Blackboard Editor
+  m_Name: Gather Sub Graph Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638707177241641024
   AssetID:
@@ -205,6 +205,12 @@ MonoBehaviour:
         BlackboardReference:
           rid: 1136246734334460745
         BlackboardGroupReferences: []
+        m_ActiveNodes: []
+        m_NodesToTick: []
+        m_NodesToEnd:
+          rid: 2426434840495391077
+        m_EndedNodes:
+          rid: 2426434840495391078
         m_VersionTimestamp: 638728116981415309
     - rid: 1136246734334460744
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
@@ -219,6 +225,7 @@ MonoBehaviour:
         m_Child:
           rid: 1136246734334460746
         Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
     - rid: 1136246734334460745
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -633,6 +640,12 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: 0.25
+    - rid: 2426434840495391077
+      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
+      data: 
+    - rid: 2426434840495391078
+      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
+      data: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +691,7 @@ MonoBehaviour:
   - rid: 1136246734334460673
   m_VersionTimestamp: 638728116981415309
   m_DebugInfo: {fileID: -6011090878073345632}
+  m_RuntimeGraph: {fileID: -1864375158808321870}
   AssetID:
     m_Value0: 1461098883854183954
     m_Value1: 2975354271620428969
@@ -880,8 +894,10 @@ MonoBehaviour:
     Variables: []
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: 1344151987945847578}
   m_CommandBuffer:
     m_Commands: []
+  m_SubgraphsInfo: []
   references:
     version: 2
     RefIds:
@@ -905,6 +921,7 @@ MonoBehaviour:
           m_Value1: 11549843281177505721
         m_FieldValues: []
         Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
     - rid: 376035756944916481
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -2695,7 +2712,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Gather Sub Graph Blackboard Editor
+  m_Name: Gather Sub Graph Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 1461098883854183954

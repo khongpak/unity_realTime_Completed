@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Building Sub Graph Blackboard Editor
+  m_Name: Building Sub Graph Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 10667897801851109447
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Building Sub Graph Blackboard Editor
+  m_Name: Building Sub Graph Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638709659981591780
   AssetID:
@@ -379,6 +379,12 @@ MonoBehaviour:
         BlackboardReference:
           rid: 376035822186005307
         BlackboardGroupReferences: []
+        m_ActiveNodes: []
+        m_NodesToTick: []
+        m_NodesToEnd:
+          rid: 2426434840495391075
+        m_EndedNodes:
+          rid: 2426434840495391076
         m_VersionTimestamp: 638709659980716540
     - rid: 376035822186005306
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
@@ -393,6 +399,7 @@ MonoBehaviour:
         m_Child:
           rid: 376035822186005308
         Repeat: 0
+        AllowMultipleRepeatsPerTick: 0
     - rid: 376035822186005307
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -853,6 +860,7 @@ MonoBehaviour:
           rid: 376035822186005331
         m_Child:
           rid: 376035822186005345
+        m_AllowMultipleRepeatsPerTick: 0
     - rid: 376035822186005342
       type: {class: VariableValueChangedCondition, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1052,6 +1060,12 @@ MonoBehaviour:
         m_Value: {fileID: 0}
         m_LinkedVariable:
           rid: 376035822186005313
+    - rid: 2426434840495391075
+      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
+      data: 
+    - rid: 2426434840495391076
+      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
+      data: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,6 +1120,7 @@ MonoBehaviour:
   - rid: 376035822120993501
   m_VersionTimestamp: 638709659980716540
   m_DebugInfo: {fileID: 8197784061110083184}
+  m_RuntimeGraph: {fileID: -428995979351933036}
   AssetID:
     m_Value0: 10667897801851109447
     m_Value1: 9031412282931658202
@@ -1330,7 +1345,7 @@ MonoBehaviour:
       m_Value1: 2191282456596108218
     Variables: []
     NamedChildren: []
-  - Name: Wait
+  - Name: Wait (Seconds)
     Story: Wait for [SecondsToWait] seconds
     RuntimeTypeID:
       m_Value0: 7729581452106168333
@@ -1371,8 +1386,10 @@ MonoBehaviour:
     Variables: []
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: -7625510552395983732}
   m_CommandBuffer:
     m_Commands: []
+  m_SubgraphsInfo: []
   references:
     version: 2
     RefIds:
@@ -1396,6 +1413,7 @@ MonoBehaviour:
           m_Value1: 11549843281177505721
         m_FieldValues: []
         Repeat: 0
+        AllowMultipleRepeatsPerTick: 0
     - rid: 376035757162759088
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -3925,6 +3943,7 @@ MonoBehaviour:
           m_Value0: 3696095273264312494
           m_Value1: 14191201703811421854
         m_FieldValues: []
+        AllowMultipleRepeatsPerTick: 0
         <ConditionModels>k__BackingField: []
         <RequiresAllConditionsTrue>k__BackingField: 0
         <ShouldTruncateNodeUI>k__BackingField: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
-  m_Name: Attacking Graph Blackboard Editor
+  m_Name: Attacking Graph Blackboard
   m_EditorClassIdentifier: 
   AssetID:
     m_Value0: 305015699057156406
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
-  m_Name: Attacking Graph Blackboard Editor
+  m_Name: Attacking Graph Blackboard
   m_EditorClassIdentifier: 
   VersionTimestamp: 638722120618115484
   AssetID:
@@ -169,6 +169,7 @@ MonoBehaviour:
   - rid: 1136246527933284890
   m_VersionTimestamp: 638722120618132455
   m_DebugInfo: {fileID: 4485949449868393563}
+  m_RuntimeGraph: {fileID: 7068402386676417086}
   AssetID:
     m_Value0: 305015699057156406
     m_Value1: 13514589722342445544
@@ -246,8 +247,10 @@ MonoBehaviour:
       Tooltip: 
     NamedChildren: []
   m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: -6881026759224001220}
   m_CommandBuffer:
     m_Commands: []
+  m_SubgraphsInfo: []
   references:
     version: 2
     RefIds:
@@ -271,6 +274,7 @@ MonoBehaviour:
           m_Value1: 11549843281177505721
         m_FieldValues: []
         Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
     - rid: 1136246444492850062
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -906,6 +910,12 @@ MonoBehaviour:
         BlackboardReference:
           rid: 1136247005689152475
         BlackboardGroupReferences: []
+        m_ActiveNodes: []
+        m_NodesToTick: []
+        m_NodesToEnd:
+          rid: 2426434840495391071
+        m_EndedNodes:
+          rid: 2426434840495391072
         m_VersionTimestamp: 638722120618132455
     - rid: 1136247005689152474
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
@@ -920,6 +930,7 @@ MonoBehaviour:
         m_Child:
           rid: 1136247005689152476
         Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
     - rid: 1136247005689152475
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1084,3 +1095,9 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: {fileID: 0}
+    - rid: 2426434840495391071
+      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
+      data: 
+    - rid: 2426434840495391072
+      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
+      data: 
