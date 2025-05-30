@@ -55,6 +55,12 @@ namespace GameDevTV.RTS.Units
                     upgrade.Apply(unitSO);
                 }
             }
+
+            Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
+                Owner,
+                UnitSO.PopulationConfig.PopulationCost,
+                UnitSO.PopulationConfig.PopulationSupply
+            ));
         }
 
         public void MoveTo(Vector3 position)
@@ -133,6 +139,14 @@ namespace GameDevTV.RTS.Units
         {
             base.OnDestroy();
             Bus<UnitDeathEvent>.Raise(Owner, new UnitDeathEvent(this));
+            if (enabled)
+            {
+                Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
+                    Owner,
+                    -UnitSO.PopulationConfig.PopulationCost,
+                    -UnitSO.PopulationConfig.PopulationSupply
+                ));
+            }
         }
     }
 }

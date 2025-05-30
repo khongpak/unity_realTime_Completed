@@ -68,6 +68,12 @@ namespace GameDevTV.RTS.Units
             {
                 collider.enabled = true;
             }
+
+            Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
+                Owner,
+                UnitSO.PopulationConfig.PopulationCost,
+                UnitSO.PopulationConfig.PopulationSupply
+            ));
         }
 
         public void BuildUnlockable(UnlockableSO unlockable)
@@ -221,6 +227,11 @@ namespace GameDevTV.RTS.Units
             base.OnDestroy();
             Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
             Bus<BuildingDeathEvent>.Raise(Owner, new BuildingDeathEvent(Owner, this));
+            Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
+                Owner,
+                -UnitSO.PopulationConfig.PopulationCost,
+                -UnitSO.PopulationConfig.PopulationSupply
+            ));
         }
 
         protected override void OnGainVisibility()

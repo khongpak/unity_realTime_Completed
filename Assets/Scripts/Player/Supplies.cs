@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace GameDevTV.RTS.Player
 {
+    [DefaultExecutionOrder(-1)]
     public class Supplies : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI mineralsText;
@@ -39,11 +40,21 @@ namespace GameDevTV.RTS.Player
             }
 
             Bus<SupplyEvent>.RegisterForAll(HandleSupplyEvent);
+            Bus<PopulationEvent>.RegisterForAll(HandlePopulationEvent);
         }
 
         private void OnDestroy()
         {
             Bus<SupplyEvent>.UnregisterForAll(HandleSupplyEvent);
+            Bus<PopulationEvent>.UnregisterForAll(HandlePopulationEvent);
+        }
+        private void HandlePopulationEvent(PopulationEvent evt)
+        {
+            Population[evt.Owner] += evt.PopulationChange;
+            PopulationLimit[evt.Owner] += evt.PopulationLimitChange;
+            Debug.Log($"Population Event for {evt.Owner}." +
+                      $"Supply Change ({evt.PopulationChange} / {evt.PopulationLimitChange}). " +
+                      $"New Totals: ({Population[evt.Owner]} / {PopulationLimit[evt.Owner]})");
         }
 
         private void HandleSupplyEvent(SupplyEvent evt)
