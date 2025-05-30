@@ -12,7 +12,7 @@ namespace GameDevTV.RTS.Commands
         private int maxUnitsOnLayer = 1;
         private float circleRadius = 0;
         private float radialOffset = 0;
-        
+
         public override bool CanHandle(CommandContext context)
         {
             return context.Commandable is AbstractUnit;
@@ -29,6 +29,17 @@ namespace GameDevTV.RTS.Commands
                 return;
             }
 
+            Vector3 targetPosition = GetSmartMoveLocation(context);
+
+            unit.MoveTo(targetPosition);
+        }
+
+        public override bool IsLocked(CommandContext context) => false;
+
+        public Vector3 GetSmartMoveLocation(CommandContext context)
+        {
+            if (context.Commandable is not AbstractUnit unit) return context.Hit.point;
+
             if (context.UnitIndex == 0)
             {
                 unitsOnLayer = 0;
@@ -36,14 +47,13 @@ namespace GameDevTV.RTS.Commands
                 circleRadius = 0;
                 radialOffset = 0;
             }
-            
+
             Vector3 targetPosition = new(
                 context.Hit.point.x + circleRadius * Mathf.Cos(radialOffset * unitsOnLayer),
                 context.Hit.point.y,
                 context.Hit.point.z + circleRadius * Mathf.Sin(radialOffset * unitsOnLayer)
             );
 
-            unit.MoveTo(targetPosition);
             unitsOnLayer++;
 
             if (unitsOnLayer >= maxUnitsOnLayer)
@@ -53,8 +63,8 @@ namespace GameDevTV.RTS.Commands
                 maxUnitsOnLayer = Mathf.FloorToInt(2 * Mathf.PI * circleRadius / (unit.AgentRadius * 2));
                 radialOffset = 2 * Mathf.PI / maxUnitsOnLayer;
             }
-        }
 
-        public override bool IsLocked(CommandContext context) => false;
+            return targetPosition;
+        }
     }
 }

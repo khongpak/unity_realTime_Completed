@@ -6,6 +6,8 @@ namespace GameDevTV.RTS.Commands
     [CreateAssetMenu(fileName = "Attack", menuName = "Units/Commands/Attack", order = 99)]
     public class AttackCommand : BaseCommand
     {
+        [SerializeField] private MoveCommand MoveCommand;
+
         public override bool CanHandle(CommandContext context)
         {
             return context.Commandable is IAttacker && context.Hit.collider != null;
@@ -17,6 +19,10 @@ namespace GameDevTV.RTS.Commands
             if (context.Hit.collider.TryGetComponent(out IDamageable damageable) && IsHitColliderVisible(context))
             {
                 attacker.Attack(damageable);
+            }
+            else if (MoveCommand != null)
+            {
+                attacker.Attack(MoveCommand.GetSmartMoveLocation(context));
             }
             else
             {
