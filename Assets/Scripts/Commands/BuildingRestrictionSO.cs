@@ -1,3 +1,4 @@
+using GameDevTV.RTS.Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,7 +26,8 @@ namespace GameDevTV.RTS.Commands
                 OverlapStyle.Sphere => Physics.OverlapSphereNonAlloc(position, Radius, hitColliders, LayerMask),
                 OverlapStyle.Box => Physics.OverlapBoxNonAlloc(
                     position, Extents, hitColliders, Quaternion.identity, LayerMask
-                )
+                ),
+                OverlapStyle.Vision => FogVisibilityManager.Instance.IsVisible(position) ? 0 : 1
             };
 
             if (MustBeFullyOnNavmesh)
@@ -46,6 +48,9 @@ namespace GameDevTV.RTS.Commands
 
         private bool IsFullyOnNavMesh(Vector3 position, NavMeshQueryFilter queryFilter)
         {
+            
+
+
             bool isOnNavMesh = NavMesh.SamplePosition(
                                 position + new Vector3(Extents.x, 0, Extents.z),
                                 out NavMeshHit _, NavMeshTolerance, queryFilter);
@@ -64,7 +69,18 @@ namespace GameDevTV.RTS.Commands
         public enum OverlapStyle
         {
             Sphere,
-            Box
+            Box,
+            Vision
+        }
+
+        public class Singleton : MonoBehaviour
+        {
+            public static Singleton Instance { get; private set; }
+
+            public void DoSomething()
+            {
+                
+            }
         }
     }
 }

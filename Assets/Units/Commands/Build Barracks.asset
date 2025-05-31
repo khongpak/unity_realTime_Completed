@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32194d70ac3bc0647b55685549f2c196, type: 3}
   m_Name: Build Barracks
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   <Name>k__BackingField: Barracks
   <Hotkey>k__BackingField: 16
   <Icon>k__BackingField: {fileID: 21300000, guid: 05140302c0774b946a72e885e4c597e1, type: 3}
@@ -21,4 +21,5 @@ MonoBehaviour:
   <GhostPrefab>k__BackingField: {fileID: 5658173951633255336, guid: e48fa0a70b36ccc46a185ecfc85fca3a, type: 3}
   <Restrictions>k__BackingField:
   - {fileID: 11400000, guid: 56b38c40a3360594cb05105a71758f47, type: 2}
+  - {fileID: 11400000, guid: 2814dec090a48c940a570d7e5f04cd52, type: 2}
   <Building>k__BackingField: {fileID: 11400000, guid: 88f39542ca9a1044296b78a2433d8468, type: 2}

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32194d70ac3bc0647b55685549f2c196, type: 3}
   m_Name: Build CommandPost
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   <Name>k__BackingField: Command Post
   <Hotkey>k__BackingField: 17
   <Icon>k__BackingField: {fileID: 21300000, guid: dfebbdf93f58d764ab9aa4d54edd629e, type: 3}
@@ -22,4 +22,5 @@ MonoBehaviour:
   <Restrictions>k__BackingField:
   - {fileID: 11400000, guid: 56b38c40a3360594cb05105a71758f47, type: 2}
   - {fileID: 11400000, guid: 25286824198b0cc4694b8a4549081e63, type: 2}
+  - {fileID: 11400000, guid: 2814dec090a48c940a570d7e5f04cd52, type: 2}
   <Building>k__BackingField: {fileID: 11400000, guid: 2e813987328e67942957464bddd33480, type: 2}
