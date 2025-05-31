@@ -58,7 +58,7 @@ namespace GameDevTV.RTS.Units
 
             Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
                 Owner,
-                UnitSO.PopulationConfig.PopulationCost,
+                0,
                 UnitSO.PopulationConfig.PopulationSupply
             ));
         }

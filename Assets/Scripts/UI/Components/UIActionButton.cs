@@ -22,6 +22,7 @@ namespace GameDevTV.RTS.UI.Components
 
         private static readonly string MINERALS_FORMAT = "{0} <color=#00ACFF>Minerals</color>. ";
         private static readonly string GAS_FORMAT = "{0} <color=#3BEA60>Gas</color>. ";
+        private static readonly string POPULATION_FORMAT = "{0} <color=#eeeeee>Population</color>. ";
         private static readonly string DEPENDENCY_FORMAT_NO_COMMA = "<color=#AC0000>{0}</color>.";
         private static readonly string DEPENDENCY_FORMAT_COMMA = "<color=#AC0000>{0}</color>, ";
 
@@ -102,9 +103,12 @@ namespace GameDevTV.RTS.UI.Components
             string tooltipText = command.Name + "\n";
 
             SupplyCostSO supplyCost = null;
+            PopulationConfigSO populationConfig = null;
+
             if (command is BuildUnitCommand unitCommand)
             {
                 supplyCost = unitCommand.Unit.Cost;
+                populationConfig = unitCommand.Unit.PopulationConfig;
             }
             else if (command is BuildBuildingCommand buildingCommand)
             {
@@ -121,6 +125,11 @@ namespace GameDevTV.RTS.UI.Components
                 {
                     tooltipText += string.Format(GAS_FORMAT, supplyCost.Gas);
                 }
+            }
+
+            if (populationConfig != null && populationConfig.PopulationCost > 0)
+            {
+                tooltipText += string.Format(POPULATION_FORMAT, populationConfig.PopulationCost);
             }
 
             if (command.IsLocked(new CommandContext(Owner.Player1, null, new RaycastHit()))

@@ -17,14 +17,15 @@ namespace GameDevTV.RTS.Commands
 
         public override void Handle(CommandContext context)
         {
-            if (!HasEnoughSupplies(context)) return;
-
             BaseBuilding building = (BaseBuilding)context.Commandable;
+
+            if (!HasEnoughSupplies(context) || (building.QueueSize == 0 && !HasEnoughSupplies(context))) return;
+
             building.BuildUnlockable(Unit);
         }
 
         public override bool IsLocked(CommandContext context) =>
-            !HasEnoughSupplies(context) || !Unit.TechTree.IsUnlocked(context.Owner, Unit);
+            !HasEnoughSupplies(context) || !Unit.TechTree.IsUnlocked(context.Owner, Unit) || (context.Commandable is BaseBuilding building && building.QueueSize == 0 && !HasEnoughPopulation(context));
 
         public UnlockableSO[] GetUnmetDependencies(Owner owner)
         {
@@ -34,6 +35,15 @@ namespace GameDevTV.RTS.Commands
         private bool HasEnoughSupplies(CommandContext context)
         {
             return Unit.Cost.Minerals <= Supplies.Minerals[context.Owner] && Unit.Cost.Gas <= Supplies.Gas[context.Owner];
+        }
+
+        private bool HasEnoughPopulation(CommandContext context)
+        {
+            if (Unit.PopulationConfig == null) return true;
+
+            int newPopulation = Unit.PopulationConfig.PopulationCost + Supplies.Population[context.Owner];
+
+            return newPopulation <= Supplies.PopulationLimit[context.Owner];
         }
     }
 }

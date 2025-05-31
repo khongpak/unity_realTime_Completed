@@ -24,6 +24,9 @@ namespace GameDevTV.RTS.Player
         public static Dictionary<Owner, int> Population { get; private set; }
         public static Dictionary<Owner, int> PopulationLimit { get; private set; }
 
+        private const string POPULATION_TEXT_FORMAT = "{0} / {1}";
+        private const string ERROR_POPULATION_TEXT_FORMAT = "<color=#ac0000>{0}</color> / {1}";
+
         private void Awake()
         {
             Minerals = new Dictionary<Owner, int>();
@@ -52,9 +55,19 @@ namespace GameDevTV.RTS.Player
         {
             Population[evt.Owner] += evt.PopulationChange;
             PopulationLimit[evt.Owner] += evt.PopulationLimitChange;
-            Debug.Log($"Population Event for {evt.Owner}." +
-                      $"Supply Change ({evt.PopulationChange} / {evt.PopulationLimitChange}). " +
-                      $"New Totals: ({Population[evt.Owner]} / {PopulationLimit[evt.Owner]})");
+            if (evt.Owner == Owner.Player1)
+            {
+                int currentPopulation = Population[evt.Owner];
+                int maxPopulation = PopulationLimit[evt.Owner];
+                if (currentPopulation <= maxPopulation)
+                {
+                    populationText.SetText(string.Format(POPULATION_TEXT_FORMAT, currentPopulation, maxPopulation));
+                }
+                else
+                {
+                    populationText.SetText(string.Format(ERROR_POPULATION_TEXT_FORMAT, currentPopulation, maxPopulation));
+                }
+            }
         }
 
         private void HandleSupplyEvent(SupplyEvent evt)

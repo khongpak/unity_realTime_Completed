@@ -109,9 +109,19 @@ namespace GameDevTV.RTS.Units
             UnlockableSO unlockableSO = buildingQueue[index];
             Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unlockableSO.Cost.Minerals, unlockableSO.Cost.MineralsSO));
             Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(Owner, unlockableSO.Cost.Gas, unlockableSO.Cost.GasSO));
+
             buildingQueue.RemoveAt(index);
             if (index == 0)
             {
+                if (unlockableSO is AbstractUnitSO unitSO)
+                {
+                    Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
+                        Owner,
+                        -unitSO.PopulationConfig.PopulationCost,
+                        0
+                    ));
+                }
+
                 StopAllCoroutines();
 
                 if (buildingQueue.Count > 0)
@@ -201,10 +211,28 @@ namespace GameDevTV.RTS.Units
                 CurrentQueueStartTime = Time.time;
                 OnQueueUpdated?.Invoke(buildingQueue.ToArray());
 
+                bool isUnit = SOBeingBuilt is AbstractUnitSO;
+                if (isUnit)
+                {
+                    AbstractUnitSO unitSO = SOBeingBuilt as AbstractUnitSO;
+                    if (Supplies.Population[Owner] + unitSO.PopulationConfig.PopulationCost > Supplies.PopulationLimit[Owner])
+                    {
+                        yield return null;
+                        continue;
+                    }
+
+                    Bus<PopulationEvent>.Raise(Owner, new PopulationEvent(
+                        Owner,
+                        unitSO.PopulationConfig.PopulationCost,
+                        0
+                    ));
+                }
+
                 yield return new WaitForSeconds(SOBeingBuilt.BuildTime);
 
-                if (SOBeingBuilt is AbstractUnitSO unitSO)
+                if (isUnit)
                 {
+                    AbstractUnitSO unitSO = SOBeingBuilt as AbstractUnitSO;
                     GameObject instance = Instantiate(unitSO.Prefab, transform.position, Quaternion.identity);
                     if (instance.TryGetComponent(out AbstractCommandable commandable))
                     {
