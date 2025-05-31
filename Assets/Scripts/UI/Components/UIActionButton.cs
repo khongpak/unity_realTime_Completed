@@ -6,6 +6,7 @@ using GameDevTV.RTS.Units;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace GameDevTV.RTS.UI.Components
@@ -19,9 +20,12 @@ namespace GameDevTV.RTS.UI.Components
         private bool isActive;
         private RectTransform rectTransform;
         private Button button;
+        private Key hotkey;
+        private bool wasAssignedThisFrame;
 
         private static readonly string MINERALS_FORMAT = "{0} <color=#00ACFF>Minerals</color>. ";
         private static readonly string GAS_FORMAT = "{0} <color=#3BEA60>Gas</color>. ";
+        private static readonly string HOTKEY_FORMAT = "(<color=#FFFF00>{0}</color>)\n";
         private static readonly string POPULATION_FORMAT = "{0} <color=#eeeeee>Population</color>. ";
         private static readonly string DEPENDENCY_FORMAT_NO_COMMA = "<color=#AC0000>{0}</color>.";
         private static readonly string DEPENDENCY_FORMAT_COMMA = "<color=#AC0000>{0}</color>, ";
@@ -33,6 +37,16 @@ namespace GameDevTV.RTS.UI.Components
             Disable();
         }
 
+        private void Update()
+        {
+            if (button.interactable && !wasAssignedThisFrame && hotkey != Key.None && Keyboard.current[hotkey].wasReleasedThisFrame)
+            {
+                button.onClick?.Invoke();
+            }
+
+            wasAssignedThisFrame = false;
+        }
+
         public void EnableFor(BaseCommand command, IEnumerable<AbstractCommandable> selectedUnits, UnityAction onClick)
         {
             button.onClick.RemoveAllListeners();
@@ -40,6 +54,8 @@ namespace GameDevTV.RTS.UI.Components
             button.interactable = selectedUnits.Any((unit) => !command.IsLocked(new CommandContext(unit, new RaycastHit())));
             button.onClick.AddListener(onClick);
             isActive = true;
+            hotkey = command.Hotkey;
+            wasAssignedThisFrame = true;
 
             if (tooltip != null)
             {
@@ -100,7 +116,16 @@ namespace GameDevTV.RTS.UI.Components
 
         private string GetTooltipText(BaseCommand command)
         {
-            string tooltipText = command.Name + "\n";
+            string tooltipText = command.Name;
+
+            if (command.Hotkey != Key.None)
+            {
+                tooltipText += string.Format(HOTKEY_FORMAT, command.Hotkey);
+            }
+            else
+            {
+                tooltipText += "\n";
+            }
 
             SupplyCostSO supplyCost = null;
             PopulationConfigSO populationConfig = null;
