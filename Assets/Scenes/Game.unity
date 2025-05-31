@@ -8554,6 +8554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armor Icon
       objectReference: {fileID: 0}
+    - target: {fileID: 52138930813371874, guid: 5914b11ece63bbe4c8e5405f73f35210, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8810813777082331533, guid: 5914b11ece63bbe4c8e5405f73f35210, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -20967,6 +20971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: {fileID: 1266750878}
+  damageIcon: {fileID: 2082407633}
 --- !u!1001 &1316927690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37005,6 +37010,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5004720826620963258, guid: 9cd21bf41652fdf49ba05bc10fa4d90d, type: 3}
   m_PrefabInstance: {fileID: 2076502492}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2082407633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4575459339529092600, guid: 5914b11ece63bbe4c8e5405f73f35210, type: 3}
+  m_PrefabInstance: {fileID: 618150348158670752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3662934f2924a52953893ff59bbf162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2083957156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38827,9 +38843,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Damage Icon
       objectReference: {fileID: 0}
-    - target: {fileID: 391636707333232417, guid: 5914b11ece63bbe4c8e5405f73f35210, type: 3}
-      propertyPath: Type
-      value: 1
+    - target: {fileID: 1679870657894237570, guid: 5914b11ece63bbe4c8e5405f73f35210, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8810813777082331533, guid: 5914b11ece63bbe4c8e5405f73f35210, type: 3}
       propertyPath: m_Pivot.x
