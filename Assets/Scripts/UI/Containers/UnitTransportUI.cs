@@ -8,7 +8,7 @@ namespace GameDevTV.RTS.UI.Containers
 {
     public class UnitTransportUI : MonoBehaviour, IUIElement<ITransporter>
     {
-        [SerializeField] private UIUnitButton[] loadedUnitButtons;
+        [SerializeField] private UITransportableUnitButton[] loadedUnitButtons;
         [SerializeField] private TextMeshProUGUI capacityText;
 
         private ITransporter transporter;
@@ -47,7 +47,7 @@ namespace GameDevTV.RTS.UI.Containers
         public void Disable()
         {
             gameObject.SetActive(false);
-            foreach(UIUnitButton button in loadedUnitButtons)
+            foreach(UITransportableUnitButton button in loadedUnitButtons)
             {
                 button.Disable();
             }

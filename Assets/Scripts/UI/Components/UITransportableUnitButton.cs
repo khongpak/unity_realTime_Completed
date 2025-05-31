@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace GameDevTV.RTS.UI.Components
 {
     [RequireComponent(typeof(Button))]
-    public class UIUnitButton : MonoBehaviour, IUIElement<ITransportable, UnityAction>
+    public class UITransportableUnitButton : MonoBehaviour, IUIElement<ITransportable, UnityAction>
     {
         [SerializeField] private Image icon;
 
@@ -17,7 +17,7 @@ namespace GameDevTV.RTS.UI.Components
             button = GetComponent<Button>();
             Disable();
         }
-        
+
         public void EnableFor(ITransportable item, UnityAction callback)
         {
             button.onClick.RemoveAllListeners();
