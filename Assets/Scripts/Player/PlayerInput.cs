@@ -252,20 +252,20 @@ namespace GameDevTV.RTS.Player
 
         private void IssueRightClickCommand(RaycastHit hit)
         {
-            List<AbstractUnit> abstractUnits = new(selectedUnits.Count);
+            List<AbstractCommandable> abstractCommandables = new(selectedUnits.Count);
             foreach (ISelectable selectable in selectedUnits)
             {
-                if (selectable is AbstractUnit unit)
+                if (selectable is AbstractCommandable unit)
                 {
-                    abstractUnits.Add(unit);
+                    abstractCommandables.Add(unit);
                 }
             }
 
-            for (int i = 0; i < abstractUnits.Count; i++)
+            for (int i = 0; i < abstractCommandables.Count; i++)
             {
-                CommandContext context = new(abstractUnits[i], hit, i, MouseButton.Right);
+                CommandContext context = new(abstractCommandables[i], hit, i, MouseButton.Right);
 
-                foreach (ICommand command in GetAvailableCommands(abstractUnits[i]))
+                foreach (ICommand command in GetAvailableCommands(abstractCommandables[i]))
                 {
                     if (command.CanHandle(context))
                     {
@@ -282,7 +282,7 @@ namespace GameDevTV.RTS.Player
             ShowClick(hit.point);
         }
 
-        private List<BaseCommand> GetAvailableCommands(AbstractUnit unit)
+        private List<BaseCommand> GetAvailableCommands(AbstractCommandable unit)
         {
             OverrideCommandsCommand[] overrideCommandsCommands = unit.AvailableCommands
                 .Where(command => command is OverrideCommandsCommand)

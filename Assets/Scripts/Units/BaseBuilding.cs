@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameDevTV.RTS.Commands;
+using GameDevTV.RTS.Environment;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
 using GameDevTV.RTS.Player;
@@ -22,6 +23,30 @@ namespace GameDevTV.RTS.Units
             BuildingProgress.BuildingState.Destroyed, 0, 0
         );
         [field: SerializeField] public BuildingSO BuildingSO { get; private set; }
+
+        private RallyPoint rallyPoint;
+
+        public RallyPoint RallyPoint
+        {
+            get => rallyPoint;
+            set
+            {
+                if (rallyPointLineRenderer != null)
+                {
+                    rallyPointLineRenderer.enabled = value.IsSet;
+                    rallyPointLineRenderer.positionCount = 2;
+                    rallyPointLineRenderer.SetPositions(new []
+                    {
+                        transform.position,
+                        value.Point
+                    });
+                }
+
+                rallyPoint = value;
+            }
+        }
+
+        [SerializeField] private LineRenderer rallyPointLineRenderer;
         [SerializeField] private Material primaryMaterial;
         [SerializeField] private NavMeshObstacle navMeshObstacle;
         [SerializeField] private new Collider collider;
@@ -237,6 +262,18 @@ namespace GameDevTV.RTS.Units
                     if (instance.TryGetComponent(out AbstractCommandable commandable))
                     {
                         commandable.Owner = Owner;
+                    }
+
+                    if (rallyPoint.IsSet && commandable.TryGetComponent(out IMoveable moveable))
+                    {
+                        yield return null; // target location is set on start, so wait for the next frame to override
+                        moveable.MoveTo(rallyPoint.Target == null ? RallyPoint.Point : RallyPoint.Target.transform.position);
+
+                        if (instance.TryGetComponent(out Worker worker) && rallyPoint.Target != null &&
+                            rallyPoint.Target.TryGetComponent(out GatherableSupply supply))
+                        {
+                            worker.Gather(supply);
+                        }
                     }
                 }
                 else if (SOBeingBuilt is UpgradeSO upgrade)

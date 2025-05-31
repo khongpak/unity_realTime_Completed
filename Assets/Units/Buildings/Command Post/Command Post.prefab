@@ -92,6 +92,7 @@ Transform:
   - {fileID: 5902895496490668234}
   - {fileID: 1729137404257271930}
   - {fileID: 7445284832703820982}
+  - {fileID: 1117030956533755628}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8954186936418030536
@@ -133,6 +134,7 @@ MonoBehaviour:
   <Owner>k__BackingField: 0
   <IsVisible>k__BackingField: 1
   <AvailableCommands>k__BackingField:
+  - {fileID: 11400000, guid: 12c1d905fccf3e9468eecdb0e64e8456, type: 2}
   - {fileID: 11400000, guid: e420e03df92447c44bf63b1c69bc7d5c, type: 2}
   <UnitSO>k__BackingField: {fileID: 11400000, guid: 2e813987328e67942957464bddd33480, type: 2}
   decalProjector: {fileID: 2001763502288724416}
@@ -146,6 +148,7 @@ MonoBehaviour:
     <Progress>k__BackingField: 0
     <State>k__BackingField: 3
   <BuildingSO>k__BackingField: {fileID: 0}
+  rallyPointLineRenderer: {fileID: 2516722021469603953}
   primaryMaterial: {fileID: 2100000, guid: b35c532178876e94f917ff0196f65258, type: 2}
   navMeshObstacle: {fileID: 4408794320720015172}
   collider: {fileID: 8954186936418030536}
@@ -244,6 +247,73 @@ MeshRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6334804327939996609, guid: ab370a72ff8f7574187350c2adccf8ae, type: 3}
   m_PrefabInstance: {fileID: 386903941683715878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &805132021208851217
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6018277380246554126}
+    m_Modifications:
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2023080543314582260, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+      propertyPath: m_Name
+      value: Rally Point Line Renderer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+--- !u!4 &1117030956533755628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 336673699606105597, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+  m_PrefabInstance: {fileID: 805132021208851217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &2516722021469603953 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 3008780680989207392, guid: 2bf2e44530170b64f9551d0c9fee0b2b, type: 3}
+  m_PrefabInstance: {fileID: 805132021208851217}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4830853549830045949
 PrefabInstance:
