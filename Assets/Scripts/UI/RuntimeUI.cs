@@ -16,6 +16,7 @@ namespace GameDevTV.RTS.UI
         [SerializeField] private SingleUnitSelectedUI singleUnitSelectedUI;
         [SerializeField] private UnitTransportUI unitTransportUI;
         [SerializeField] private MultipleUnitsSelectedUI multipleUnitsSelectedUI;
+        [SerializeField] private ControlGroupUI controlGroupUI;
 
         private HashSet<AbstractCommandable> selectedUnits = new(12);
 
@@ -118,6 +119,7 @@ namespace GameDevTV.RTS.UI
 
         private void RefreshUI()
         {
+            controlGroupUI.EnableFor(selectedUnits);
             if (selectedUnits.Count > 0)
             {
                 actionsUI.EnableFor(selectedUnits);

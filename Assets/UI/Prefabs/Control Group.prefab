@@ -238,13 +238,14 @@ GameObject:
   - component: {fileID: 7325521562410431036}
   - component: {fileID: 273308918259061520}
   - component: {fileID: 8401590859556048674}
+  - component: {fileID: 6920038328751781063}
   m_Layer: 5
   m_Name: Control Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6774689828320721616
 RectTransform:
   m_ObjectHideFlags: 0
@@ -349,6 +350,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6920038328751781063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607849281544595589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ac8ef613d5438c95d9c78dd2b9ac6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groupText: {fileID: 3249075926907165109}
+  unitCountText: {fileID: 6224554791532355681}
+  unitIcon: {fileID: 1597506721379949864}
 --- !u!1 &7181368591465592706
 GameObject:
   m_ObjectHideFlags: 0
