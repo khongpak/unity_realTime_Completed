@@ -22,6 +22,7 @@ namespace GameDevTV.RTS.Player
         [SerializeField] private LayerMask interactableLayers;
         [SerializeField] private LayerMask floorLayers;
         [SerializeField] private RectTransform selectionBox;
+        [SerializeField] private Renderer clickIndicator;
         [SerializeField] [ColorUsage(showAlpha: true, hdr: true)]
         private Color errorTintColor = Color.red;
         [SerializeField] [ColorUsage(showAlpha: true, hdr: true)]
@@ -48,6 +49,7 @@ namespace GameDevTV.RTS.Player
 
         private static readonly int TINT = Shader.PropertyToID("_Tint");
         private static readonly int FRESNEL = Shader.PropertyToID("_FresnelColor");
+        private static readonly int CLICK_TIME = Shader.PropertyToID("_ClickTime");
 
         private void Awake()
         {
@@ -244,6 +246,7 @@ namespace GameDevTV.RTS.Player
                 && Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, interactableLayers | floorLayers))
             {
                 IssueRightClickCommand(hit);
+                ShowClick(hit.point);
             }
         }
 
@@ -275,6 +278,8 @@ namespace GameDevTV.RTS.Player
                     }
                 }
             }
+
+            ShowClick(hit.point);
         }
 
         private List<BaseCommand> GetAvailableCommands(AbstractUnit unit)
@@ -319,6 +324,12 @@ namespace GameDevTV.RTS.Player
             }
         }
 
+        private void ShowClick(Vector3 position)
+        {
+            clickIndicator.transform.position = position;
+            clickIndicator.material.SetFloat(CLICK_TIME, Time.time);
+        }
+
         private void ActivateAction(RaycastHit hit)
         {
             if (ghostInstance != null)
@@ -347,6 +358,7 @@ namespace GameDevTV.RTS.Player
 
             Bus<CommandIssuedEvent>.Raise(Owner.Player1, new CommandIssuedEvent(activeCommand));
             activeCommand = null;
+            ShowClick(hit.point);
         }
 
         private void HandleRotation()
