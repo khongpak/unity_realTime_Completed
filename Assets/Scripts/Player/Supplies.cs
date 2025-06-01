@@ -39,11 +39,21 @@ namespace GameDevTV.RTS.Player
             }
 
             Bus<SupplyEvent>.RegisterForAll(HandleSupplyEvent);
+            Bus<PopulationEvent>.RegisterForAll(HandlePopulationEvent);
         }
 
         private void OnDestroy()
         {
             Bus<SupplyEvent>.UnregisterForAll(HandleSupplyEvent);
+            Bus<PopulationEvent>.UnregisterForAll(HandlePopulationEvent);
+        }
+
+        private void HandlePopulationEvent(PopulationEvent evt)
+        {
+            Population[evt.Owner] += evt.PopulationChange;
+            PopulationLimit[evt.Owner] += evt.PopulationLimitChange;
+
+            Debug.Log($"Population Updated for {evt.Owner}. ({Population[evt.Owner]} / {PopulationLimit[evt.Owner]})");
         }
 
         private void HandleSupplyEvent(SupplyEvent evt)

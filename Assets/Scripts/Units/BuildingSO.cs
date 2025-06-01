@@ -12,6 +12,7 @@ namespace GameDevTV.RTS.Units
             BuildingSO copy = base.Clone() as BuildingSO;
 
             copy.SightConfig = SightConfig == null ? null : Instantiate(SightConfig);
+            copy.PopulationConfig = PopulationConfig == null ? null : Instantiate(PopulationConfig);
 
             return copy;
         }
