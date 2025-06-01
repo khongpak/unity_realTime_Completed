@@ -81,10 +81,7 @@ namespace GameDevTV.RTS.UI
 
         private void HandleBuildingSpawn(BuildingSpawnEvent args)
         {
-            if (selectedUnits.Count == 1 && selectedUnits.First() is Worker)
-            {
-                actionsUI.EnableFor(selectedUnits);
-            }
+            actionsUI.EnableFor(selectedUnits);
         }
 
         private void HandleLoadUnit(UnitLoadEvent evt)

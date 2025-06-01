@@ -51,7 +51,8 @@ namespace GameDevTV.RTS.Units
                 VisionTransform.gameObject.SetActive(Owner == Owner.Player1);
             }
 
-            initialCommands = AvailableCommands;
+            initialCommands = UnitSO.Prefab.GetComponent<AbstractCommandable>().AvailableCommands;
+            SetCommandOverrides(null);
 
             if (MinimapRenderer != null)
             {

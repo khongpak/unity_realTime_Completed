@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameDevTV.RTS.Commands;
 using GameDevTV.RTS.EventBus;
 using GameDevTV.RTS.Events;
 using GameDevTV.RTS.Player;
@@ -23,6 +24,8 @@ namespace GameDevTV.RTS.Units
         [field: SerializeField] public BuildingSO BuildingSO { get; private set; }
         [SerializeField] private Material primaryMaterial;
         [SerializeField] private NavMeshObstacle navMeshObstacle;
+        [SerializeField] private new Collider collider;
+        [SerializeField] private CancelBuildingCommand cancelBuildingCommand;
 
         public delegate void QueueUpdatedEvent(UnlockableSO[] unitsInQueue);
         public event QueueUpdatedEvent OnQueueUpdated;
@@ -59,6 +62,11 @@ namespace GameDevTV.RTS.Units
                 {
                     upgrade.Apply(BuildingSO);
                 }
+            }
+
+            if (collider != null)
+            {
+                collider.enabled = true;
             }
         }
 
@@ -121,6 +129,7 @@ namespace GameDevTV.RTS.Units
             unitBuildingThis = buildingBuilder;
             Owner = unitBuildingThis.Owner;
             MainRenderer.material = BuildingSO.PlacementMaterial;
+            SetCommandOverrides(new BaseCommand[] { cancelBuildingCommand });
 
             Progress = new BuildingProgress(
                 BuildingProgress.BuildingState.Building,
@@ -133,8 +142,36 @@ namespace GameDevTV.RTS.Units
                 Heal(1);
             }
 
+            if (collider != null)
+            {
+                collider.enabled = true;
+            }
+
             Bus<UnitDeathEvent>.OnEvent[Owner] -= HandleUnitDeath;
             Bus<UnitDeathEvent>.OnEvent[Owner] += HandleUnitDeath;
+        }
+
+        public void CancelBuilding()
+        {
+            if (unitBuildingThis != null)
+            {
+                unitBuildingThis.CancelBuilding();
+            }
+            else
+            {
+                Destroy(gameObject);
+
+                Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(
+                    Owner,
+                    Mathf.FloorToInt(0.75f * UnitSO.Cost.Minerals),
+                    UnitSO.Cost.MineralsSO
+                ));
+                Bus<SupplyEvent>.Raise(Owner, new SupplyEvent(
+                    Owner,
+                    Mathf.FloorToInt(0.75f * UnitSO.Cost.Gas),
+                    UnitSO.Cost.GasSO
+                ));
+            }
         }
 
         private void HandleUnitDeath(UnitDeathEvent evt)
@@ -226,5 +263,15 @@ namespace GameDevTV.RTS.Units
                 culledVisuals.gameObject.SetActive(true);
             }
         }
+
+        public override void Deselect()
+        {
+            base.Deselect();
+            if (Progress.State != BuildingProgress.BuildingState.Completed)
+            {
+                SetCommandOverrides(new BaseCommand[] { cancelBuildingCommand });
+            }
+        }
+
     }
 }

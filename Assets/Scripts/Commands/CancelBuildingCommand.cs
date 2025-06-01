@@ -9,14 +9,22 @@ namespace GameDevTV.RTS.Commands
     {
         public override bool CanHandle(CommandContext context)
         {
-            return context.Commandable is IBuildingBuilder
-                && context.Button == MouseButton.Left;
+            return context.Commandable is BaseBuilding || (
+                    context.Commandable is IBuildingBuilder
+                    && context.Button == MouseButton.Left
+            );
         }
 
         public override void Handle(CommandContext context)
         {
-            IBuildingBuilder buildingBuilder = context.Commandable as IBuildingBuilder;
-            buildingBuilder.CancelBuilding();
+            if (context.Commandable is BaseBuilding building)
+            {
+                building.CancelBuilding();
+            }
+            else if (context.Commandable is IBuildingBuilder buildingBuilder)
+            {
+                buildingBuilder.CancelBuilding();
+            }
         }
 
         public override bool IsLocked(CommandContext context) => false;
