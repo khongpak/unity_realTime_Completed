@@ -19,3 +19,4 @@ MonoBehaviour:
   <IsSingleUnitCommand>k__BackingField: 0
   <GhostPrefab>k__BackingField: {fileID: 0}
   <Restrictions>k__BackingField: []
+  moveCommand: {fileID: 11400000, guid: 5b88f1c2df63cea41a0b8cd466334886, type: 2}
